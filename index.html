@@ -1913,16 +1913,87 @@
     }
 
     // INITIALIZE ON LOAD
+        // ========================================================
+    // LIVE NEON POSTGRES SYNC + OFFLINE INDEXED-DB FALLBACK
+    // ========================================================
+    async function pushToNeon(key, val) {
+      try {
+        const res = await fetch('/api/sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key, val })
+        });
+        if (!res.ok) throw new Error('Neon POST failed');
+      } catch (err) {
+        console.warn('Offline — saved to device, will sync next time:', err);
+      }
+    }
+
+    async function pullFromNeon() {
+      try {
+        const res = await fetch('/api/sync');
+        if (!res.ok) return;
+        const cloud = await res.json();
+
+        // Sync checklists & custom paths
+        if (cloud.tasks) localStorage.setItem('osaka_tasks_v2', JSON.stringify(cloud.tasks));
+        if (cloud.usj_pass5) localStorage.setItem('osaka_usj_pass5_done', JSON.stringify(cloud.usj_pass5));
+        if (cloud.vercel_paths) localStorage.setItem('osaka_vercel_paths_v2', JSON.stringify(cloud.vercel_paths));
+
+        // Sync uploaded QR images & PDFs into local IndexedDB for offline use
+        for (const [k, v] of Object.entries(cloud)) {
+          if (k.startsWith('asset_') && v) {
+            const assetKey = k.replace('asset_', '');
+            vaultCache[assetKey] = v;
+            const db = await openVaultDB();
+            db.transaction(STORE_NAME, 'readwrite').objectStore(STORE_NAME).put(v, assetKey);
+          }
+        }
+
+        // Re-render UI with cloud data
+        renderPlanDay();
+        renderTasks();
+        renderWalletQrGrid();
+        lucide.createIcons();
+      } catch (err) {
+        console.warn('Offline — using local IndexedDB & localStorage:', err);
+      }
+    }
+
+    // Hook existing functions so every click/upload saves to Neon automatically
+    const _origSaveVault = saveToVaultDB;
+    saveToVaultDB = async function(key, dataUrl) {
+      await _origSaveVault(key, dataUrl);
+      await pushToNeon('asset_' + key, dataUrl);
+    };
+
+    const _origToggleTask = toggleTask;
+    toggleTask = function(id) {
+      _origToggleTask(id);
+      pushToNeon('tasks', JSON.parse(localStorage.getItem('osaka_tasks_v2') || '{}'));
+    };
+
+    const _origToggleUsj = toggleUsjPass5;
+    toggleUsjPass5 = function(rideId) {
+      _origToggleUsj(rideId);
+      pushToNeon('usj_pass5', JSON.parse(localStorage.getItem('osaka_usj_pass5_done') || '{}'));
+    };
+
+    const _origSavePaths = saveVercelPaths;
+    saveVercelPaths = function() {
+      _origSavePaths();
+      pushToNeon('vercel_paths', JSON.parse(localStorage.getItem('osaka_vercel_paths_v2') || '{}'));
+    };
+
+    // INITIALIZE ON LOAD
     window.onload = function () {
       const savedTheme = localStorage.getItem('osaka_theme_v2');
       if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark');
         document.getElementById('theme-icon').setAttribute('data-lucide', 'sun');
       }
-
       updateJstClock();
       setInterval(updateJstClock, 15000);
-
       renderDayPills();
       renderPlanDay();
       renderWalletQrGrid();
@@ -1930,10 +2001,11 @@
       renderHoursList();
       renderAllMapsList();
       loadVaultDB();
+      pullFromNeon(); // <-- Pulls live state from Neon DB on startup
       fetchOsakaWeather(false);
-
       lucide.createIcons();
     };
+
   </script>
 </body>
 </html>

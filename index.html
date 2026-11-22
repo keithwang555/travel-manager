@@ -16,6 +16,14 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- PDF.js (Multi-page high-DPI rendering for iOS Standalone Web App) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (window.pdfjsLib) {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
+
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -44,7 +52,6 @@
   </script>
 
   <style>
-    /* Smooth scrolling and clean scrollbar suppression for horizontal pill strips */
     html {
       scroll-behavior: smooth;
       -webkit-tap-highlight-color: transparent;
@@ -63,6 +70,9 @@
     .glass-bar {
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
+    }
+    .pdf-scroll-container {
+      -webkit-overflow-scrolling: touch;
     }
   </style>
 </head>
@@ -88,7 +98,7 @@
 
         <!-- Compact Live Utility Pills -->
         <div class="flex items-center gap-1.5 shrink-0">
-          <!-- Live Osaka Weather Pill (Taps through to Guide -> Weather) -->
+          <!-- Live Osaka Weather Pill -->
           <button onclick="openWeatherFromHeader()" title="Live Osaka Weather" class="px-2.5 py-1.5 rounded-full bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800 flex items-center gap-1 text-xs font-mono font-semibold text-slate-700 dark:text-slate-200 hover:text-rose-600 transition">
             <span id="header-weather-icon">🌤️</span>
             <span id="header-weather-temp">--°C</span>
@@ -121,17 +131,8 @@
       <!-- TAB 1: PLAN (CLEAN DAY-BY-DAY ITINERARY)               -->
       <!-- ====================================================== -->
       <section id="tab-plan" class="space-y-4">
-
-        <!-- Horizontal Day Selector Pills -->
-        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5" id="day-pills-container">
-          <!-- Rendered dynamically via JS -->
-        </div>
-
-        <!-- Active Day Content (Day Header + Collapsible Strategy + Progressive Disclosure Timeline) -->
-        <div id="plan-day-container" class="space-y-4">
-          <!-- Rendered dynamically via JS -->
-        </div>
-
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5" id="day-pills-container"></div>
+        <div id="plan-day-container" class="space-y-4"></div>
       </section>
 
       <!-- ====================================================== -->
@@ -143,7 +144,7 @@
         <div class="flex items-center justify-between px-1">
           <div>
             <h2 class="text-base font-bold tracking-tight text-slate-900 dark:text-white">Travel Wallet</h2>
-            <p class="text-xs text-slate-500 dark:text-slate-400">Offline IndexedDB + Vercel static vault</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Cloud synced + offline IndexedDB vault</p>
           </div>
           <button onclick="openVercelModal()" class="px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-1.5 hover:text-rose-600 transition">
             <i data-lucide="cloud" class="w-3.5 h-3.5 text-rose-600"></i> Vercel Paths
@@ -271,9 +272,7 @@
             <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Gate & Customs QR Passes</span>
             <span class="text-xs text-slate-400">Tap QR to enlarge</span>
           </div>
-          <div class="grid grid-cols-2 gap-3" id="wallet-qr-grid">
-            <!-- Rendered dynamically via JS -->
-          </div>
+          <div class="grid grid-cols-2 gap-3" id="wallet-qr-grid"></div>
         </div>
 
         <!-- Confirmed Bookings (Apple Wallet Style Clean Cards) -->
@@ -289,6 +288,7 @@
                 <div class="flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                   <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Paid in Full • SGD 728.03</span>
+                  <span id="badge-asset-hyatt" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">PDF Saved</span>
                 </div>
                 <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-1">Caption by Hyatt Namba Osaka</h3>
                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Sun, Dec 13 (3:00 PM) – Thu, Dec 17 (8:00 AM target)</p>
@@ -298,7 +298,6 @@
               </button>
             </div>
 
-            <!-- Primary Actions -->
             <div class="flex items-center gap-2">
               <button onclick="openPdfFile('hyatt')" class="flex-1 py-2.5 px-3.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold flex items-center justify-center gap-1.5">
                 <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Open Hyatt PDF
@@ -306,13 +305,12 @@
               <button onclick="openPhraseModal('hotel')" class="py-2.5 px-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-1.5">
                 <i data-lucide="languages" class="w-3.5 h-3.5"></i> Desk JP
               </button>
-              <label class="p-2.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Attach local PDF">
+              <label class="p-2.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Upload PDF">
                 <i data-lucide="upload" class="w-4 h-4"></i>
                 <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'hyatt')" />
               </label>
             </div>
 
-            <!-- Progressive Disclosure for Reservation Details -->
             <div>
               <button onclick="toggleDetails('wallet-hyatt-details', this)" class="w-full pt-2 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
                 <span>View room & property nuances</span>
@@ -334,6 +332,7 @@
                 <div class="flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-amber-500"></span>
                   <span class="text-xs font-medium text-amber-600 dark:text-amber-400">Confirmed • 2x 20kg Bags</span>
+                  <span id="badge-asset-scoot" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">PDF Saved</span>
                 </div>
                 <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-1">Scoot Flights • SIN ⇄ KIX</h3>
                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">TR 880 (Dec 13, 03:05→10:15) • TR 881 (Dec 17, 11:30→17:30)</p>
@@ -347,7 +346,7 @@
               <button onclick="openPdfFile('scoot')" class="flex-1 py-2.5 px-3.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold flex items-center justify-center gap-1.5">
                 <i data-lucide="plane" class="w-3.5 h-3.5"></i> Open Scoot PDF
               </button>
-              <label class="p-2.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Attach local PDF">
+              <label class="p-2.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Upload PDF">
                 <i data-lucide="upload" class="w-4 h-4"></i>
                 <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'scoot')" />
               </label>
@@ -373,6 +372,7 @@
                 <div class="flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-rose-600"></span>
                   <span class="text-xs font-medium text-rose-600 dark:text-rose-400">Booked via Klook • Tue, Dec 15</span>
+                  <span id="badge-asset-usj" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">PDF Saved</span>
                 </div>
                 <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-1">USJ Studio + Express Pass 5</h3>
                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Race & Minion Special • SNW Entry 11:20–12:20</p>
@@ -403,11 +403,11 @@
                 <div class="pt-1 flex items-center gap-2">
                   <label class="flex-1 py-2 px-3 rounded-xl bg-stone-100 dark:bg-slate-800 text-xs font-semibold text-center cursor-pointer">
                     Attach Studio PDF
-                    <input type="file" accept="application/pdf" class="hidden" onchange="handleVaultUpload(event, 'usj_studio')" />
+                    <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'usj_studio')" />
                   </label>
                   <label class="flex-1 py-2 px-3 rounded-xl bg-stone-100 dark:bg-slate-800 text-xs font-semibold text-center cursor-pointer">
                     Attach Express PDF
-                    <input type="file" accept="application/pdf" class="hidden" onchange="handleVaultUpload(event, 'usj_express')" />
+                    <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'usj_express')" />
                   </label>
                 </div>
               </div>
@@ -417,7 +417,10 @@
           <!-- 4. MASTER OSAKA.PDF -->
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-4 shadow-editorial dark:border dark:border-slate-800/80 flex items-center justify-between gap-3">
             <div>
-              <h4 class="text-sm font-bold text-slate-900 dark:text-white">Master Osaka.pdf</h4>
+              <div class="flex items-center gap-2">
+                <h4 class="text-sm font-bold text-slate-900 dark:text-white">Master Osaka.pdf</h4>
+                <span id="badge-asset-osaka" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">Saved</span>
+              </div>
               <p class="text-xs text-slate-500 dark:text-slate-400">13-page reference plan</p>
             </div>
             <div class="flex items-center gap-2 shrink-0">
@@ -426,7 +429,7 @@
               </button>
               <label class="p-2 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Attach Osaka.pdf">
                 <i data-lucide="upload" class="w-4 h-4"></i>
-                <input type="file" accept="application/pdf" class="hidden" onchange="handleVaultUpload(event, 'osaka')" />
+                <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'osaka')" />
               </label>
             </div>
           </div>
@@ -480,11 +483,8 @@
           </button>
         </div>
 
-        <!-- ---------------------------------------------------- -->
-        <!-- GUIDE SUB-VIEW 1: LIVE OSAKA WEATHER & LAYERING      -->
-        <!-- ---------------------------------------------------- -->
+        <!-- GUIDE SUB-VIEW 1: LIVE OSAKA WEATHER & LAYERING -->
         <div id="guide-view-weather" class="space-y-4">
-          <!-- Live Current Conditions Card -->
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
             <div class="flex items-start justify-between">
               <div>
@@ -513,15 +513,11 @@
               </div>
             </div>
 
-            <!-- 7-Day Forecast Strip -->
             <div class="pt-3 border-t border-stone-100 dark:border-slate-800">
-              <div id="weather-7day-strip" class="grid grid-cols-7 gap-1.5 text-center">
-                <!-- Populated dynamically -->
-              </div>
+              <div id="weather-7day-strip" class="grid grid-cols-7 gap-1.5 text-center"></div>
             </div>
           </div>
 
-          <!-- Mid-December Thermal Layering Guide -->
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
             <div>
               <span class="text-xs font-semibold uppercase tracking-wider text-rose-600">Dec 13–17 Climate Strategy</span>
@@ -550,9 +546,7 @@
           </div>
         </div>
 
-        <!-- ---------------------------------------------------- -->
-        <!-- GUIDE SUB-VIEW 2: PENDING TASKS                      -->
-        <!-- ---------------------------------------------------- -->
+        <!-- GUIDE SUB-VIEW 2: PENDING TASKS -->
         <div id="guide-view-tasks" class="hidden space-y-4">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
             <div class="flex items-center justify-between">
@@ -565,29 +559,20 @@
               </span>
             </div>
 
-            <!-- Pending Tasks List -->
-            <div id="pending-tasks-list" class="space-y-2.5">
-              <!-- Rendered via JS -->
-            </div>
+            <div id="pending-tasks-list" class="space-y-2.5"></div>
 
-            <!-- Toggle for Completed Anchor Bookings -->
             <div class="pt-2 border-t border-stone-100 dark:border-slate-800">
               <button onclick="toggleCompletedTasks()" id="toggle-completed-btn" class="w-full py-2 flex items-center justify-between text-xs font-semibold text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
                 <span>Show completed bookings (3)</span>
                 <i data-lucide="chevron-down" id="completed-chevron" class="w-4 h-4 transition-transform duration-200"></i>
               </button>
-              <div id="completed-tasks-list" class="hidden pt-2.5 space-y-2">
-                <!-- Rendered via JS -->
-              </div>
+              <div id="completed-tasks-list" class="hidden pt-2.5 space-y-2"></div>
             </div>
           </div>
         </div>
 
-        <!-- ---------------------------------------------------- -->
         <!-- GUIDE SUB-VIEW 3: VENUE HOURS & CLOSURES (DEC 13-17) -->
-        <!-- ---------------------------------------------------- -->
         <div id="guide-view-hours" class="hidden space-y-3">
-          <!-- Search & Day Filter -->
           <div class="space-y-2.5">
             <div class="relative">
               <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
@@ -602,16 +587,11 @@
             </div>
           </div>
 
-          <div id="hours-list-container" class="space-y-3">
-            <!-- Rendered via JS -->
-          </div>
+          <div id="hours-list-container" class="space-y-3"></div>
         </div>
 
-        <!-- ---------------------------------------------------- -->
-        <!-- GUIDE SUB-VIEW 4: ALL DOOR-TO-DOOR GOOGLE MAPS       -->
-        <!-- ---------------------------------------------------- -->
+        <!-- GUIDE SUB-VIEW 4: ALL DOOR-TO-DOOR GOOGLE MAPS -->
         <div id="guide-view-maps" class="hidden space-y-3.5">
-          <!-- Preschooler (Yōji) Free Fare Rule Card -->
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-4 shadow-editorial dark:border dark:border-slate-800/80 space-y-2">
             <div class="flex items-center justify-between gap-2">
               <div class="flex items-center gap-2">
@@ -627,7 +607,6 @@
             </p>
           </div>
 
-          <!-- Day Filter Pills -->
           <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             <button onclick="setMapFilter('all')" data-mfilter="all" class="map-pill px-3 py-1.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold shrink-0">All Legs (28)</button>
             <button onclick="setMapFilter('hub')" data-mfilter="hub" class="map-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Hotel & Konbini</button>
@@ -638,9 +617,7 @@
             <button onclick="setMapFilter('day5')" data-mfilter="day5" class="map-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Day 5 KIX</button>
           </div>
 
-          <div id="all-maps-list" class="space-y-3">
-            <!-- Rendered via JS -->
-          </div>
+          <div id="all-maps-list" class="space-y-3"></div>
         </div>
 
       </section>
@@ -717,9 +694,7 @@
         </button>
       </div>
 
-      <div id="fs-modal-body">
-        <!-- Populated dynamically -->
-      </div>
+      <div id="fs-modal-body"></div>
 
       <button onclick="closeFullscreenModal()" class="w-full py-3 rounded-2xl bg-slate-900 text-white font-semibold text-xs">
         Done
@@ -734,7 +709,7 @@
     <div class="w-full max-w-[460px] bg-white dark:bg-slate-900 rounded-3xl border border-stone-200 dark:border-slate-800 p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between">
         <div>
-          <span class="text-xs font-mono font-semibold uppercase text-rose-600">Offline & Vercel Vault</span>
+          <span class="text-xs font-mono font-semibold uppercase text-rose-600">Offline & Cloud Vault</span>
           <h3 class="text-base font-bold text-slate-900 dark:text-white">PDF & QR Storage Paths</h3>
         </div>
         <button onclick="closeVercelModal()" class="p-2 rounded-full bg-stone-100 dark:bg-slate-800 text-slate-500">
@@ -743,21 +718,17 @@
       </div>
 
       <p class="text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed">
-        Files uploaded in the <strong>Wallet</strong> tab are stored offline inside your browser's <code>IndexedDB</code>. When deploying to Vercel, place your static files in <code>/public</code> (or alongside <code>index.html</code>) using these paths:
+        Files uploaded in the <strong>Wallet</strong> tab sync to your Neon database and cache offline inside your browser's <code>IndexedDB</code>. Fallback static paths:
       </p>
 
       <pre class="text-xs font-mono bg-slate-950 text-emerald-400 p-3.5 rounded-2xl overflow-x-auto leading-relaxed">/docs/Hyatt_View_Reservation.pdf
 /docs/Itinerary_EYC6JZ.pdf
 /docs/usj_studio_pass.pdf
 /docs/express_pass.pdf
-/docs/Osaka.pdf
-/qr/vjw-heping.png
-/qr/vjw-ethan.png
-/qr/usj-passes.png
-/qr/book-forest.png</pre>
+/docs/Osaka.pdf</pre>
 
       <div class="space-y-2 text-xs">
-        <div class="font-semibold text-slate-900 dark:text-white">Custom Vercel / Cloud URLs:</div>
+        <div class="font-semibold text-slate-900 dark:text-white">Custom Fallback URLs:</div>
         <input id="vpath-hyatt" type="text" placeholder="/docs/Hyatt_View_Reservation.pdf" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 font-mono text-xs" />
         <input id="vpath-scoot" type="text" placeholder="/docs/Itinerary_EYC6JZ.pdf" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 font-mono text-xs" />
         <input id="vpath-usj_studio" type="text" placeholder="/docs/usj_studio_pass.pdf" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 font-mono text-xs" />
@@ -776,6 +747,37 @@
     </div>
   </div>
 
+  <!-- ======================================================== -->
+  <!-- MODAL 4: MULTI-PAGE PDF.JS READER (iOS PWA FRIENDLY)     -->
+  <!-- ======================================================== -->
+  <div id="pdf-reader-modal" class="fixed inset-0 z-50 hidden bg-slate-950 flex flex-col">
+    <!-- Sticky Top Control Bar -->
+    <div class="shrink-0 bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between gap-2 text-white">
+      <div class="min-w-0">
+        <h3 id="pdf-reader-title" class="text-sm font-bold truncate">Document Viewer</h3>
+        <p id="pdf-reader-meta" class="text-[11px] font-mono text-slate-400">Loading...</p>
+      </div>
+
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button onclick="changePdfZoom(-0.25)" id="pdf-zoom-out" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono" title="Zoom Out">
+          <i data-lucide="zoom-out" class="w-4 h-4"></i>
+        </button>
+        <span id="pdf-zoom-label" class="px-1.5 text-[11px] font-mono text-slate-300">100%</span>
+        <button onclick="changePdfZoom(0.25)" id="pdf-zoom-in" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono" title="Zoom In">
+          <i data-lucide="zoom-in" class="w-4 h-4"></i>
+        </button>
+        <button onclick="closePdfReader()" class="ml-1 px-3 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold flex items-center gap-1">
+          <i data-lucide="x" class="w-4 h-4"></i> Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Scrollable High-DPI Pages Container -->
+    <div id="pdf-pages-container" class="flex-1 overflow-y-auto pdf-scroll-container p-3 sm:p-5 flex flex-col items-center gap-4 bg-slate-950">
+      <!-- Canvases / status rendered dynamically -->
+    </div>
+  </div>
+
   <!-- TOAST FEEDBACK -->
   <div id="toast" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold shadow-float flex items-center gap-2">
     <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
@@ -786,7 +788,6 @@
   <!-- COMPLETE DATA & INTERACTIVE APPLICATION LOGIC            -->
   <!-- ======================================================== -->
   <script>
-    // Helper: Build official Google Maps universal directions deep link
     function buildGMapDirUrl(origin, destination, mode = 'transit') {
       return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&travelmode=${mode}`;
     }
@@ -1241,7 +1242,7 @@
       { id: 'qr-bookforest', title: 'Book Forest Session C', subtitle: 'Wed Dec 16 • 13:30–15:00', tag: 'WED DEC 16', code: 'BOOKFOREST-DEC16-1330' }
     ];
 
-    // 4. GUIDE -> PRE-TRIP ACTION CHECKLIST (SYNCED 100% WITH SECTION 3 OF DOC)
+    // 4. GUIDE -> PRE-TRIP ACTION CHECKLIST
     const INITIAL_TASKS = [
       { id: 't-bookforest', title: 'Set Calendar Alert for Wed, Dec 2 at 9:00 AM SGT (10:00 AM JST)', desc: 'Reserve your free Wed, Dec 16 (13:30–15:00) session at Nakanoshima Children\'s Book Forest (kodomohonnomori-osaka.resv.jp).', done: false },
       { id: 't-legoland', title: 'Book LEGOLAND Discovery Center Osaka Online (1–2 weeks prior)', desc: 'Reserve timed entry for Mon, Dec 14 at 1:30 PM or 2:00 PM (after 2:00 PM gets the weekday afternoon discount).', done: false },
@@ -1250,7 +1251,7 @@
       { id: 't-usj', title: 'USJ Tickets Booked via Klook (Tue, Dec 15)', desc: '1-Day Studio Passes (JNPMM/JNPMN) + 2x Express Pass 5: Race & Minion Special (102MV/102MW).', done: true }
     ];
 
-    // 5. GUIDE -> VENUE HOURS & CLOSURES (DEC 13-17, 2026 - APPENDIX B SYNCED)
+    // 5. GUIDE -> VENUE HOURS & CLOSURES
     const VENUE_HOURS = [
       { name: 'Kuromon Market', hours: 'Daily 9:00 AM – 6:00 PM (individual stalls vary; most close 5:00–5:30 PM)', cutoff: 'Best window: 9:00 AM – 2:00 PM', status: 'Open daily (a few fish stalls close Sundays)', tags: ['mon', 'wed'], nuance: 'Free entry; arrive at 12:15 PM Sunday for full seafood stock before afternoon wind-down.' },
       { name: 'Shinsaibashi PARCO (6F) & Daimaru (9F)', hours: 'Retail: 10:00 AM – 8:00 PM | Dining floors: 11:00 AM – 10:00/11:00 PM', cutoff: 'Retail doors shut promptly at 8:00 PM', status: 'Open daily', tags: ['mon', 'wed'], nuance: 'Indoor & heated; 6F PARCO houses LEGO, SEGA, Godzilla, CAPCOM, Ghibli & Shin-chan; 9F Daimaru has Pokémon Center DX.' },
@@ -1333,11 +1334,22 @@
       }
     };
 
+    const PDF_TITLES = {
+      hyatt: 'Caption by Hyatt Reservation (#40023B32617210)',
+      scoot: 'Scoot Flights Itinerary (EYC6JZ)',
+      usj_studio: 'USJ 1-Day Studio Passes (JNPMM / JNPMN)',
+      usj_express: 'USJ Express Pass 5 (102MV / 102MW)',
+      osaka: 'Master Osaka.pdf (13-Page Reference)'
+    };
+
     // STATE
     let activeDayId = 'day1';
     let hoursFilter = 'all';
     let mapFilter = 'all';
     let vaultCache = {};
+    let currentPdfDoc = null;
+    let currentPdfScale = 1.0;
+    let currentPdfTitle = '';
 
     // ========================================================
     // INDEXED-DB OFFLINE VAULT STORAGE
@@ -1357,12 +1369,30 @@
       });
     }
 
+    async function getFromVaultDB(key) {
+      if (vaultCache[key]) return vaultCache[key];
+      try {
+        const db = await openVaultDB();
+        return await new Promise((resolve) => {
+          const req = db.transaction(STORE_NAME, 'readonly').objectStore(STORE_NAME).get(key);
+          req.onsuccess = () => {
+            if (req.result) vaultCache[key] = req.result;
+            resolve(req.result || null);
+          };
+          req.onerror = () => resolve(null);
+        });
+      } catch (e) {
+        return null;
+      }
+    }
+
     async function saveToVaultDB(key, dataUrl) {
+      vaultCache[key] = dataUrl;
+      updateAssetBadges();
       try {
         const db = await openVaultDB();
         const tx = db.transaction(STORE_NAME, 'readwrite');
         tx.objectStore(STORE_NAME).put(dataUrl, key);
-        vaultCache[key] = dataUrl;
       } catch (e) {
         console.warn('IndexedDB fallback:', e);
       }
@@ -1380,12 +1410,24 @@
             getReq.onsuccess = () => {
               vaultCache[k] = getReq.result;
               renderWalletQrGrid();
+              updateAssetBadges();
             };
           });
         };
       } catch (e) {
         console.warn('IndexedDB read warning:', e);
       }
+    }
+
+    function updateAssetBadges() {
+      const show = (id, cond) => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('hidden', !cond);
+      };
+      show('badge-asset-hyatt', !!vaultCache['hyatt']);
+      show('badge-asset-scoot', !!vaultCache['scoot']);
+      show('badge-asset-usj', !!(vaultCache['usj_studio'] || vaultCache['usj_express']));
+      show('badge-asset-osaka', !!vaultCache['osaka']);
     }
 
     // ========================================================
@@ -1463,7 +1505,6 @@
 
       const container = document.getElementById('plan-day-container');
       container.innerHTML = `
-        <!-- Clean Day Title & Subtle Collapsible Strategy Strip -->
         <div class="px-1 space-y-2">
           <div class="flex items-baseline justify-between gap-2">
             <h2 class="text-base font-bold tracking-tight text-slate-900 dark:text-white">${day.fullTitle}</h2>
@@ -1486,7 +1527,6 @@
 
         ${usjTrackerHtml}
 
-        <!-- Progressive Disclosure Itinerary Cards -->
         <div class="space-y-4">
           ${day.events.map((ev, idx) => {
             const detailId = `${day.id}-ev-${idx}`;
@@ -1495,18 +1535,15 @@
 
             return `
               <article class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-3">
-                <!-- 1. Time -->
                 <div class="font-mono text-xs font-semibold text-rose-600 dark:text-rose-400">
                   ${ev.time}
                 </div>
 
-                <!-- 2. Activity Title & 3. Crisp 1-Line Summary -->
                 <div class="space-y-1">
                   <h3 class="text-[15px] font-bold text-slate-900 dark:text-white leading-snug">${ev.title}</h3>
                   <p class="text-[13.5px] text-slate-600 dark:text-slate-300 leading-relaxed">${ev.summary}</p>
                 </div>
 
-                <!-- 4. 1-Tap Google Maps Directions Link -->
                 ${ev.route ? `
                   <div class="pt-1 flex items-center gap-2">
                     <a href="${dirUrl1}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-600 dark:text-rose-400 text-xs font-semibold transition">
@@ -1516,7 +1553,6 @@
                   </div>
                 ` : ''}
 
-                <!-- 5. Progressive Disclosure Toggle: More details & nuances -->
                 <div class="pt-1">
                   <button onclick="toggleDetails('${detailId}', this)" class="w-full pt-2.5 border-t border-stone-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
                     <span>More details & nuances</span>
@@ -1574,7 +1610,7 @@
     }
 
     // ========================================================
-    // TAB 2: WALLET QR CARDS & PDF VAULT
+    // TAB 2: WALLET QR CARDS & MULTI-PAGE PDF.JS READER
     // ========================================================
     function generateCrispQrSvg(codeText) {
       return `
@@ -1640,11 +1676,16 @@
     function handleVaultUpload(event, key) {
       const file = event.target.files && event.target.files[0];
       if (!file) return;
+      if (file.size > 3.2 * 1024 * 1024) {
+        showToast('File > 3.2 MB may not sync to cloud (saved locally)');
+      } else {
+        showToast(`Saving & syncing ${file.name}...`);
+      }
       const reader = new FileReader();
       reader.onload = async (e) => {
         await saveToVaultDB(key, e.target.result);
         renderWalletQrGrid();
-        showToast(`Saved ${file.name} offline!`);
+        showToast(`Saved ${file.name}!`);
       };
       reader.readAsDataURL(file);
     }
@@ -1664,25 +1705,162 @@
       document.getElementById('fullscreen-modal').classList.remove('hidden');
     }
 
-    function openPdfFile(key) {
-      if (vaultCache[key]) {
-        const win = window.open();
-        if (win) {
-          win.document.write(`<iframe src="${vaultCache[key]}" style="width:100%;height:100vh;border:0;"></iframe>`);
-          return;
+    // Multi-Page PDF.js Reader (Works cleanly in iOS Home Screen PWA mode)
+    async function openPdfFile(key) {
+      const modal = document.getElementById('pdf-reader-modal');
+      const container = document.getElementById('pdf-pages-container');
+      const titleEl = document.getElementById('pdf-reader-title');
+      const metaEl = document.getElementById('pdf-reader-meta');
+
+      currentPdfDoc = null;
+      currentPdfScale = 1.0;
+      currentPdfTitle = PDF_TITLES[key] || 'Document';
+      titleEl.textContent = currentPdfTitle;
+      metaEl.textContent = 'Loading document...';
+      document.getElementById('pdf-zoom-label').textContent = '100%';
+      container.innerHTML = `<div class="py-20 text-xs font-mono text-slate-400">Loading pages...</div>`;
+      modal.classList.remove('hidden');
+      lucide.createIcons();
+
+      // 1. Check in-memory cache or IndexedDB
+      let source = await getFromVaultDB(key);
+
+      // 2. If not cached locally yet, fetch from Neon /api/sync on demand
+      if (!source) {
+        try {
+          const res = await fetch(`/api/sync?key=${encodeURIComponent('asset_' + key)}`);
+          if (res.ok) {
+            const data = await res.json();
+            const fetched = data.val || data['asset_' + key];
+            if (fetched) {
+              source = fetched;
+              await saveToVaultDB(key, fetched);
+            }
+          }
+        } catch (err) {
+          console.warn('Cloud asset fetch skipped:', err);
         }
       }
-      const savedPaths = JSON.parse(localStorage.getItem('osaka_vercel_paths_v2') || '{}');
-      const defaults = {
-        hyatt: '/docs/Hyatt_View_Reservation.pdf',
-        scoot: '/docs/Itinerary_EYC6JZ.pdf',
-        usj_studio: '/docs/usj_studio_pass.pdf',
-        usj_express: '/docs/express_pass.pdf',
-        osaka: '/docs/Osaka.pdf'
-      };
-      const url = savedPaths[key] || defaults[key];
-      window.open(url, '_blank');
-      showToast(`Opening ${url}`);
+
+      // 3. Fallback to configured static path
+      if (!source) {
+        const savedPaths = JSON.parse(localStorage.getItem('osaka_vercel_paths_v2') || '{}');
+        const defaults = {
+          hyatt: '/docs/Hyatt_View_Reservation.pdf',
+          scoot: '/docs/Itinerary_EYC6JZ.pdf',
+          usj_studio: '/docs/usj_studio_pass.pdf',
+          usj_express: '/docs/express_pass.pdf',
+          osaka: '/docs/Osaka.pdf'
+        };
+        source = savedPaths[key] || defaults[key];
+      }
+
+      // If the user uploaded an image screenshot instead of a PDF
+      if (typeof source === 'string' && source.startsWith('data:image/')) {
+        metaEl.textContent = 'Image Attachment';
+        container.innerHTML = `
+          <div class="w-full max-w-[760px] bg-white rounded-2xl overflow-hidden shadow-2xl">
+            <img id="pdf-image-preview" src="${source}" alt="${currentPdfTitle}" class="w-full h-auto block" />
+          </div>
+        `;
+        return;
+      }
+
+      // Render multi-page PDF via PDF.js
+      try {
+        let loadingTask;
+        if (typeof source === 'string' && source.startsWith('data:application/pdf')) {
+          const base64 = source.split(',')[1];
+          const raw = atob(base64);
+          const bytes = new Uint8Array(raw.length);
+          for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
+          loadingTask = window.pdfjsLib.getDocument({ data: bytes });
+        } else {
+          loadingTask = window.pdfjsLib.getDocument(source);
+        }
+
+        currentPdfDoc = await loadingTask.promise;
+        await renderAllPdfPages();
+      } catch (err) {
+        console.error('PDF render error:', err);
+        metaEl.textContent = 'Not uploaded yet';
+        container.innerHTML = `
+          <div class="max-w-sm my-auto p-6 rounded-3xl bg-slate-900 border border-slate-800 text-center space-y-3">
+            <div class="text-sm font-bold text-white">No PDF Attached Yet</div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Tap <strong>Close</strong>, then tap the <strong>Upload</strong> button on this booking card in your Wallet to attach the PDF once—it will sync to the cloud and open smoothly across all your devices.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    async function renderAllPdfPages() {
+      if (!currentPdfDoc) return;
+      const container = document.getElementById('pdf-pages-container');
+      const metaEl = document.getElementById('pdf-reader-meta');
+      const totalPages = currentPdfDoc.numPages;
+
+      metaEl.textContent = `${totalPages} ${totalPages === 1 ? 'Page' : 'Pages'} • Scroll to read`;
+      container.innerHTML = '';
+
+      const availableWidth = Math.min(container.clientWidth - 24, 820);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+
+      for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+        const page = await currentPdfDoc.getPage(pageNum);
+        const baseViewport = page.getViewport({ scale: 1 });
+        const fitScale = (availableWidth / baseViewport.width) * currentPdfScale;
+        const viewport = page.getViewport({ scale: fitScale });
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'bg-white rounded-xl shadow-2xl overflow-hidden shrink-0';
+        wrapper.style.width = `${Math.floor(viewport.width)}px`;
+
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = Math.floor(viewport.width * dpr);
+        canvas.height = Math.floor(viewport.height * dpr);
+        canvas.style.width = `${Math.floor(viewport.width)}px`;
+        canvas.style.height = `${Math.floor(viewport.height)}px`;
+        canvas.style.display = 'block';
+
+        const badge = document.createElement('div');
+        badge.className = 'bg-slate-900/90 text-slate-400 text-[10px] font-mono px-3 py-1 flex justify-between';
+        badge.innerHTML = `<span>${currentPdfTitle}</span><span>Page ${pageNum} of ${totalPages}</span>`;
+
+        wrapper.appendChild(canvas);
+        wrapper.appendChild(badge);
+        container.appendChild(wrapper);
+
+        await page.render({
+          canvasContext: ctx,
+          viewport,
+          transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : null
+        }).promise;
+      }
+    }
+
+    async function changePdfZoom(delta) {
+      const next = Math.min(2.5, Math.max(0.75, +(currentPdfScale + delta).toFixed(2)));
+      if (next === currentPdfScale) return;
+      currentPdfScale = next;
+      document.getElementById('pdf-zoom-label').textContent = `${Math.round(currentPdfScale * 100)}%`;
+
+      const img = document.getElementById('pdf-image-preview');
+      if (img) {
+        img.style.width = `${Math.round(currentPdfScale * 100)}%`;
+        return;
+      }
+      if (currentPdfDoc) {
+        await renderAllPdfPages();
+      }
+    }
+
+    function closePdfReader() {
+      document.getElementById('pdf-reader-modal').classList.add('hidden');
+      document.getElementById('pdf-pages-container').innerHTML = '';
+      currentPdfDoc = null;
     }
 
     // ========================================================
@@ -1709,7 +1887,6 @@
       switchGuideView('weather');
     }
 
-    // Live Open-Meteo Osaka Weather
     function decodeWeatherCode(code) {
       const map = {
         0: { label: 'Clear Sky', icon: '☀️' },
@@ -1770,7 +1947,6 @@
       }
     }
 
-    // Guide -> Tasks Renderer
     function renderTasks() {
       const saved = JSON.parse(localStorage.getItem('osaka_tasks_v2') || '{}');
       const tasks = INITIAL_TASKS.map(t => ({
@@ -1824,7 +2000,6 @@
       icon.style.transform = hidden ? 'rotate(0deg)' : 'rotate(180deg)';
     }
 
-    // Guide -> Hours Renderer
     function setHoursFilter(key) {
       hoursFilter = key;
       document.querySelectorAll('.hours-pill').forEach(btn => {
@@ -1865,7 +2040,6 @@
       }).join('');
     }
 
-    // Guide -> All Maps Renderer
     function setMapFilter(key) {
       mapFilter = key;
       document.querySelectorAll('.map-pill').forEach(btn => {
@@ -2050,6 +2224,7 @@
         renderPlanDay();
         renderTasks();
         renderWalletQrGrid();
+        updateAssetBadges();
         lucide.createIcons();
       } catch (err) {
         console.warn('Offline — using local IndexedDB & localStorage:', err);
@@ -2100,7 +2275,6 @@
       fetchOsakaWeather(false);
       lucide.createIcons();
     };
-
   </script>
 </body>
 </html>

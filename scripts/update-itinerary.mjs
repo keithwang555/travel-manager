@@ -25,32 +25,65 @@ ${docText}
 === CURRENT index.html ===
 ${currentHtml}`;
 
-const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
+const models = [
+  'gemini-3.8-flash',
+  'gemini-3.8-flash-lite',
+  'gemini-3.6-flash',
+  'gemini-3.5-flash',
+];
 
-const response = await fetch(endpoint, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: {
-      temperature: 0.1,
-      maxOutputTokens: 65536,
-    },
-  }),
-});
+let data = null;
 
-if (!response.ok) {
-  console.error('Gemini API error:', response.status, await response.text());
+for (const model of models) {
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    console.log(`Calling ${model} (attempt ${attempt})...`);
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: 0.1,
+          maxOutputTokens: 65536,
+        },
+      }),
+    });
+
+    if (response.ok) {
+      data = await response.json();
+      console.log(`Succeeded with ${model}`);
+      break;
+    }
+
+    const errText = await response.text();
+    console.warn(`${model} returned ${response.status}: ${errText}`);
+
+    if (response.status === 503 || response.status === 429) {
+      await new Promise((resolve) => setTimeout(resolve, 6000));
+      continue;
+    }
+
+    // Move immediately to the next fallback model on non-transient errors (e.g. 404)
+    break;
+  }
+
+  if (data) break;
+}
+
+if (!data) {
+  console.error('All Gemini fallback models failed.');
   process.exit(1);
 }
 
-const data = await response.json();
 let updatedHtml = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '';
 
 // Strip accidental markdown fences if present
 updatedHtml = updatedHtml.replace(/^```html\s*/i, '').replace(/\s*```$/i, '').trim();
 
-if (!updatedHtml.startsWith('<!DOCTYPE html>') || !updatedHtml.endsWith('</html>')) {
+const lowerHtml = updatedHtml.toLowerCase();
+if (!lowerHtml.startsWith('<!doctype html>') || !lowerHtml.endsWith('</html>')) {
   console.error('Generated output is not a complete HTML document. Aborting.');
   process.exit(1);
 }

@@ -135,7 +135,7 @@
       </section>
 
       <!-- ====================================================== -->
-      <!-- TAB 2: WALLET (QRS, PASSES, PDFS & STAFF SHOW-CARDS)   -->
+      <!-- TAB 2: WALLET (QRS, PASSES, BUDGET & PDFS)             -->
       <!-- ====================================================== -->
       <section id="tab-wallet" class="hidden space-y-5">
 
@@ -148,6 +148,121 @@
           <button onclick="openVercelModal()" class="px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-1.5 hover:text-rose-600 transition">
             <i data-lucide="cloud" class="w-3.5 h-3.5 text-rose-600"></i> Vercel Paths
           </button>
+        </div>
+
+        <!-- On-Ground Budget & Payment Split Card (Appendix D Synced) -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-rose-600">Appendix D • Budget Strategy</span>
+              <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-0.5">S$1,000 (~¥123,500) On-Ground Budget</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Excludes pre-paid flights, hotel (~S$728) & USJ passes • 1 JPY ≈ 0.0081 SGD</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 font-mono text-xs font-bold shrink-0">
+              S$1,000 Cap
+            </span>
+          </div>
+
+          <!-- 3-Channel Payment Split Up Front -->
+          <div class="space-y-2">
+            <div class="p-3 rounded-2xl bg-stone-50 dark:bg-slate-800/60 border border-stone-200/60 dark:border-slate-800 space-y-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                  <i data-lucide="credit-card" class="w-3.5 h-3.5 text-rose-600"></i> Trust Debit Card (0% FX Fee)
+                </span>
+                <span class="font-mono font-bold text-rose-600 dark:text-rose-400">~S$840 / ~¥103,500</span>
+              </div>
+              <p class="text-[12px] text-slate-600 dark:text-slate-300 leading-snug">
+                Primary Visa for 95%+ of spend (USJ dining/merch, LEGOLAND online, PARCO/Hands, Daimaru/ABC-Mart, restaurants, 7-Eleven, ICOCA top-ups). Select JPY at terminals. Carry passport for 10% tax-free on ¥5,500+.
+              </p>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-stone-50 dark:bg-slate-800/60 border border-stone-200/60 dark:border-slate-800 space-y-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                  <i data-lucide="smartphone" class="w-3.5 h-3.5 text-emerald-600"></i> Digital ICOCA (Apple/Google Wallet)
+                </span>
+                <span class="font-mono font-bold text-emerald-600 dark:text-emerald-400">~S$28 / ¥3,500</span>
+              </div>
+              <p class="text-[12px] text-slate-600 dark:text-slate-300 leading-snug">
+                Loaded via Trust card. One-handed tap for Osaka Metro subways, Hanshin/JR to USJ, and Keihan Line. (Ethan rides free under preschooler Yōji rule).
+              </p>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-stone-50 dark:bg-slate-800/60 border border-stone-200/60 dark:border-slate-800 space-y-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                  <i data-lucide="banknote" class="w-3.5 h-3.5 text-amber-600"></i> Physical JPY Cash
+                </span>
+                <span class="font-mono font-bold text-amber-600 dark:text-amber-400">~S$132 / ¥16k–¥20k</span>
+              </div>
+              <p class="text-[12px] text-slate-600 dark:text-slate-300 leading-snug">
+                Single 7-Eleven ATM withdrawal on arrival using Trust card. Dedicated to Kuromon Market seafood stalls, Kids Plaza 1F tickets, 2F coin laundry, gachapon & cash-only eateries.
+              </p>
+            </div>
+          </div>
+
+          <!-- Collapsible Category Breakdown -->
+          <div>
+            <button onclick="toggleDetails('wallet-budget-breakdown', this)" class="w-full pt-2 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
+              <span>View Category Breakdown (Food, Shoes, Card Holder, Toys & Transit)</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i>
+            </button>
+            <div id="wallet-budget-breakdown" class="hidden pt-3 space-y-2.5 text-[12.5px] text-slate-600 dark:text-slate-300">
+              <div class="flex items-start justify-between gap-2 border-b border-stone-100 dark:border-slate-800/60 pb-2">
+                <div>
+                  <div class="font-bold text-slate-900 dark:text-white">🍣 Food, Seafood & Konbini</div>
+                  <div class="text-[11.5px] text-slate-500">Day 1 Kuromon (¥8k–11k), Day 3 USJ dining (¥8.5k–11.5k), sit-down meals & 7-Eleven</div>
+                </div>
+                <div class="font-mono font-semibold text-right shrink-0">¥42k–54k<br><span class="text-[11px] text-slate-400">~S$340–437</span></div>
+              </div>
+
+              <div class="flex items-start justify-between gap-2 border-b border-stone-100 dark:border-slate-800/60 pb-2">
+                <div>
+                  <div class="font-bold text-slate-900 dark:text-white">👟 Ethan's White Leather P1 Shoes</div>
+                  <div class="text-[11.5px] text-slate-500">ASICS SUKU²/Laserbeam, MoonStar, Haruta Kids (Daimaru 9F / ABC-Mart; 10% tax-free)</div>
+                </div>
+                <div class="font-mono font-semibold text-right shrink-0">¥6.5k–11k<br><span class="text-[11px] text-slate-400">~S$53–89</span></div>
+              </div>
+
+              <div class="flex items-start justify-between gap-2 border-b border-stone-100 dark:border-slate-800/60 pb-2">
+                <div>
+                  <div class="font-bold text-slate-900 dark:text-white">💳 Automated Pop-Up Card Holder</div>
+                  <div class="text-[11.5px] text-slate-500">Hands at Shinsaibashi PARCO 9F–11F (Secrid or Japanese slim aluminum ejector cases)</div>
+                </div>
+                <div class="font-mono font-semibold text-right shrink-0">¥6k–16k<br><span class="text-[11px] text-slate-400">~S$49–130</span></div>
+              </div>
+
+              <div class="flex items-start justify-between gap-2 border-b border-stone-100 dark:border-slate-800/60 pb-2">
+                <div>
+                  <div class="font-bold text-slate-900 dark:text-white">🧸 Toys, USJ Gear & Hotel Extras</div>
+                  <div class="text-[11.5px] text-slate-500">USJ Power-Up Band™ (¥5,600), PARCO/Daimaru toys, hotel tax & 2F coin laundry (~¥2.2k)</div>
+                </div>
+                <div class="font-mono font-semibold text-right shrink-0">¥12k–18k<br><span class="text-[11px] text-slate-400">~S$97–146</span></div>
+              </div>
+
+              <div class="flex items-start justify-between gap-2 border-b border-stone-100 dark:border-slate-800/60 pb-2">
+                <div>
+                  <div class="font-bold text-slate-900 dark:text-white">🎟️ Remaining Attractions</div>
+                  <div class="text-[11.5px] text-slate-500">LEGOLAND (~¥4.6k–5.6k), Kids Plaza (¥2k–2.3k), Museums (¥2.6k–3k; Ethan free)</div>
+                </div>
+                <div class="font-mono font-semibold text-right shrink-0">¥9k–11.5k<br><span class="text-[11px] text-slate-400">~S$73–93</span></div>
+              </div>
+
+              <div class="flex items-start justify-between gap-2 border-b border-stone-100 dark:border-slate-800/60 pb-2">
+                <div>
+                  <div class="font-bold text-slate-900 dark:text-white">🚅 Airport & Local Transit</div>
+                  <div class="text-[11.5px] text-slate-500">Rapi:t β round-trip (¥2,980; Ethan free on lap), ICOCA load (¥3.5k), Day 4 taxi cushion (~¥1k)</div>
+                </div>
+                <div class="font-mono font-semibold text-right shrink-0">¥6.5k–8.5k<br><span class="text-[11px] text-slate-400">~S$53–69</span></div>
+              </div>
+
+              <div class="flex items-start justify-between gap-2 pt-1 font-semibold text-emerald-600 dark:text-emerald-400">
+                <div>🛡️ Unallocated Cushion</div>
+                <div class="font-mono text-right">~S$35–S$335<br><span class="text-[11px] opacity-80">(~¥4,500–¥41,500)</span></div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 2x2 Gate & Customs QR Pass Grid -->
@@ -355,7 +470,7 @@
             Weather
           </button>
           <button onclick="switchGuideView('tasks')" id="gseg-tasks" class="gseg-btn py-2 px-2 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition">
-            Tasks (<span id="pending-badge-count">3</span>)
+            Tasks (<span id="pending-badge-count">2</span>)
           </button>
           <button onclick="switchGuideView('hours')" id="gseg-hours" class="gseg-btn py-2 px-2 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition">
             Hours
@@ -436,17 +551,17 @@
         </div>
 
         <!-- ---------------------------------------------------- -->
-        <!-- GUIDE SUB-VIEW 2: PENDING TASKS (3 REMAINING)        -->
+        <!-- GUIDE SUB-VIEW 2: PENDING TASKS                      -->
         <!-- ---------------------------------------------------- -->
         <div id="guide-view-tasks" class="hidden space-y-4">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
             <div class="flex items-center justify-between">
               <div>
-                <h2 class="text-[15px] font-bold text-slate-900 dark:text-white">Remaining Pre-Trip Tasks</h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Priority action items before Dec 13</p>
+                <h2 class="text-[15px] font-bold text-slate-900 dark:text-white">Pre-Trip Action Checklist</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Priority action items in execution order</p>
               </div>
               <span id="tasks-status-pill" class="px-2.5 py-1 rounded-full bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 font-mono text-xs font-semibold">
-                3 Pending
+                2 Pending
               </span>
             </div>
 
@@ -493,7 +608,7 @@
         </div>
 
         <!-- ---------------------------------------------------- -->
-        <!-- GUIDE SUB-VIEW 4: ALL 28 DOOR-TO-DOOR GOOGLE MAPS    -->
+        <!-- GUIDE SUB-VIEW 4: ALL DOOR-TO-DOOR GOOGLE MAPS       -->
         <!-- ---------------------------------------------------- -->
         <div id="guide-view-maps" class="hidden space-y-3.5">
           <!-- Preschooler (Yōji) Free Fare Rule Card -->
@@ -676,23 +791,23 @@
       return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&travelmode=${mode}`;
     }
 
-    // 1. COMPLETE 5-DAY ITINERARY DATA (WITH UPDATED USJ EXPRESS PASS 5 & ZERO COASTERS)
+    // 1. COMPLETE 5-DAY ITINERARY DATA (SYNCED 100% WITH LATEST GOOGLE DOC)
     const ITINERARY_DAYS = [
       {
         id: 'day1',
         pillDay: 'Sun 13',
         pillSub: 'Arrival',
-        fullTitle: 'Sun, Dec 13 • Arrival, Seafood & Neon',
+        fullTitle: 'Sun, Dec 13 • 10:15 AM Arrival, Peak Seafood Lunch, Indoor Pop-Culture & Neon Walk',
         area: 'Minami / Namba (On foot after Rapi:t)',
-        strategy: 'Sleep Reset: After Saturday 6 PM–midnight SGT rest and sleep on Scoot TR 880 (Seats 32B/32C), stay active indoors all afternoon with zero nap, then wind down around 7:30 PM to lock in JST.',
+        strategy: 'Sleep Strategy: Following your Saturday 6:00 PM–midnight SGT rest and extra sleep on Scoot TR 880 in Seats 32B/32C, you stay active indoors all afternoon with zero mid-afternoon nap, then wrap up around 7:30 PM to lock in local Japan time.',
         events: [
           {
             time: '10:15 – 11:05',
             title: 'KIX T1 Arrival, Immigration & Bags',
-            summary: 'Land on Scoot TR 880 (Seats 32B/32C), clear Visit Japan Web fast-track, and cross skybridge to Nankai Station.',
+            summary: 'Disembark Scoot TR 880 (Seats 32B/32C), clear Visit Japan Web fast-track, pick up two 20 kg bags, and cross skybridge to Nankai Station.',
             details: [
-              'Disembark Scoot TR 880 at KIX Terminal 1, scan Visit Japan Web QR codes (in Wallet tab) for fast-track lanes, and collect your two 20 kg checked bags.',
-              'Follow overhead signs out of Terminal 1 arrivals across the pedestrian skybridge to Kansai-Airport Station (2nd floor) and head to Nankai Electric Railway (orange/blue signage—not JR).'
+              'Disembark Scoot TR 880 at KIX Terminal 1, clear immigration/customs (complete Visit Japan Web QR codes in Wallet tab before departure for fast-track lanes), and pick up your two 20 kg bags.',
+              'Follow overhead signs out of Terminal 1 arrivals across the pedestrian skybridge to Kansai-Airport Station (2nd floor) and head to the Nankai Electric Railway ticket machines/counter (orange/blue signage—not JR).'
             ],
             route: {
               label: 'Walk: KIX T1 → Nankai Station',
@@ -704,12 +819,11 @@
           {
             time: '11:05 / 11:35 – 12:10',
             title: 'Nankai Rapi:t β to Namba & Bag Drop',
-            summary: '35-min express to Nankai Namba, then 400m flat walk east down Nansan-dori to Caption by Hyatt.',
+            summary: 'Board Nankai Rapi:t β to Namba (35 min), then walk 400 m flat east down Nansan-dori to drop luggage at Caption by Hyatt.',
             details: [
-              'Board the Sunday/Holiday Nankai Rapi:t β departing KIX at 11:05 AM (arrives Namba 11:40 AM) or 11:35 AM (arrives Namba 12:10 PM) — ¥1,490 adult reserved seat with oversized luggage racks.',
+              'Board the Sunday/Holiday Nankai Rapi:t β departing KIX at 11:05 AM (arrives Namba 11:40 AM) or 11:35 AM (arrives Namba 12:10 PM) — ¥1,490 adult reserved seat (plenty of oversized luggage racks at carriage ends).',
               'Preschool Yōji Rule: Ethan rides free on your lap, or costs ¥750 for his own reserved seat.',
-              'Take the Nankai South/East street-level elevator down and walk 400m (6–7 min) straight east down Nansan-dori (なんさん通り) with zero stairs and 1 crossing at Sakaisuji Ave to Caption by Hyatt Namba Osaka.',
-              'Drop luggage at the 24-hour front desk (11:00 AM early arrival logged on #40023B32617210; check-in 3:00 PM) and put on warm layers (10–12°C afternoon).'
+              'Take the station elevator down to street level and walk 400 m (6–7 min) straight east down Nansan-dori to Caption by Hyatt Namba Osaka. Leave suitcases with front desk (11:00 AM arrival logged; check-in 3:00 PM) and put on warm outer layers (10–12°C afternoon weather).'
             ],
             route: {
               label: 'Transit: KIX T1 → Nankai Namba',
@@ -726,12 +840,12 @@
           },
           {
             time: '12:15 – 14:00',
-            title: 'Kuromon Market Seafood Grazing',
-            summary: '2-minute walk across Sakaisuji Ave into the covered market during its peak 9 AM–2 PM seafood window.',
+            title: 'Kuromon Market (Peak Midday Seafood Grazing)',
+            summary: '2-minute walk across Sakaisuji Avenue into covered arcade during its prime 9:00 AM – 2:00 PM peak window.',
             details: [
               'Walk 190 meters (2 minutes) straight across Sakaisuji Avenue from Caption by Hyatt.',
-              'Arrive right in the prime 9:00 AM – 2:00 PM window before stalls wind down after 3:00 PM.',
-              'Sample freshly sliced otoro (fatty tuna) and salmon sashimi, butter-grilled scallops, king crab legs, takoyaki, wagyu skewers, and fresh strawberries at stall counters or the indoor rest area.'
+              'Why 12:15 PM is prime: You hit the covered, weather-proof market during its peak 9:00 AM – 2:00 PM window before seafood stalls wind down after 3:00 PM.',
+              'Go-with-the-flow grazing: Walk main arcade sampling freshly sliced otoro (fatty tuna) and salmon sashimi, butter-grilled scallops, king crab legs, takoyaki, wagyu skewers, and fresh strawberries at stall counters or the market indoor rest area.'
             ],
             route: {
               label: 'Walk: Caption → Kuromon Market (190m)',
@@ -742,16 +856,17 @@
           },
           {
             time: '14:15 – 16:45',
-            title: 'No-Nap Indoor Pop-Culture & Toy Run',
-            summary: 'Sheltered arcade walk to Shinsaibashi PARCO 6F (LEGO, SEGA, Godzilla, Ghibli) & Daimaru 9F Pokémon Center.',
+            title: 'No-Nap Indoor Pop-Culture & Shopping Run',
+            summary: 'PARCO 6F pop-culture hub, PARCO 9F-11F Hands card holder & Daimaru 9F / ABC-Mart P1 school shoes.',
             details: [
-              'Walk 8 minutes northwest into the glass-roofed Shinsaibashi-Suji Shopping Street (sheltered from wind and cold).',
-              'Shinsaibashi PARCO — Floor 6 (10:00 AM – 8:00 PM): LEGO® Store, SEGA STORE OSAKA, CAPCOM Store, Godzilla Store (2m Godzilla statue), Donguri Republic (Ghibli) & Crayon Shin-chan Official Store.',
-              'Indoor Connecting Bridge: Walk next door to Daimaru Shinsaibashi Main Building — Floor 9 for Pokémon Center Osaka DX (open until 8:00 PM).',
-              'Optional 3:30 PM Quick Pit Stop: Swing back to Caption briefly to grab your room key (request Floor 10 or 11), drop shopping bags, and add heavy coats/gloves before dusk—without lying down for a nap.'
+              'Walk 8 minutes northwest into glass-roofed Shinsaibashi-Suji Shopping Street (sheltered from wind and cold). Bring physical passport for instant 10% tax-free shopping on ¥5,500+ single-store purchases.',
+              'Shinsaibashi PARCO — Floor 6 (Open 10:00 AM – 8:00 PM): Take elevator straight to Floor 6 for Ethan\'s pop-culture hub: LEGO® Store, SEGA STORE OSAKA (opened Oct 2026), CAPCOM Store Osaka, Godzilla Store Osaka (2m statue), Donguri Republic (Ghibli photo spots) & Crayon Shin-chan Official Store.',
+              'Zero-Detour Stop 1 — Automated Pop-Up Card Holder (PARCO 9F–11F Hands): Ride elevator up 3 floors to Hands (formerly Tokyu Hands) to test and pick up an automated trigger/click-eject cardholder (Secrid Cardprotector/Miniwallet or Japanese slim aluminum ejector cases).',
+              'Zero-Detour Stop 2 — Pokémon DX & Ethan\'s White Leather P1 School Shoes (Daimaru 9F / ABC-Mart Grand Stage): Cross indoor bridge to Daimaru Shinsaibashi Main Building — Floor 9 for Pokémon Center Osaka DX (open until 8:00 PM), and visit Daimaru\'s Kids\' Floor (ASICS SUKU² / MoonStar foot sizing) or ABC-Mart Grand Stage right on covered Shinsaibashi-Suji (ASICS Laserbeam, MoonStar, or Haruta Kids all-white Velcro/leather P1 school shoes).',
+              'Optional 3:30 PM Quick Pit Stop: Since room check-in opens at 3:00 PM, swing back to Caption briefly to grab room key, drop shopping bags, and put on heavier coats/gloves before dusk—without lying down for a nap.'
             ],
             route: {
-              label: 'Walk: Kuromon → Shinsaibashi PARCO 6F',
+              label: 'Walk: Kuromon → Shinsaibashi PARCO',
               origin: 'Kuromon Market, Osaka',
               destination: 'Shinsaibashi PARCO, Osaka',
               mode: 'walking'
@@ -765,13 +880,13 @@
           },
           {
             time: '17:00 – 19:30',
-            title: 'Neon City Light Walk & Early Dinner',
-            summary: 'Sunset Glico sign at Dotonbori Canal, 4 km Midosuji ginkgo illuminations, early dinner & 7:30 PM sleep reset.',
+            title: 'Neon City Light Walk & Go-With-the-Flow Early Dinner',
+            summary: 'Dotonbori Canal Glico sign, 4 km Midosuji ginkgo light illuminations, early dinner & 7:30 PM sleep reset.',
             details: [
-              'Sunset hits around 4:50 PM, and temperatures drop to 4–5°C after dark.',
-              '5:00 – 5:45 PM | Dotonbori Canal: Ebisu Bridge for the glowing Glico Running Man, giant mechanical crab, and animated 3D food signs.',
-              '5:45 – 6:30 PM | Midosuji Boulevard Illuminations: 4 km of glowing ginkgo trees lit nightly (5:00 PM – 1:00 AM) with interactive sidewalk projections near Kita-Mido.',
-              '6:30 – 7:30 PM | Early Dinner & Wind-Down: Casual dinner in Dotonbori/Shinsaibashi (okonomiyaki, ramen, conveyor sushi, or katsu) and walk 7–10 min back to Caption by 7:30–8:00 PM.'
+              'Sunset hits around 4:50 PM, and temperatures dip to 4–5°C after dark.',
+              '5:00 PM – 5:45 PM | Dotonbori Canal: Walk to Ebisu Bridge for glowing Glico Running Man billboard, giant moving mechanical crab, and animated 3D food signs reflecting across the water.',
+              '5:45 PM – 6:30 PM | Midosuji Boulevard Illuminations: Step 1 block west onto Midosuji Avenue, where 4 km of ginkgo trees glow nightly (5:00 PM – 1:00 AM) with five decade-themed light zones and interactive sidewalk projections near Kita-Mido.',
+              '6:30 PM – 7:30 PM | Early Dinner & Wind-Down: Follow appetite in Dotonbori/Shinsaibashi (okonomiyaki, ramen, conveyor sushi, or katsu) and walk 7–10 minutes back to Caption by 7:30–8:00 PM for a full night\'s sleep.'
             ],
             route: {
               label: 'Walk: Caption → Dotonbori Glico Sign',
@@ -792,27 +907,28 @@
         id: 'day2',
         pillDay: 'Mon 14',
         pillSub: 'LEGO Bay',
-        fullTitle: 'Mon, Dec 14 • Waterfront LEGO Day',
-        area: 'Osaka Bay (Sakaisuji → Chuo Line)',
-        strategy: 'Why Monday: Kids Plaza Osaka (closed 2nd Monday), Nakanoshima Children\'s Book Forest, and both Nakanoshima art museums are all closed Mondays—whereas LEGOLAND Discovery Center is open 10:00 AM – 6:00 PM.',
+        fullTitle: 'Mon, Dec 14 • Slow Morning & Waterfront LEGO Day',
+        area: 'Osaka Bay (Sakaisuji → Chuo Line to Osakako)',
+        strategy: 'Why Monday: Kids Plaza Osaka (closed 2nd Monday of the month), Nakanoshima Children\'s Book Forest (closed Mondays), and both Nakanoshima art museums (closed Mondays) are all closed today, whereas LEGOLAND Discovery Center is open 10:00 AM – 6:00 PM.',
         events: [
           {
             time: '09:00 – 11:45',
-            title: 'Unhurried Sleep-In & Coffee Morning',
-            summary: 'No alarms or early trains—wake naturally, grab breakfast around Namba, and pack socks for Ethan.',
+            title: 'Unhurried Sleep-In & Go-With-the-Flow Breakfast/Coffee',
+            summary: 'No alarms or early trains—wake naturally, grab breakfast around Namba, and dress in peelable layers.',
             details: [
-              'Wake naturally after Sunday\'s travel day and enjoy a relaxed breakfast/coffee around Namba or Nippombashi.',
-              'Dress in peelable layers (Tempozan Marketplace and LEGOLAND are strongly heated) and pack socks for Ethan\'s soft-play climbing structure.'
+              'No alarms or early trains—wake naturally, grab coffee and breakfast at your own pace around Namba/Nippombashi.',
+              'Dress comfortably in layers (you will be indoors in a strongly heated mall all afternoon) and pack socks for Ethan.'
             ]
           },
           {
             time: '11:45 – 12:30',
-            title: 'Subway to Osaka Bay (~25–30 min)',
-            summary: 'Nippombashi → Sakaisuji Line (1 stop) → Chuo Line (7 stops) to Osakako Exit 1 elevator.',
+            title: 'Transit to Osaka Bay (~25–30 min door-to-door)',
+            summary: 'Nippombashi → Sakaisuji Line (1 stop) → Chuo Line (7 stops) to Osakako Station Exit 1 elevator.',
             details: [
               'Walk 4 minutes (300 m) from Caption to Nippombashi Station (Osaka Metro).',
-              'Board the brown Sakaisuji Line northbound 1 stop (2 min) to Sakaisuji-Hommachi Station, then transfer inside to the green Chuo Line westbound 7 stops (~14 min) to Osakako Station.',
-              'Ethan rides 100% free under the Yōji preschool rule. Take Osakako Exit 1 (elevator available) and walk 5 minutes north to Tempozan Marketplace.'
+              'Board Osaka Metro Sakaisuji Line (brown line, northbound) 1 stop (2 min) to Sakaisuji-Hommachi Station.',
+              'Transfer inside station to Osaka Metro Chuo Line (green line, westbound) 7 stops (~14 min) to Osakako Station.',
+              'Ethan rides 100% free under the Yōji preschool rule. Take Exit 1 (elevator available) and walk 5 minutes straight north to Tempozan Marketplace.'
             ],
             route: {
               label: 'Transit: Caption → Osakako Station',
@@ -829,19 +945,19 @@
           },
           {
             time: '12:30 – 13:30',
-            title: 'Waterfront Lunch at Tempozan 2F',
-            summary: 'Eat overlooking Osaka Bay or inside the retro 1960s Naniwa Kuishinbo Yokocho food alley.',
+            title: 'Waterfront Lunch Inside Tempozan Marketplace',
+            summary: 'Eat in 2F food court overlooking Osaka Bay or retro 1960s Naniwa Kuishinbo Yokocho food alley.',
             details: [
-              'Choose between the Tempozan Marketplace 2F bay-view food court or the 1960s-themed Naniwa Kuishinbo Yokocho food alley right downstairs from LEGOLAND.'
+              'Go with the flow inside Tempozan Marketplace (2F food court overlooking Osaka Bay or retro 1960s Naniwa Kuishinbo Yokocho food alley) before heading up to 3rd floor.'
             ]
           },
           {
             time: '13:30 – 16:30',
-            title: 'LEGOLAND Discovery Center Osaka (3F)',
-            summary: '100% indoor LEGO rides, 4D cinema, soft-play climbing tower & Miniland Osaka (last entry 4:00 PM).',
+            title: 'LEGOLAND Discovery Center Osaka (Tempozan 3F)',
+            summary: '100% indoor LEGO rides, 4D cinema, soft-play climbing zone & Miniland Osaka (open 10 AM–6 PM).',
             details: [
-              'Monday Hours: 10:00 AM – 6:00 PM (last admission 4:00 PM; timed tickets allow a 3-hour stay). Online advance booking required; weekday entries after 2:00 PM save ~20%.',
-              'Everything Ethan (~1.15 m) can do: Kingdom Quest laser-zap dark ride, Merlin\'s Apprentice pedal-powered ride, 4D LEGO Cinema, LEGO City Play Zone (socks required!), Miniland Osaka (day-to-night illuminated LEGO city), and LEGO racer build-and-test ramps.'
+              'Hours & Entry: Open 10:00 AM – 6:00 PM on Mondays (last admission 4:00 PM; timed tickets allow up to a 3-hour stay). Pre-book online timed slot (weekday entries after 2:00 PM qualify for ~20% afternoon discount online).',
+              'Everything Ethan (~1.15 m) Can Do: Kingdom Quest interactive laser-zap dark ride & Merlin\'s Apprentice pedal-powered flying ride; 4D LEGO Cinema (wind, rain, snow effects); LEGO City Play Zone (multi-story soft-play climbing structure—bring socks!); Miniland Osaka (illuminated LEGO replica of landmarks cycling day to night); LEGO racer build-and-test ramps.'
             ],
             route: {
               label: 'Walk: Osakako → LEGOLAND Osaka',
@@ -853,10 +969,10 @@
           {
             time: '16:45 – 19:30',
             title: 'Return to Namba & Early Dinner',
-            summary: 'Chuo Line → Sakaisuji Line back to Nippombashi (~25 min), dinner near hotel & early bedtime before USJ.',
+            summary: 'Chuo Line → Sakaisuji Line back to Nippombashi (~25 min), go-with-the-flow dinner near hotel & early sleep.',
             details: [
-              'Reverse the Chuo Line (Osakako → Sakaisuji-Hommachi) → Sakaisuji Line route back to Nippombashi Station (~25 min).',
-              'Enjoy an easy dinner near Caption by Hyatt and turn in early ahead of Tuesday\'s USJ day.'
+              'Reverse the Chuo Line → Sakaisuji Line route back to Nippombashi Station (~25 min).',
+              'Grab an easy go-with-the-flow dinner near Caption and turn in early for tomorrow\'s USJ start.'
             ],
             route: {
               label: 'Transit: Tempozan → Caption Hotel',
@@ -871,20 +987,20 @@
         id: 'day3',
         pillDay: 'Tue 15',
         pillSub: 'USJ Day',
-        fullTitle: 'Tue, Dec 15 • Universal Studios Japan (Zero Coasters)',
-        area: 'Sakurajima / Bay (Hanshin → JR Yumesaki)',
-        strategy: 'Booked Express Pass 5 (Race & Minion Special • USJ-P1X000000102MV / 102MW): Locks in 11:20–12:20 Super Nintendo World™, 11:20–11:50 Mario Kart, 15:00–15:30 Villain-Con, plus untimed Minion Mayhem & JAWS™—zero rollercoasters.',
+        fullTitle: 'Tue, Dec 15 • Full Day at Universal Studios Japan (USJ)',
+        area: 'Sakurajima / Bay (Hanshin Namba → JR Yumesaki Line)',
+        strategy: 'Why Tuesday: Mid-December Tuesdays have Moderate crowd levels, and your booked Express Pass 5: Race & Minion Special locks in your non-coaster headliners with timed Super Nintendo World™ entry.',
         isUsjDay: true,
         events: [
           {
             time: '07:50 – 08:30',
-            title: 'Morning Train to Universal City (~25–30m)',
-            summary: 'Kintetsu-Nippombashi → Hanshin Namba Line to Nishikujo → JR Yumesaki Line to Universal City.',
+            title: 'Morning Train to Universal City (~25–30 min)',
+            summary: 'Kintetsu-Nippombashi → Hanshin Namba to Nishikujo → JR Yumesaki to Universal City; arrive gates ~8:30 AM.',
             details: [
               'Walk 4 minutes (300 m) from Caption to Kintetsu-Nippombashi Station.',
-              'Board a Hanshin Namba Line train bound for Amagasaki/Kobe-Sannomiya (4 stops direct, ~11 min) to Nishikujo Station, then walk 1 min across to JR Yumesaki Line Platform 3/4 (2 stops, 5 min) to Universal City Station.',
-              'Walk 3 minutes through Universal CityWalk to reach USJ gates by ~8:30 AM (official hours 9:00 AM – 9:00 PM; gates routinely open 15–30 min early).',
-              'Park Rules: X-ray & metal detector bag screening at entry; no outside food/drinks; no re-entry once you exit.'
+              'Board Hanshin Namba Line train bound for Amagasaki/Kobe-Sannomiya (direct, 4 stops / ~11 min) to Nishikujo Station.',
+              'Exit Hanshin gates, walk 1 min across to JR Yumesaki Line platform (Platform 3/4 bound for Sakurajima) for 2 stops (5 min) to Universal City Station.',
+              'Walk 3 minutes through Universal CityWalk to reach USJ gates by ~8:30 AM (official hours 9:00 AM – 9:00 PM; gates routinely open 15–30 min early). Note: X-ray/metal detector screening; outside food/drinks prohibited; no re-entry.'
             ],
             route: {
               label: 'Transit: Caption → Universal City Station',
@@ -901,50 +1017,51 @@
           },
           {
             time: '08:45 – 11:15',
-            title: 'Early Rope-Drop Rides & Nintendo Prep',
-            summary: 'Enjoy low morning waits at Universal Wonderland or Minion Mayhem; reach Nintendo entrance by 11:10 AM.',
+            title: 'Early Rope-Drop Rides & Nintendo Arrival Prep',
+            summary: 'Confirmed QR codes ready (Studio Passes JNPMM/JNPMN + Express Pass 5 102MV/102MW); hit family rides.',
             details: [
-              'Have uncropped original QR codes ready in Wallet: Studio Passes (USJ-P1X000000JNPMM / JNPMN) + Express Pass 5 (USJ-P1X000000102MV / 102MW), plus passports for ID verification if requested.',
-              'Hit Universal Wonderland family rides or an early standby run on Minion Mayhem before heading to Super Nintendo World™ by 11:10–11:15 AM.'
+              'Confirmed Tickets Ready (Uncropped Original QR Codes): 1-Day Studio Passes (Adult USJ-P1X000000JNPMM / Child USJ-P1X000000JNPMN) + 2x Express Pass 5: Race & Minion Special (USJ-P1X000000102MV / USJ-P1X000000102MW). Keep passports on hand for ID verification.',
+              'Use early morning low-wait hours for Universal Wonderland family rides or an early standby ride on Despicable Me: Minion Mayhem (102 cm+ with companion).',
+              'Arrive at Super Nintendo World™ entrance by 11:10–11:15 AM ahead of your 11:20 AM timed window.'
             ]
           },
           {
             time: '11:20 – 12:20',
-            title: 'Super Nintendo World™ & Mario Kart Slot',
-            summary: 'Guaranteed area entry (11:20–12:20) & strict 30-min Express window for Mario Kart (11:20–11:50).',
+            title: 'Super Nintendo World™ Timed Entry & Mario Kart Slot',
+            summary: 'Guaranteed land entry (11:20–12:20) & strict 30-min Express slot for Mario Kart (11:20–11:50).',
             details: [
-              '11:20 – 11:50 AM (Strict 30-Min Express Window): Head straight to Mario Kart: Koopa\'s Challenge™ (107 cm+ with companion; non-coaster AR dark ride). Ask a crew member at the entrance for Ethan\'s 107 cm+ height wristband.',
-              'Optional Extras: Grab a Power-Up Band™ (¥5,600) at kiosks inside the land to punch ? blocks, or join standby for Yoshi\'s Adventure™ (92 cm+ gentle track ride).',
-              'Coaster Policy: Skip Mine-Cart Madness™ (rollercoaster).'
+              '11:20 AM – 12:20 PM: Enter Super Nintendo World™ during guaranteed Express Pass timed-entry window.',
+              '11:20 AM – 11:50 AM (Strict 30-Min Express Window): Head straight to Mario Kart: Koopa\'s Challenge™ (107 cm+ with companion; non-coaster AR dark ride). Ask crew member at entrance for Ethan\'s 107 cm+ height wristband.',
+              'Optional Nintendo Extras: Pick up a Power-Up Band™ (¥5,600) at kiosks inside land to punch ? blocks and collect coins, or join standby for Yoshi\'s Adventure™ (92 cm+ gentle track ride). Skip Mine-Cart Madness™ (rollercoaster).'
             ]
           },
           {
             time: '12:20 – 13:30',
-            title: 'Warm Indoor Park Lunch',
-            summary: 'Scan Kinopio\'s Cafe QR upon entering Nintendo World, or warm up at Three Broomsticks™ / Discovery Restaurant.',
+            title: 'Warm Indoor Lunch',
+            summary: 'Kinopio\'s Cafe (scan QR at 11:20 AM) or Three Broomsticks™ / Discovery Restaurant indoor dining.',
             details: [
-              'If dining at Kinopio\'s Cafe, scan the QR code near the restaurant entrance right when you enter Super Nintendo World at 11:20 AM to secure a 12:20 PM table.',
-              'Alternative warm indoor dining: Three Broomsticks™ (Hogsmeade) or Discovery Restaurant (Jurassic Park).'
+              'Scan Kinopio\'s Cafe QR code near restaurant entrance right when entering Nintendo World at 11:20 AM to secure a 12:20 PM table.',
+              'Alternative indoor warm options: Three Broomsticks™ (Hogsmeade) or Discovery Restaurant (Jurassic Park).'
             ]
           },
           {
             time: '13:30 – 17:30',
-            title: 'Afternoon Non-Coaster Express Slots',
+            title: 'Afternoon Non-Coaster Express Slots & Park Exploring',
             summary: 'Minion Mayhem (untimed), Villain-Con Minion Blast (15:00–15:30 slot) & JAWS™ (untimed Choice A).',
             details: [
-              'Despicable Me: Minion Mayhem (Untimed Express): Indoor motion simulator (102 cm+ with companion).',
-              '3:00 – 3:30 PM / 15:00–15:30 (Strict 30-Min Express Window): Illumination\'s Villain-Con Minion Blast (no height limit; stand-up interactive blaster).',
-              'JAWS™ (Untimed Choice A Express): Pick JAWS™ over Jurassic Park - The Ride so you stay completely dry in December (no height minimum).',
-              'Skipped Slots: Skip Harry Potter and the Forbidden Journey™ (strict 122 cm minimum; Ethan is ~1.15 m) and skip Flight of the Hippogriff™ (rollercoaster).'
+              'Despicable Me: Minion Mayhem (Untimed Express Slot): Indoor motion simulator (102 cm+ with companion).',
+              '3:00 PM – 3:30 PM / 15:00–15:30 (Strict 30-Min Express Window): Illumination\'s Villain-Con Minion Blast (no height limit; stand-up interactive blaster).',
+              'JAWS™ (Untimed Choice A Express Slot): Choose JAWS™ over Jurassic Park - The Ride so you stay completely dry in December (no height minimum).',
+              'Skipped Slots: Skip Harry Potter and the Forbidden Journey™ on Express Pass (strict 122 cm minimum; Ethan is ~1.15 m) and skip Flight of the Hippogriff™ (rollercoaster).'
             ]
           },
           {
             time: '17:30 – 19:00',
-            title: 'Gramercy Park Light Shows & Return',
-            summary: 'Catch Light Up the Night (~5:30 PM) & Joy of Lights (~6:00 PM), then train back to Nippombashi (~25m).',
+            title: 'Christmas Light Show & Return to Hotel',
+            summary: 'Gramercy Park Light Up the Night (~5:30 PM) & Joy of Lights (~6:00 PM) → train back to Namba.',
             details: [
-              'Watch the free evening Christmas shows at Gramercy Park (Light Up the Night at ~5:30 PM / Joy of Lights at ~6:00 PM) if Ethan still has energy.',
-              'Return via Universal City (JR Yumesaki) → Nishikujo (Hanshin Namba Line) → Kintetsu-Nippombashi (~25 min) for dinner near Caption.'
+              'At dusk (~5:30 PM), watch free Light Up the Night (~5:30 PM) and Joy of Lights (~6:00 PM) Christmas shows at Gramercy Park if Ethan still has energy.',
+              'Head straight back via Universal City → Nishikujo → Kintetsu-Nippombashi (~25 min) for dinner near hotel.'
             ],
             route: {
               label: 'Transit: USJ → Caption by Hyatt Namba',
@@ -959,17 +1076,18 @@
         id: 'day4',
         pillDay: 'Wed 16',
         pillSub: 'Play & Art',
-        fullTitle: 'Wed, Dec 16 • Kids Plaza, Book Forest & Art',
-        area: 'Kita / Nakanoshima (Sakaisuji Line Corridor)',
-        strategy: 'Single-Corridor Flow: Every stop runs cleanly north-to-south along the brown Sakaisuji Line—Ogimachi (Kids Plaza) → Kitahama / Nakanoshima (Book Forest, Contemporary Art Museums & Hikari-Renaissance Lights).',
+        fullTitle: 'Wed, Dec 16 • Indoor Play Town, Tadao Ando Book Forest & Contemporary Art',
+        area: 'Kita / Nakanoshima (Sakaisuji Line: Ogimachi → Kitahama)',
+        strategy: 'Single Corridor Flow: Every stop today runs cleanly along one compact corridor from Ogimachi down to Nakanoshima.',
         events: [
           {
             time: '09:05 – 09:30',
-            title: 'Direct Subway to Kids Plaza Osaka (~15m)',
-            summary: 'Sakaisuji Line 5 stops northbound from Nippombashi to Ogimachi Exit 2 elevator.',
+            title: 'Direct Subway to Kids Plaza Osaka (~15 min)',
+            summary: 'Sakaisuji Line 5 stops northbound from Nippombashi to Ogimachi Station Exit 2 elevator.',
             details: [
-              'Walk 4 minutes (300 m) to Nippombashi Station and board the brown Sakaisuji Line northbound directly 5 stops (9 min) to Ogimachi Station.',
-              'Take Exit 2 (elevator available)—it opens directly in front of the Kids Plaza Osaka entrance.'
+              'Walk 4 minutes (300 m) to Nippombashi Station.',
+              'Board Osaka Metro Sakaisuji Line (brown line, northbound) 5 stops (9 min) to Ogimachi Station.',
+              'Take Exit 2 (elevator available)—it opens directly in front of Kids Plaza Osaka entrance.'
             ],
             route: {
               label: 'Transit: Caption → Kids Plaza Osaka',
@@ -981,18 +1099,18 @@
           {
             time: '09:30 – 12:15',
             title: 'Kids Plaza Osaka (9:30 AM Opening)',
-            summary: 'First run of the Hundertwasser climbable play town (4F), Kantele TV Studio (3F) & giant bubbles (5F).',
+            summary: 'Hundertwasser Kids Town (4F), pretend supermarket/post office (4F), Kantele TV Studio (3F) & soap bubbles (5F).',
             details: [
-              'Open 9:30 AM – 5:00 PM (last entry 4:15 PM). Buy tickets at 1F counter (¥1,500 adult; ¥500 preschooler ages 3–5 / ¥800 age 6+; ICOCA accepted).',
-              'Highlights: Hundertwasser Kids Town (winding tube slides, suspension bridges & climbable towers on 4F), pretend supermarket/post office (4F), Kantele TV Studio (3F), and giant soap-bubble & water-physics labs (5F).'
+              'Buy tickets at 1F counter (¥1,500 adult; ¥500 preschooler ages 3–5 / ¥800 age 6+; ICOCA accepted). Open 9:30 AM – 5:00 PM (last entry 4:15 PM).',
+              'Arriving at 9:30 AM gives Ethan first run of Hundertwasser Kids Town (winding tube slides, suspension bridges, climbable towers on 4F), pretend supermarket/post office (4F), Kantele TV Studio (3F), and giant soap-bubble & water-physics exhibits (5F).'
             ]
           },
           {
             time: '12:15 – 13:15',
             title: 'Covered Arcade Lunch (Tenjinbashisuji)',
-            summary: 'Step immediately next door into Japan\'s longest covered shopping arcade for a warm sit-down lunch.',
+            summary: 'Step next door into Japan\'s longest covered arcade for a warm, go-with-the-flow sit-down lunch.',
             details: [
-              'Exit straight into Tenjinbashisuji Shopping Street next door to eat indoors out of the December chill.'
+              'Step immediately next door into Tenjinbashisuji Shopping Street (Japan\'s longest covered shopping arcade) for a warm, sit-down lunch without walking in the cold.'
             ],
             route: {
               label: 'Walk: Kids Plaza → Tenjinbashisuji Arcade',
@@ -1004,11 +1122,11 @@
           {
             time: '13:15 – 15:00',
             title: 'Nakanoshima Children\'s Book Forest',
-            summary: '2 stops south to Kitahama, then Session C (13:30–15:00) inside Tadao Ando\'s curved riverfront library.',
+            summary: 'Subway hop to Kitahama, then Session C (1:30–3:00 PM) in Tadao Ando\'s timber-and-concrete library.',
             details: [
-              'Subway Hop (1:15–1:30 PM): Ride Sakaisuji Line 2 stops south (4 min) from Ogimachi to Kitahama Station (Exit 26 or Keihan Naniwabashi Exit 3 elevator) + 4-min walk across Naniwabashi Bridge.',
-              'Session C (1:30 – 3:00 PM): Strict 90-minute complete changeover (free admission; show reservation QR/number booked on Wed, Dec 2 at 9:00 AM SGT).',
-              'Nuances: No coin lockers inside (keep backpacks with you), no eating (lidded water bottles only), no tripods/selfie sticks.'
+              '1:15 PM – 1:30 PM | 2-Stop Subway Hop: Return to Ogimachi Station and ride Sakaisuji Line 2 stops south (4 min) to Kitahama Station. Take Exit 26 (or Keihan Naniwabashi Exit 3 elevator) and walk 4 minutes across Naniwabashi Bridge onto Nakanoshima island.',
+              '1:30 PM – 3:00 PM | Nakanoshima Children\'s Book Forest: Session C (1:30–3:00 PM) strict 90-minute changeover system (free admission; show reservation QR/number booked Wed, Dec 2 at 9:00 AM SGT).',
+              'Nuances: No coin lockers inside (keep backpacks with you), no eating (lidded water bottles only), no tripods/selfie sticks. Explore ~20,000 picture books in cozy reading nooks.'
             ],
             route: {
               label: 'Transit: Ogimachi → Nakanoshima Book Forest',
@@ -1019,12 +1137,12 @@
           },
           {
             time: '15:05 – 16:45',
-            title: 'West Nakanoshima Art Museums',
-            summary: 'Giant Ship\'s Cat at Nakanoshima Museum of Art + National Museum of Art next door (both close 5:00 PM).',
+            title: 'Contemporary Art Museums (West Nakanoshima)',
+            summary: 'Ship\'s Cat at Nakanoshima Museum of Art + National Museum of Art next door (both close 5:00 PM).',
             details: [
-              'Fastest Transfer: Walk 1 min to Naniwabashi Station and take Keihan Nakanoshima Line 1 stop west (2 min) to Watanabebashi Exit 2 (4-min walk), OR take a 5-min taxi (~¥800–¥1,000; show Taxi JP card in Wallet).',
-              'Stop A — Nakanoshima Museum of Art (10:00 AM – 5:00 PM; Last Entry 4:30 PM): Giant Ship\'s Cat sculpture on 2F deck, 5F galleries, and 1F design shop.',
-              'Stop B — The National Museum of Art (10:00 AM – 5:00 PM; Last Entry 4:30 PM): Next door beneath steel-bamboo sculpture (¥1,000 adult, under-18 free).'
+              'Fastest Transfer: Walk 1 min to Naniwabashi Station and take Keihan Nakanoshima Line 1 stop west (2 min) to Watanabebashi Station (Exit 2, 4-min walk), OR take a 5-minute taxi (~¥800–¥1,000) straight to museum plaza to save Ethan\'s legs.',
+              'Stop A — Nakanoshima Museum of Art, Osaka (10:00 AM – 5:00 PM; Last Entry 4:30 PM): Snap photos with giant Ship\'s Cat sculpture on 2F entrance deck, visit 5F galleries (Tomoko Konoike interactive touch-and-sit installation), and browse 1F design shop.',
+              'Stop B — The National Museum of Art, Osaka (10:00 AM – 5:00 PM; Last Entry 4:30 PM): Immediately next door; walk beneath dramatic steel-and-bamboo sculpture down into underground collection galleries (¥1,000 adult, free for under-18s).'
             ],
             route: {
               label: 'Transit: Book Forest → Nakanoshima Art Museum',
@@ -1041,11 +1159,11 @@
           },
           {
             time: '17:00 – 19:30',
-            title: 'OSAKA Hikari-Renaissance & Final Dinner',
-            summary: '5:00 PM waterfront illuminations outside the museums, Midosuji Line back to Namba & pack bags.',
+            title: 'OSAKA Hikari-Renaissance Lights & Final Dinner',
+            summary: '5:00 PM waterfront lights outside museums, Midosuji Line back to Namba, final dinner & pack bags.',
             details: [
-              'Step out at 5:00 PM directly into OSAKA Hikari-Renaissance 2026 (Dec 11–25, lit 5:00 PM – 10:00 PM) illuminating Nakanoshima bridges and Osaka City Central Public Hall.',
-              'Walk 6 min south to Yodoyabashi Station (red Midosuji Line) for a 3-stop (6-min) direct ride to Namba, have your final dinner, and pack bags tonight.'
+              'Stepping out at 5:00 PM, walk straight into OSAKA Hikari-Renaissance 2026 (Dec 11 – Dec 25, 2026, lit from 5:00 PM) illuminating Nakanoshima\'s waterfront bridges and Osaka City Central Public Hall.',
+              'Walk 6 minutes south to Yodoyabashi Station (Midosuji Line, red line) for a 3-stop (6-minute) direct ride back to Namba Station, enjoy final go-with-the-flow dinner, and pack suitcases tonight.'
             ],
             route: {
               label: 'Transit: Yodoyabashi → Caption Hotel',
@@ -1060,17 +1178,17 @@
         id: 'day5',
         pillDay: 'Thu 17',
         pillSub: 'Fly Home',
-        fullTitle: 'Thu, Dec 17 • 8:00 AM Checkout & Flight Home',
-        area: 'Nankai Namba → KIX Terminal 1 (TR 881)',
-        strategy: '80+ Minute Airport Cushion: Checking out at 8:00 AM sharp puts you on the 8:30 AM Nankai Rapi:t β arriving KIX T1 at 9:09 AM—well ahead of Scoot\'s 10:30 AM bag-drop cutoff for your 11:30 AM flight.',
+        fullTitle: 'Thu, Dec 17 • 8:00 AM Checkout & 11:30 AM Flight Home (TR 881)',
+        area: 'Nankai Namba → KIX Terminal 1',
+        strategy: '80+ Minute Cushion: Checking out at 8:00 AM sharp puts you on the 8:30 AM Nankai Rapi:t β arriving KIX T1 at 9:09 AM—2 hours 21 minutes before your 11:30 AM Scoot TR 881 departure (well ahead of Scoot\'s strict 10:30 AM bag-drop deadline for your two 20 kg bags).',
         events: [
           {
             time: '07:25 – 07:55',
-            title: 'Morning 7-Eleven Breakfast Run',
-            summary: '3-min walk (260m) south to 7-Eleven Nipponbashi 3-chome; eat upstairs at your room table.',
+            title: 'Morning Konbini Breakfast Run',
+            summary: 'Walk 3–4 minutes (260 m) south to 7-Eleven Nipponbashi 3-chome; eat upstairs at room table.',
             details: [
-              'Walk 260m (3–4 min) south down Sakaisuji Avenue to 7-Eleven Osaka Nipponbashi 3-chome (open 24h) for hot coffee, pastries, or onigiri.',
-              'House Rule: Eat upstairs at your room table (outside konbini food is not permitted in Caption\'s 1F lobby lounge).'
+              'Walk 3–4 minutes (260 m) south down Sakaisuji Avenue to 7-Eleven Osaka Nipponbashi 3-chome (open 24 hours) for hot coffee, pastries, or onigiri.',
+              'House Rule: Eat upstairs at your room table (outside convenience-store food/drinks cannot be eaten in Caption\'s ground-floor lobby lounge).'
             ],
             route: {
               label: 'Walk: Caption → 7-Eleven Nipponbashi 3-chome',
@@ -1081,11 +1199,11 @@
           },
           {
             time: '08:00 – 08:15',
-            title: '8:00 AM Checkout & Flat Walk to Nankai',
-            summary: 'Check out promptly and walk 400m flat west down Nansan-dori to Nankai Namba 3F North Gate.',
+            title: 'Prompt Hotel Checkout & Walk to Nankai Namba',
+            summary: 'Check out at 8:00 AM sharp; walk 400 m flat west down Nansan-dori to Nankai Namba 3F North Gate.',
             details: [
               'Check out of Caption by Hyatt Namba Osaka at 8:00 AM sharp.',
-              'Walk 400m (6–7 min with two 20 kg bags) straight west down Nansan-dori to Nankai Namba Station, take the street-level elevator up to 3F North Ticket Gate, and collect reserved Rapi:t tickets.'
+              'Walk 400 meters (6–7 min with two 20 kg bags) straight west down Nansan-dori to Nankai Namba Station, take elevator up to 3F North Ticket Gate, and pick up reserved Rapi:t tickets (or tap ICOCA for Airport Express).'
             ],
             route: {
               label: 'Walk: Caption → Nankai Namba Station (400m)',
@@ -1096,8 +1214,8 @@
           },
           {
             time: '08:30 – 09:09',
-            title: 'Nankai Rapi:t β Express to KIX T1',
-            summary: '39-min direct airport express arriving KIX Terminal 1 at 9:09 AM (backup: 8:15 AM Airport Express).',
+            title: 'Nankai Rapi:t β Limited Express to KIX T1',
+            summary: '39-minute direct express arriving KIX Terminal 1 at 9:09 AM (backup: 8:15 AM Airport Express arrives 9:00 AM).',
             details: [
               'Board the 8:30 AM Nankai Rapi:t β (weekday schedule), arriving directly at Kansai Airport Station (Terminal 1) at 9:09 AM.',
               'Backup Option: The 8:15 AM Nankai Airport Express arrives at 9:00 AM.'
@@ -1111,24 +1229,24 @@
           },
           {
             time: '09:09 – 11:30',
-            title: 'KIX T1 Bag Drop & Scoot TR 881 Home',
-            summary: 'Drop bags before 10:30 AM cutoff; depart KIX 11:30 AM (Seats 11D/11E) → land SIN T1 at 5:30 PM.',
+            title: 'KIX T1 Bag Drop, Security & Flight Home',
+            summary: 'Drop bags before 10:30 AM cutoff; Scoot TR 881 departs 11:30 AM (Seats 11D/11E) → lands SIN T1 at 5:30 PM.',
             details: [
-              'Arrive at KIX T1 2 hours 21 minutes before departure—giving 80+ minutes of cushion before Scoot\'s strict 10:30 AM (60-min) bag-drop deadline for your two 20 kg bags.',
-              'Depart KIX Terminal 1 at 11:30 AM on Scoot TR 881 (Seats 11D & 11E), arriving back at Singapore Changi Terminal 1 at 5:30 PM (17:30).'
+              'Arrives 2 hours 21 minutes before your 11:30 AM Scoot TR 881 departure (giving over 80 minutes of cushion before Scoot\'s strict 60-minute / 10:30 AM bag-drop deadline for your two 20 kg bags).',
+              'Scoot TR 881 departs KIX T1 at 11:30 AM (Seats 11D & 11E) → lands Singapore Changi Terminal 1 at 5:30 PM (17:30).'
             ]
           }
         ]
       }
     ];
 
-    // 2. BOOKED USJ EXPRESS PASS 5 TRACKER (DAY 3)
+    // 2. BOOKED USJ EXPRESS PASS 5 TRACKER (DAY 3 - RACE & MINION SPECIAL)
     const USJ_PASS5_RIDES = [
-      { id: 'u5-1', slot: '11:20 – 12:20', title: 'Super Nintendo World™ Area Entry', meta: 'Guaranteed Timed Entry • Power-Up Band optional' },
-      { id: 'u5-2', slot: '11:20 – 11:50', title: 'Mario Kart: Koopa\'s Challenge™', meta: 'Strict 30m Express • 107cm+ w/ companion • Non-coaster' },
+      { id: 'u5-1', slot: '11:20 – 12:20', title: 'Super Nintendo World™ Area Entry', meta: 'Guaranteed Timed Entry • Power-Up Band™ (¥5,600) optional' },
+      { id: 'u5-2', slot: '11:20 – 11:50', title: 'Mario Kart: Koopa\'s Challenge™', meta: 'Strict 30m Express • 107cm+ w/ companion • Non-coaster AR ride' },
       { id: 'u5-3', slot: 'Untimed Express', title: 'Despicable Me: Minion Mayhem', meta: '102cm+ w/ companion • Indoor motion simulator' },
-      { id: 'u5-4', slot: '15:00 – 15:30', title: 'Illumination\'s Villain-Con Minion Blast', meta: 'Strict 30m Express • No height limit • Interactive blaster' },
-      { id: 'u5-5', slot: 'Untimed Choice A', title: 'JAWS™ (Selected over Jurassic Park)', meta: 'No height limit • Boat ride (stays dry in Dec)' }
+      { id: 'u5-4', slot: '15:00 – 15:30', title: 'Illumination\'s Villain-Con Minion Blast', meta: 'Strict 30m Express • No height limit • Stand-up interactive blaster' },
+      { id: 'u5-5', slot: 'Untimed Choice A', title: 'JAWS™ (Selected over Jurassic Park)', meta: 'No height limit • Boat ride (stays 100% dry in Dec)' }
     ];
 
     // 3. WALLET QR PASSES
@@ -1139,27 +1257,26 @@
       { id: 'qr-bookforest', title: 'Book Forest Session C', subtitle: 'Wed Dec 16 • 13:30–15:00', tag: 'WED DEC 16', code: 'BOOKFOREST-DEC16-1330' }
     ];
 
-    // 4. GUIDE -> TASKS (3 REMAINING PENDING + 3 COMPLETED)
+    // 4. GUIDE -> PRE-TRIP ACTION CHECKLIST (SYNCED 100% WITH SECTION 3 OF DOC)
     const INITIAL_TASKS = [
-      { id: 't-kyoto', title: 'Cancel Kyoto Hotel (Royal Park Kyoto Umekoji)', desc: 'Cancel reservation #5853.131.622 while inside the free-cancellation window.', done: false },
-      { id: 't-bookforest', title: 'Wed, Dec 2 (9:00 AM SGT): Book Children\'s Book Forest', desc: 'Reserve free Wed, Dec 16 (13:30–15:00 Session C) slot on kodomohonnomori-osaka.resv.jp.', done: false },
-      { id: 't-legoland', title: 'Book LEGOLAND Discovery Center Online (1–2 Wks Prior)', desc: 'Reserve Mon, Dec 14 afternoon slot (entries after 2:00 PM save ~20% on weekdays).', done: false },
+      { id: 't-bookforest', title: 'Set Calendar Alert for Wed, Dec 2 at 9:00 AM SGT (10:00 AM JST)', desc: 'Reserve your free Wed, Dec 16 (13:30–15:00 Session C) session at Nakanoshima Children\'s Book Forest (kodomohonnomori-osaka.resv.jp).', done: false },
+      { id: 't-legoland', title: 'Book LEGOLAND Discovery Center Osaka Online (1–2 Wks Prior)', desc: 'Reserve timed entry for Mon, Dec 14 at 1:30 PM or 2:00 PM (after 2:00 PM gets the weekday afternoon discount).', done: false },
       { id: 't-flights', title: 'Scoot Flights Booked (EYC6JZ • TR 880 & TR 881)', desc: 'Confirmed: Seats 32B/32C outbound, 11D/11E return, 2x 20kg checked bags.', done: true },
       { id: 't-hyatt', title: 'Caption by Hyatt Namba Osaka Booked (#40023B32617210)', desc: 'Paid SGD 728.03: 1 Queen Bed City View, High Floor 10/11 & 11:00 AM arrival logged.', done: true },
       { id: 't-usj', title: 'USJ Tickets Booked via Klook (Tue, Dec 15)', desc: '1-Day Studio Passes (JNPMM/JNPMN) + 2x Express Pass 5: Race & Minion Special (102MV/102MW).', done: true }
     ];
 
-    // 5. GUIDE -> VENUE HOURS & CLOSURES (DEC 13-17, 2026)
+    // 5. GUIDE -> VENUE HOURS & CLOSURES (DEC 13-17, 2026 - APPENDIX B SYNCED)
     const VENUE_HOURS = [
-      { name: 'Kuromon Market', hours: 'Daily 9:00 AM – 6:00 PM (stalls close ~5:00–5:30 PM)', cutoff: 'Best window: 9:00 AM – 2:00 PM', status: 'Open daily (few fish stalls close Sun)', tags: ['mon', 'wed'], nuance: 'Free entry; arrive at 12:15 PM Sunday for full seafood stock before afternoon wind-down.' },
-      { name: 'Shinsaibashi PARCO (6F) & Daimaru (9F)', hours: 'Retail: 10:00 AM – 8:00 PM | Dining: 11:00 AM – 10:00/11:00 PM', cutoff: 'Retail doors shut promptly at 8:00 PM', status: 'Open daily', tags: ['mon', 'wed'], nuance: 'Indoor & heated; 6F PARCO has LEGO, SEGA, Godzilla, CAPCOM, Ghibli & Shin-chan; 9F Daimaru has Pokémon Center DX.' },
+      { name: 'Kuromon Market', hours: 'Daily 9:00 AM – 6:00 PM (individual stalls vary; most close 5:00–5:30 PM)', cutoff: 'Best window: 9:00 AM – 2:00 PM', status: 'Open daily (few fish stalls close Sun)', tags: ['mon', 'wed'], nuance: 'Free entry; arrive at 12:15 PM Sunday for full seafood stock before afternoon wind-down.' },
+      { name: 'Shinsaibashi PARCO (6F) & Daimaru (9F)', hours: 'Retail: 10:00 AM – 8:00 PM | Dining: 11:00 AM – 10:00/11:00 PM', cutoff: 'Retail doors shut promptly at 8:00 PM', status: 'Open daily', tags: ['mon', 'wed'], nuance: 'Indoor & heated; 6F PARCO houses LEGO, SEGA, Godzilla, CAPCOM, Ghibli & Shin-chan; 9F Daimaru has Pokémon Center DX.' },
       { name: 'Midosuji Boulevard Illuminations', hours: 'Nightly 5:00 PM – 1:00 AM (Nov 3 – Dec 31, 2026)', cutoff: 'Lights stay on past midnight', status: 'Nightly', tags: ['mon', 'wed', 'night'], nuance: 'Free; 4 km of glowing ginkgo trees right beside Shinsaibashi-Suji.' },
-      { name: 'LEGOLAND Discovery Center Osaka', hours: 'Mon–Fri: 10:00 AM – 6:00 PM | Sat–Sun: 10:00 AM – 7:00 PM', cutoff: 'Last entry: 4:00 PM on weekdays (3-hour stay limit)', status: 'Open Mon, Dec 14', tags: ['mon', 'wed'], nuance: 'No walk-up counter tickets—buy online in advance. Adults must accompany a child. Weekday entries after 2:00 PM save ~20%.' },
-      { name: 'Universal Studios Japan (USJ)', hours: 'Tue, Dec 15: 9:00 AM – 9:00 PM (gates open 15–30m early)', cutoff: 'Gramercy Park Christmas shows at ~5:30 PM & ~6:00 PM', status: 'BOOKED Tue, Dec 15', tags: ['mon', 'wed'], nuance: 'Studio Passes (JNPMM/JNPMN) + Express Pass 5 (102MV/102MW): 11:20–12:20 SNW, 11:20–11:50 Mario Kart, 15:00–15:30 Villain-Con + untimed Minion Mayhem & JAWS. No re-entry; no outside food.' },
-      { name: 'Kids Plaza Osaka', hours: '9:30 AM – 5:00 PM', cutoff: 'Last entry: 4:15 PM', status: 'CLOSED Mon Dec 14 • Open Wed Dec 16', tags: ['wed'], nuance: '¥1,500 adult / ¥500 preschooler (ages 3–5) or ¥800 age 6+. Walk-up tickets; same-day re-entry allowed with stub.' },
-      { name: 'Nakanoshima Children\'s Book Forest', hours: '9:30 AM – 5:00 PM (four 90-min sessions)', cutoff: 'Changeover: 9:30–11:00, 11:30–13:00, 13:30–15:00, 15:30–17:00', status: 'CLOSED Mon • Open Wed Dec 16', tags: ['wed'], nuance: 'Free admission. Online booking (100 slots/session) opens 14 days prior on Wed, Dec 2 at 9:00 AM SGT (plus 50 walk-in spots 10 min before session).' },
-      { name: 'Nakanoshima Museum of Art, Osaka', hours: '10:00 AM – 5:00 PM (Fri until 8:00 PM)', cutoff: 'Last entry: 4:30 PM', status: 'CLOSED Mon • Open Wed Dec 16', tags: ['wed'], nuance: 'Walk-in tickets on 2F; giant Ship\'s Cat sculpture sits outside on the 2F deck.' },
-      { name: 'The National Museum of Art, Osaka', hours: '10:00 AM – 5:00 PM (Fri until 8:00 PM)', cutoff: 'Last entry: 4:30 PM', status: 'CLOSED Mon • Open Wed Dec 16', tags: ['wed'], nuance: 'Collection gallery: ¥1,000 adult, free for under-18s; entirely underground below its steel-bamboo sculpture.' },
+      { name: 'LEGOLAND Discovery Center Osaka', hours: 'Mon–Fri: 10:00 AM – 6:00 PM | Sat–Sun: 10:00 AM – 7:00 PM', cutoff: 'Last entry: 4:00 PM on weekdays (3-hour stay limit)', status: 'Open Mon, Dec 14', tags: ['mon', 'wed'], nuance: 'No walk-up counter tickets—must buy online in advance. Adults can only enter with a child. Weekday entries after 2:00 PM save ~20% online.' },
+      { name: 'Universal Studios Japan (USJ)', hours: '9:00 AM – 9:00 PM (gates often open 15–30 min early)', cutoff: 'Gramercy Park Christmas show at ~5:30 PM & ~6:00 PM', status: 'BOOKED Tue, Dec 15', tags: ['mon', 'wed'], nuance: 'BOOKED (Klook): 1-Day Studio Passes (USJ-P1X000000JNPMM / JNPMN) + 2x Express Pass 5: Race & Minion Special (USJ-P1X000000102MV / 102MW). Timed slots: 11:20–12:20 Super Nintendo World™, 11:20–11:50 Mario Kart, 15:00–15:30 Villain-Con Minion Blast + untimed Minion Mayhem & JAWS. No re-entry; no outside food.' },
+      { name: 'Kids Plaza Osaka', hours: '9:30 AM – 5:00 PM', cutoff: 'Last entry: 4:15 PM', status: 'CLOSED Mon Dec 14 • Open Wed Dec 16', tags: ['wed'], nuance: '¥1,500 adult / ¥500 preschooler (ages 3–5) or ¥800 age 6+. Walk-up tickets available; same-day re-entry allowed with stub.' },
+      { name: 'Nakanoshima Children\'s Book Forest', hours: '9:30 AM – 5:00 PM (four 90-min sessions)', cutoff: 'Strict changeover: 9:30–11:00, 11:30–13:00, 13:30–15:00, 15:30–17:00', status: 'CLOSED Mondays • Open Wed Dec 16', tags: ['wed'], nuance: 'Free admission. Online booking (100 slots/session) opens 14 days prior at 10:00 AM JST (9:00 AM SGT) = Wed, Dec 2 at 9:00 AM SGT (plus 50 walk-in spots 10 min before session).' },
+      { name: 'Nakanoshima Museum of Art, Osaka', hours: '10:00 AM – 5:00 PM (Fri until 8:00 PM)', cutoff: 'Last entry: 4:30 PM', status: 'CLOSED Mondays • Open Wed Dec 16', tags: ['wed'], nuance: 'Walk-in tickets on 2F; giant Ship\'s Cat sculpture sits outside on the 2F deck.' },
+      { name: 'The National Museum of Art, Osaka', hours: '10:00 AM – 5:00 PM (Fri until 8:00 PM)', cutoff: 'Last entry: 4:30 PM', status: 'CLOSED Mondays • Open Wed Dec 16', tags: ['wed'], nuance: 'Collection gallery: ¥1,000 adult, free for under-18s; entirely underground below its steel-bamboo sculpture.' },
       { name: 'OSAKA Hikari-Renaissance (Nakanoshima)', hours: 'Nightly 5:00 PM – 10:00 PM (Dec 11 – Dec 25, 2026)', cutoff: 'Lights turn on at 5:00 PM', status: 'Nightly during run', tags: ['mon', 'wed', 'night'], nuance: 'Free waterfront light installations right outside the museums/Book Forest on Wed, Dec 16.' }
     ];
 
@@ -1172,9 +1289,8 @@
       { day: 'day1', dayLabel: 'Day 1', mode: 'transit', time: '35m', title: 'KIX Terminal 1 → Nankai Namba Station', origin: 'Kansai International Airport Terminal 1, Osaka', destination: 'Nankai Namba Station, Osaka', notes: 'Nankai Rapi:t β at 11:05 AM or 11:35 AM (¥1,490 adult; Ethan free on lap).' },
       { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '6–7m (400m)', title: 'Nankai Namba → Caption by Hyatt (Bag Drop)', origin: 'Nankai Namba Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Elevator to street level; walk flat east down Nansan-dori.' },
       { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '2m (190m)', title: 'Caption by Hyatt → Kuromon Market', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Kuromon Market, Osaka', notes: 'Cross Sakaisuji Ave straight into the covered seafood arcade.' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '8m', title: 'Kuromon Market → Shinsaibashi PARCO (6F)', origin: 'Kuromon Market, Osaka', destination: 'Shinsaibashi PARCO, Osaka', notes: 'Glass-roofed Shinsaibashi-Suji Shopping Street.' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '1m', title: 'Shinsaibashi PARCO → Daimaru Shinsaibashi (9F)', origin: 'Shinsaibashi PARCO, Osaka', destination: 'Daimaru Shinsaibashi, Osaka', notes: 'Indoor connecting bridge to Pokémon Center Osaka DX.' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '10m', title: 'Daimaru Shinsaibashi → Caption Hotel (Pit Stop)', origin: 'Daimaru Shinsaibashi, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Optional 3:30 PM stop for room key & coats without napping.' },
+      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '8m', title: 'Kuromon Market → Shinsaibashi PARCO & Daimaru', origin: 'Kuromon Market, Osaka', destination: 'Shinsaibashi PARCO, Osaka', notes: 'Glass-roofed Shinsaibashi-Suji arcade to PARCO (6F Pop-Culture & 9F-11F Hands) & Daimaru (9F Pokémon DX & Shoes).' },
+      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '10m', title: 'Shinsaibashi PARCO → Caption Hotel (Pit Stop)', origin: 'Shinsaibashi PARCO, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Optional 3:30 PM stop for room key & coats without napping.' },
       { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '7–8m', title: 'Caption by Hyatt → Dotonbori Glico Sign', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Dotonbori Glico Sign, Ebisu Bridge, Osaka', notes: '5:00 PM sunset neon canal walk.' },
       { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '3m', title: 'Dotonbori Canal → Midosuji Illuminations', origin: 'Dotonbori Glico Sign, Osaka', destination: 'Midosuji Boulevard, Shinsaibashi, Osaka', notes: '4 km of glowing ginkgo trees lit 5:00 PM – 1:00 AM.' },
       { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '8–10m', title: 'Dotonbori / Midosuji → Caption by Hyatt', origin: 'Dotonbori, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Return by 7:30–8:00 PM for sleep reset.' },
@@ -1912,8 +2028,7 @@
       document.getElementById('jst-clock').textContent = jst;
     }
 
-    // INITIALIZE ON LOAD
-        // ========================================================
+    // ========================================================
     // LIVE NEON POSTGRES SYNC + OFFLINE INDEXED-DB FALLBACK
     // ========================================================
     async function pushToNeon(key, val) {
@@ -1935,12 +2050,10 @@
         if (!res.ok) return;
         const cloud = await res.json();
 
-        // Sync checklists & custom paths
         if (cloud.tasks) localStorage.setItem('osaka_tasks_v2', JSON.stringify(cloud.tasks));
         if (cloud.usj_pass5) localStorage.setItem('osaka_usj_pass5_done', JSON.stringify(cloud.usj_pass5));
         if (cloud.vercel_paths) localStorage.setItem('osaka_vercel_paths_v2', JSON.stringify(cloud.vercel_paths));
 
-        // Sync uploaded QR images & PDFs into local IndexedDB for offline use
         for (const [k, v] of Object.entries(cloud)) {
           if (k.startsWith('asset_') && v) {
             const assetKey = k.replace('asset_', '');
@@ -1950,7 +2063,6 @@
           }
         }
 
-        // Re-render UI with cloud data
         renderPlanDay();
         renderTasks();
         renderWalletQrGrid();
@@ -1960,7 +2072,6 @@
       }
     }
 
-    // Hook existing functions so every click/upload saves to Neon automatically
     const _origSaveVault = saveToVaultDB;
     saveToVaultDB = async function(key, dataUrl) {
       await _origSaveVault(key, dataUrl);
@@ -2001,7 +2112,7 @@
       renderHoursList();
       renderAllMapsList();
       loadVaultDB();
-      pullFromNeon(); // <-- Pulls live state from Neon DB on startup
+      pullFromNeon();
       fetchOsakaWeather(false);
       lucide.createIcons();
     };

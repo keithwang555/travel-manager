@@ -11,7 +11,7 @@
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -109,9 +109,9 @@
             <span class="text-[10px] text-slate-400 mr-0.5">JST</span><span id="jst-clock">--:--</span>
           </div>
 
-          <!-- Quick Hotel JP Show-Card -->
-          <button onclick="openPhraseModal('hotel')" title="Show Caption Hotel Address in Japanese" class="p-2 rounded-full bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800 text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800 transition">
-            <i data-lucide="building-2" class="w-4 h-4"></i>
+          <!-- Quick Station & Landmark JP Directions -->
+          <button onclick="scrollToDayDirections()" title="Ask for Station & Landmark Directions in Japanese" class="p-2 rounded-full bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800 text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800 transition">
+            <i data-lucide="languages" class="w-4 h-4"></i>
           </button>
 
           <!-- Light / Dark Theme Toggle -->
@@ -198,7 +198,7 @@
                 <span class="font-mono font-bold text-amber-600 dark:text-amber-400">~S$132 / ¥16k–¥20k</span>
               </div>
               <p class="text-[12px] text-slate-600 dark:text-slate-300 leading-snug">
-                Single 7-Eleven ATM withdrawal on arrival using Trust card. Dedicated to Kuromon Market seafood stalls, Kids Plaza 1F tickets, 2F coin laundry, gachapon & cash-only eateries.
+                Single 7-Eleven ATM withdrawal on arrival using Trust card. Dedicated to Kuromon Market seafood stalls, 2F coin laundry, gachapon & cash-only eateries.
               </p>
             </div>
           </div>
@@ -245,9 +245,9 @@
               <div class="flex items-start justify-between gap-2 border-b border-stone-100 dark:border-slate-800/60 pb-2">
                 <div>
                   <div class="font-bold text-slate-900 dark:text-white">🎟️ Remaining Attractions</div>
-                  <div class="text-[11.5px] text-slate-500">LEGOLAND (~¥4.6k–5.6k), Kids Plaza (¥2k–2.3k), Museums (¥2.6k–3k; Ethan free)</div>
+                  <div class="text-[11.5px] text-slate-500">LEGOLAND (~¥4.6k–5.6k), Kids Plaza (¥2k–2.3k), Nakanoshima Art Museum (~¥1.6k–1.8k; Ethan free)</div>
                 </div>
-                <div class="font-mono font-semibold text-right shrink-0">¥9k–11.5k<br><span class="text-[11px] text-slate-400">~S$73–93</span></div>
+                <div class="font-mono font-semibold text-right shrink-0">¥8.2k–9.7k<br><span class="text-[11px] text-slate-400">~S$66–79</span></div>
               </div>
 
               <div class="flex items-start justify-between gap-2 border-b border-stone-100 dark:border-slate-800/60 pb-2">
@@ -260,7 +260,7 @@
 
               <div class="flex items-start justify-between gap-2 pt-1 font-semibold text-emerald-600 dark:text-emerald-400">
                 <div>🛡️ Unallocated Cushion</div>
-                <div class="font-mono text-right">~S$35–S$335<br><span class="text-[11px] opacity-80">(~¥4,500–¥41,500)</span></div>
+                <div class="font-mono text-right">~S$45–S$345<br><span class="text-[11px] opacity-80">(~¥5,500–¥42,500)</span></div>
               </div>
             </div>
           </div>
@@ -302,8 +302,8 @@
               <button onclick="openPdfFile('hyatt')" class="flex-1 py-2.5 px-3.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold flex items-center justify-center gap-1.5">
                 <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Open Hyatt PDF
               </button>
-              <button onclick="openPhraseModal('hotel')" class="py-2.5 px-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-1.5">
-                <i data-lucide="languages" class="w-3.5 h-3.5"></i> Desk JP
+              <button onclick="openPhraseModal('namba_exit')" class="py-2.5 px-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-1.5">
+                <i data-lucide="languages" class="w-3.5 h-3.5"></i> Station Exit JP
               </button>
               <label class="p-2.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Upload PDF">
                 <i data-lucide="upload" class="w-4 h-4"></i>
@@ -421,7 +421,7 @@
                 <h4 class="text-sm font-bold text-slate-900 dark:text-white">Master Osaka.pdf</h4>
                 <span id="badge-asset-osaka" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">Saved</span>
               </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">13-page reference plan</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Reference plan</p>
             </div>
             <div class="flex items-center gap-2 shrink-0">
               <button onclick="openPdfFile('osaka')" class="py-2 px-3.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-semibold">
@@ -435,27 +435,27 @@
           </div>
         </div>
 
-        <!-- Japanese Staff & Taxi Show-Cards -->
+        <!-- Japanese Station & Landmark Show-Cards -->
         <div class="space-y-2.5">
           <div class="px-1">
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Japanese Staff & Taxi Show-Cards</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Japanese Station & Landmark Show-Cards</span>
           </div>
           <div class="grid grid-cols-2 gap-3">
-            <button onclick="openPhraseModal('hotel')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
-              <div class="text-sm font-bold text-slate-900 dark:text-white">🏨 Hotel Desk</div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">High floor 10/11 + 11 AM bag drop</p>
+            <button onclick="openPhraseModal('namba_exit')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
+              <div class="text-sm font-bold text-slate-900 dark:text-white">🛗 Namba South Exit</div>
+              <p class="text-xs text-slate-500 dark:text-slate-400">1F Elevator to Nansan-dori & Hotel</p>
             </button>
             <button onclick="openPhraseModal('yoji')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
               <div class="text-sm font-bold text-slate-900 dark:text-white">🚃 6yo Free Rule</div>
               <p class="text-xs text-slate-500 dark:text-slate-400">Preschooler (Yōji) train gate pass</p>
             </button>
-            <button onclick="openPhraseModal('rapit')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
-              <div class="text-sm font-bold text-slate-900 dark:text-white">🚄 Rapi:t Counter</div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">1 adult seat + 6yo free on lap</p>
+            <button onclick="openPhraseModal('usj_nishikujo')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
+              <div class="text-sm font-bold text-slate-900 dark:text-white">🎢 USJ Nishikujo</div>
+              <p class="text-xs text-slate-500 dark:text-slate-400">JR Yumesaki Platform 3 transfer</p>
             </button>
-            <button onclick="openPhraseModal('taxi')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
-              <div class="text-sm font-bold text-slate-900 dark:text-white">🚕 Museum Taxi</div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Day 4 Nakanoshima Art Museum</p>
+            <button onclick="openPhraseModal('nakanoshima_landmarks')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
+              <div class="text-sm font-bold text-slate-900 dark:text-white">🏛️ Day 4 Landmarks</div>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Kids Plaza, Book Forest & Museum</p>
             </button>
           </div>
         </div>
@@ -473,7 +473,7 @@
             Weather
           </button>
           <button onclick="switchGuideView('tasks')" id="gseg-tasks" class="gseg-btn py-2 px-2 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition">
-            Tasks (<span id="pending-badge-count">2</span>)
+            Tasks (<span id="pending-badge-count">3</span>)
           </button>
           <button onclick="switchGuideView('hours')" id="gseg-hours" class="gseg-btn py-2 px-2 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition">
             Hours
@@ -520,7 +520,7 @@
 
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
             <div>
-              <span class="text-xs font-semibold uppercase tracking-wider text-rose-600">Dec 13–17 Climate Strategy</span>
+              <span class="text-xs font-semibold uppercase tracking-wider text-rose-600">Dec 13–17 Packing & Layering</span>
               <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-0.5">Daytime (10–12°C) vs. Evening (4–5°C)</h3>
             </div>
 
@@ -538,10 +538,10 @@
             </div>
 
             <ul class="space-y-2 text-[13.5px] text-slate-600 dark:text-slate-300">
-              <li>• <strong>Peelable Layers:</strong> Breathable base + fleece/sweater + zip puffer so Ethan doesn't overheat indoors.</li>
-              <li>• <strong>Day 1 (3:30 PM Pit Stop):</strong> Swing by Caption after PARCO 6F to pick up room key & heavy coats before the 5 PM neon walk.</li>
+              <li>• <strong>Peelable Layers:</strong> Breathable base + fleece/sweater + zip puffer for indoor/outdoor transitions.</li>
+              <li>• <strong>Day 1 (3:30 PM Pit Stop):</strong> Pick up room key & heavy coats at Caption after PARCO before the 5:00 PM lights.</li>
               <li>• <strong>Day 2 Mandatory Socks:</strong> Required for Ethan inside LEGOLAND's LEGO City Play Zone.</li>
-              <li>• <strong>Day 3 USJ Bay Breeze:</strong> Bring beanie, scarf/neck gaiter & pocket hand-warmers (<em>kairo</em>) for morning entry & 5:30 PM light shows.</li>
+              <li>• <strong>Day 3 USJ Bay Breeze:</strong> Bring beanie, scarf/neck gaiter & pocket hand-warmers (<em>kairo</em>).</li>
             </ul>
           </div>
         </div>
@@ -555,7 +555,7 @@
                 <p class="text-xs text-slate-500 dark:text-slate-400">Priority action items in execution order</p>
               </div>
               <span id="tasks-status-pill" class="px-2.5 py-1 rounded-full bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 font-mono text-xs font-semibold">
-                2 Pending
+                3 Pending
               </span>
             </div>
 
@@ -580,7 +580,7 @@
             </div>
 
             <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-              <button onclick="setHoursFilter('all')" data-hfilter="all" class="hours-pill px-3 py-1.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold shrink-0">All (10)</button>
+              <button onclick="setHoursFilter('all')" data-hfilter="all" class="hours-pill px-3 py-1.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold shrink-0">All (9)</button>
               <button onclick="setHoursFilter('mon')" data-hfilter="mon" class="hours-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Open Mon 14</button>
               <button onclick="setHoursFilter('wed')" data-hfilter="wed" class="hours-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Open Wed 16</button>
               <button onclick="setHoursFilter('night')" data-hfilter="night" class="hours-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Illuminations</button>
@@ -603,12 +603,12 @@
               </button>
             </div>
             <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Age 6 (pre-elementary) rides <strong>100% free</strong> on Osaka Metro, Kintetsu, Hanshin, JR West & Nankai Airport Express with you (walk through wide manned gate together). Nankai Rapi:t is free on lap or ¥750 for own reserved seat. At Nankai Namba, use <strong>South/East 1F street-level elevator</strong> for a flat 400m walk to Caption.
+              Age 6 (pre-elementary) rides <strong>100% free</strong> on Osaka Metro, Kintetsu, Hanshin, JR West & Nankai Airport Express with you (walk through wide manned gate together). Nankai Rapi:t is free on lap or ¥750 for own reserved seat. At Nankai Namba, use <strong>South Exit (南口) 1F street-level elevator</strong> onto Nansan-dori for a flat 400m walk to Caption.
             </p>
           </div>
 
           <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-            <button onclick="setMapFilter('all')" data-mfilter="all" class="map-pill px-3 py-1.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold shrink-0">All Legs (28)</button>
+            <button onclick="setMapFilter('all')" data-mfilter="all" class="map-pill px-3 py-1.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold shrink-0">All Legs (27)</button>
             <button onclick="setMapFilter('hub')" data-mfilter="hub" class="map-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Hotel & Konbini</button>
             <button onclick="setMapFilter('day1')" data-mfilter="day1" class="map-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Day 1</button>
             <button onclick="setMapFilter('day2')" data-mfilter="day2" class="map-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Day 2</button>
@@ -792,23 +792,61 @@
       return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&travelmode=${mode}`;
     }
 
-    // 1. COMPLETE 5-DAY ITINERARY DATA (SYNCED 100% WITH LATEST GOOGLE DOC)
+    function linkifyText(text) {
+      return text.replace(
+        /(https?:\/\/[^\s),]+[^\s).,])/g,
+        '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-rose-600 dark:text-rose-400 underline font-semibold break-all hover:opacity-80">$1</a>'
+      );
+    }
+
+    // ========================================================
+    // 1. COMPLETE 5-DAY ITINERARY DATA (ADHD-PACED & DETAILED)
+    // ========================================================
+    // === ITINERARY_DAYS_START ===
     const ITINERARY_DAYS = [
       {
         id: 'day1',
         pillDay: 'Sun 13',
         pillSub: 'Arrival',
-        fullTitle: 'Day 1 — Sunday, December 13: 10:15 AM Arrival, Peak Seafood Lunch, Indoor Pop-Culture & Neon Walk',
-        area: 'Minami / Namba (all on foot)',
-        strategy: 'Sleep strategy: Following your Saturday 6:00 PM–midnight SGT rest and extra sleep on Scoot TR 880 in Seats 32B/32C, you stay active indoors all afternoon with zero mid-afternoon nap, then wrap up around 7:30 PM to lock in local Japan time.',
+        fullTitle: 'Day 1 — Sunday, December 13: Arrival, Kuromon Lunch, Shopping & Neon Walk',
+        area: 'Minami / Namba • Shinsaibashi',
+        mustBring: [
+          'Physical passports (immigration + 10% tax-free shopping on ¥5,500+)',
+          'Visit Japan Web QR codes & Scoot TR 880 booking',
+          'Phone with Digital ICOCA + portable charger',
+          'Warm outer jacket/layers & Ethan\'s water bottle'
+        ],
+        directionsJp: [
+          {
+            badge: 'NANKAI NAMBA STATION',
+            label: 'South Exit (南口) 1F Elevator → Nansan-dori / Hotel',
+            jp: 'すみません、南海なんば駅の「南口（なんさん通り方面）」の1階エレベーターはどこですか？',
+            romaji: 'Sumimasen, Nankai Namba-eki no "Minami-guchi (Nansan-dōri hōmen)" no ikkai erebētā wa doko desu ka?',
+            en: 'Excuse me, where is the 1F street-level elevator for Nankai Namba Station\'s South Exit toward Nansan-dori?'
+          },
+          {
+            badge: 'HOTEL LANDMARK',
+            label: 'Caption by Hyatt Namba Osaka (Nippombashi 2-7-5)',
+            jp: 'すみません、「キャプション by Hyatt なんば 大阪」（日本橋2-7-5）はどちらですか？',
+            romaji: 'Sumimasen, "Caption by Hyatt Namba Osaka" (Nippombashi 2-7-5) wa dochira desu ka?',
+            en: 'Excuse me, which way is Caption by Hyatt Namba Osaka (2-7-5 Nippombashi)?'
+          },
+          {
+            badge: 'NIPPOMBASHI → SHINSAIBASHI PARCO',
+            label: 'Nippombashi Exit 5 Elevator / Brown Sakaisuji Line → PARCO',
+            jp: 'すみません、日本橋駅の「5番出口（エレベーター）」／「心斎橋パルコ」へはどう行けばいいですか？',
+            romaji: 'Sumimasen, Nippombashi-eki no "Goban-deguchi (erebētā)" / "Shinsaibashi PARCO" e wa dō ikeba ii desu ka?',
+            en: 'Excuse me, how do I get to Nippombashi Station Exit 5 elevator / Shinsaibashi PARCO?'
+          }
+        ],
         events: [
           {
-            time: '10:15 AM – 11:05 AM',
-            title: 'KIX Terminal 1 Arrival, Immigration & Bags',
-            summary: 'Disembark Scoot TR 880 (Seats 32B/32C), clear Visit Japan Web fast-track, pick up two 20 kg bags, and cross skybridge to Nankai Station.',
+            time: '10:15 AM – 11:35 AM',
+            title: 'KIX Terminal 1 Arrival, Bags & Buffer (80 min)',
+            summary: 'Disembark Scoot TR 880 (Seats 32B/32C), clear Visit Japan Web lanes, collect two 20 kg bags, take a bathroom/snack break & cross 2F skybridge to Nankai Station.',
             details: [
-              'Disembark Scoot TR 880 at KIX Terminal 1, clear immigration/customs (complete Visit Japan Web QR codes before departure for fast-track lanes), and pick up your two 20 kg bags.',
-              'Follow overhead signs out of Terminal 1 arrivals across the pedestrian skybridge to Kansai-Airport Station (2nd floor) and head to the Nankai Electric Railway ticket machines/counter (orange/blue signage—not JR).'
+              'Clear immigration/customs using your Visit Japan Web QR codes and collect two 20 kg checked bags.',
+              'Take a calm bathroom/water break, then cross the 2F pedestrian skybridge to Kansai-Airport Station — Nankai Electric Railway (orange/blue signage, NOT JR).'
             ],
             route: {
               label: 'Walk: KIX T1 → Nankai Station',
@@ -818,13 +856,13 @@
             }
           },
           {
-            time: '11:05 AM or 11:35 AM – 12:10 PM',
-            title: 'Nankai Rapi:t Limited Express to Namba',
-            summary: 'Board Sunday/Holiday Nankai Rapi:t β to Namba, then walk 400 m flat east down Nansan-dori to drop luggage at Caption by Hyatt.',
+            time: '11:35 AM or 12:05 PM',
+            title: 'Nankai Rapi:t Limited Express to Namba + Bag Drop',
+            summary: 'Take Sunday/Holiday 11:35 AM Rapi:t β (arrives 12:14 PM) or 12:05 PM Rapi:t α (arrives 12:45 PM), exit Nankai Namba South Exit 1F elevator onto Nansan-dori & drop bags at Caption.',
             details: [
-              'Board the Sunday/Holiday Nankai Rapi:t β departing KIX at 11:05 AM (arrives Namba 11:40 AM) or 11:35 AM (arrives Namba 12:10 PM) — ¥1,490 adult reserved seat (plenty of oversized luggage racks at the end of each carriage).',
-              'Preschool Yōji Rule: Ethan rides free on your lap, or costs ¥750 for his own reserved seat.',
-              'Take the station elevator down to street level and walk 400 m (6–7 min) straight east down Nansan-dori to Caption by Hyatt Namba Osaka. Leave your suitcases with the front desk (standard check-in is 3:00 PM) and put on warm outer layers (10–12°C afternoon weather).'
+              'Board Sunday/Holiday 11:35 AM Rapi:t β (arrives Namba 12:14 PM) or 12:05 PM Rapi:t α (arrives Namba 12:45 PM) — ¥1,490 adult reserved seat (backup: 12:35 PM Rapi:t β arrives 1:14 PM; Airport Express runs every ~15 min). Ethan rides free on lap (or ¥750 own seat).',
+              'At Nankai Namba Station: Take South Exit (南口 / Minami-guchi) via the 1F Street-Level Elevator onto Nansan-dori (なんさん通り).',
+              'Walk 400 m (6–8 min flat, zero stairs) straight east across Sakaisuji Ave to Caption by Hyatt Namba Osaka (2-7-5 Nippombashi) and leave luggage at the front desk (room check-in opens at 3:00 PM).'
             ],
             route: {
               label: 'Transit: KIX T1 → Nankai Namba',
@@ -833,20 +871,19 @@
               mode: 'transit'
             },
             secondaryRoute: {
-              label: 'Walk: Nankai Namba → Caption Hotel (400m)',
+              label: 'Walk: Nankai Namba South Exit → Caption (400m)',
               origin: 'Nankai Namba Station, Osaka',
               destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka',
               mode: 'walking'
             }
           },
           {
-            time: '12:15 PM – 2:00 PM',
-            title: 'Kuromon Market (Peak Midday Seafood Grazing)',
-            summary: '2-minute walk across Sakaisuji Avenue into covered arcade during its prime 9:00 AM – 2:00 PM peak window.',
+            time: '1:00 PM – 2:30 PM',
+            title: 'Kuromon Market (Midday Seafood Lunch)',
+            summary: '2-minute (190 m) flat walk straight across Sakaisuji Avenue into the covered seafood arcade.',
             details: [
-              'Walk: 190 meters (2 minutes) straight across Sakaisuji Avenue from the hotel.',
-              'Why 12:15 PM is prime: You hit the covered, weather-proof market during its peak 9:00 AM – 2:00 PM window before seafood stalls begin winding down after 3:00 PM.',
-              'Go-with-the-flow grazing: Walk the main arcade sampling freshly sliced otoro (fatty tuna) and salmon sashimi, butter-grilled scallops, king crab legs, takoyaki, wagyu skewers, and fresh strawberries eaten standing at stall counters or in the market\'s indoor rest area.'
+              'Walk 2 min (190 m) straight across Sakaisuji Avenue from Caption into the covered market.',
+              'Sample freshly sliced otoro/salmon sashimi, butter-grilled scallops, king crab legs, takoyaki, wagyu skewers, and strawberries (cash/Trust Visa).'
             ],
             route: {
               label: 'Walk: Caption → Kuromon Market (190m)',
@@ -856,21 +893,21 @@
             }
           },
           {
-            time: '2:15 PM – 4:45 PM',
-            title: 'No-Nap Indoor Pop-Culture & Zero-Detour Shopping Run',
-            summary: 'PARCO 6F pop-culture hub, PARCO 9F–11F Hands card holder & Daimaru 9F / ABC-Mart P1 school shoes.',
+            time: '2:45 PM – 5:00 PM',
+            title: 'Shinsaibashi PARCO (6F & 9F–11F) & Daimaru 9F Shopping',
+            summary: '1-stop Brown Sakaisuji subway shortcut to PARCO 6F toys, PARCO 9F–11F Hands card holder & Daimaru 9F / ABC-Mart P1 school shoes.',
             details: [
-              'Walk: 8 minutes northwest into the glass-roofed Shinsaibashi-Suji Shopping Street (completely sheltered from wind and cold). Bring your physical passport for instant 10% tax-free shopping on ¥5,500+ single-store purchases.',
-              'Shinsaibashi PARCO — Floor 6 (Open 10:00 AM – 8:00 PM): Take the elevator straight up to Floor 6 for Ethan\'s indoor pop-culture hub: LEGO® Store, SEGA STORE OSAKA (opened Oct 2026), CAPCOM Store Osaka, Godzilla Store Osaka (2m statue), Donguri Republic (Ghibli photo spots) & Crayon Shin-chan Official Store.',
-              'Zero-Detour Stop 1 — Automated Pop-Up Card Holder (Shinsaibashi PARCO, Floors 9F–11F Hands): Ride the same PARCO elevator up 3 floors to Hands (formerly Tokyu Hands) to test and pick up an automated trigger/click-eject cardholder—specifically the OGON Slider Card Case (Hands Net Japan, ¥5,940: https://hands.net/goods/3760127774044/ | OGON Official: https://www.ogondesign.com/en/collections/slider — thumb-slide aluminum ejector, tax-free eligible) or Secrid Cardprotector (https://secrid.com/en-global/wallets/cardprotector/).',
-              'Zero-Detour Stop 2 — Pokémon DX & Ethan\'s White Leather P1 School Shoes (Daimaru Shinsaibashi / ABC-Mart Grand Stage): Cross the indoor connecting bridge to Daimaru Shinsaibashi Main Building — Floor 9 for Pokémon Center Osaka DX (open until 8:00 PM), and visit Daimaru\'s Kids\' Floor (for ASICS SUKU² Kids Collection at ABC-Mart Japan: https://www.abc-mart.net/shop/e/easisk231/ or MoonStar School Shoes Official Store: https://www.moonstar.co.jp/schoolsupplies/ with professional foot sizing) or ABC-Mart Grand Stage right on covered Shinsaibashi-Suji (for ASICS Kids LAZERBEAM MM-MG White 19–23 cm at ABC-Mart Japan: https://www.abc-mart.net/shop/g/g6867400001082/, MoonStar School Shoes: https://www.moonstar.co.jp/schoolsupplies/, or HARUTA Kids Coin Loafer #4814: https://www.haruta-shoes.co.jp/items/01048140 / HARUTA Kids Collection: https://www.haruta-shoes.co.jp/items?lcc=10 P1 school shoes).',
-              'Optional 3:30 PM Quick Pit Stop: Since room check-in opens at 3:00 PM, swing back to Caption briefly to grab your room key, drop off shopping bags, and put on heavier coats/gloves before dusk—without lying down for a nap.'
+              'Subway shortcut (avoids 22-min walk): Walk 5 min to Nippombashi Station — Exit 5 (elevator), ride Osaka Metro Sakaisuji Line (BROWN — K17) northbound 1 stop (2 min) to Nagahoribashi (K16), and walk 4–5 min indoors via Crysta Nagahori into Shinsaibashi PARCO.',
+              'Shinsaibashi PARCO 6F (closes 8:00 PM): LEGO® Store, SEGA STORE OSAKA, CAPCOM Store, Godzilla Store (2m statue), Donguri Republic (Ghibli) & Crayon Shin-chan Store.',
+              'Zero-Detour Stop 1 — Automated Pop-Up Card Holder (PARCO 9F–11F Hands): OGON Slider Card Case (Hands Net Japan, ¥5,940: https://hands.net/goods/3760127774044/ | OGON Official: https://www.ogondesign.com/en/collections/slider — 10% tax-free with passport) or Secrid Cardprotector (https://secrid.com/en-global/wallets/cardprotector/).',
+              'Zero-Detour Stop 2 — Pokémon DX & Ethan\'s White P1 School Shoes (Daimaru 9F / ABC-Mart Grand Stage): Cross indoor bridge to Daimaru Main Building 9F (Pokémon Center Osaka DX), Daimaru Kids\' Floor, or ABC-Mart Grand Stage on covered Shinsaibashi-Suji for ASICS SUKU² Kids (https://www.abc-mart.net/shop/e/easisk231/), ASICS Kids LAZERBEAM MM-MG White 19–23 cm (https://www.abc-mart.net/shop/g/g6867400001082/), MoonStar School Shoes (https://www.moonstar.co.jp/schoolsupplies/), or HARUTA Kids Coin Loafer #4814 (https://www.haruta-shoes.co.jp/items/01048140 | Kids Lineup: https://www.haruta-shoes.co.jp/items?lcc=10).',
+              'Optional 3:30 PM Pit Stop: Check-in opens at 3:00 PM—swing by Caption to pick up room key, drop bags & put on heavier coats before dusk.'
             ],
             route: {
-              label: 'Walk: Kuromon → Shinsaibashi PARCO',
-              origin: 'Kuromon Market, Osaka',
+              label: 'Transit: Nippombashi → PARCO (Brown Line)',
+              origin: 'Nippombashi Station, Osaka',
               destination: 'Shinsaibashi PARCO, Osaka',
-              mode: 'walking'
+              mode: 'transit'
             },
             secondaryRoute: {
               label: 'Walk: PARCO → Caption Hotel (Pit Stop)',
@@ -881,13 +918,12 @@
           },
           {
             time: '5:00 PM – 7:30 PM',
-            title: 'Neon City Light Walk & Go-With-the-Flow Early Dinner',
-            summary: 'Dotonbori Canal Glico sign, 4 km Midosuji ginkgo light illuminations, early dinner & 7:30 PM sleep reset.',
+            title: 'Dotonbori Canal, Midosuji Lights & Early Dinner',
+            summary: 'Ebisu Bridge Glico sign (5:00–5:45 PM), Midosuji Boulevard ginkgo lights (5:45–6:30 PM) & casual dinner.',
             details: [
-              'Sunset hits around 4:50 PM, and temperatures dip to 4–5°C after dark.',
-              '5:00 PM – 5:45 PM | Dotonbori Canal: Walk to Ebisu Bridge for the glowing Glico Running Man billboard, giant moving mechanical crab, and animated 3D food signs reflecting across the water.',
-              '5:45 PM – 6:30 PM | Midosuji Boulevard Illuminations: Step one block west onto Midosuji Avenue, where 4 km of ginkgo trees glow nightly (5:00 PM – 1:00 AM) with five decade-themed light zones and interactive sidewalk projections near Kita-Mido.',
-              '6:30 PM – 7:30 PM | Early Dinner & Wind-Down: Follow your appetite in Dotonbori/Shinsaibashi (okonomiyaki, ramen, conveyor sushi, or katsu) and walk 7–10 minutes back to Caption by 7:30–8:00 PM for a full night\'s sleep.'
+              '5:00 PM – 5:45 PM: Walk to Ebisu Bridge (Dotonbori Canal) for the Glico Running Man sign and giant moving crab.',
+              '5:45 PM – 6:30 PM: Step one block west onto Midosuji Boulevard (ginkgo tree illuminations 5:00 PM – 1:00 AM).',
+              '6:30 PM – 7:30 PM: Casual dinner in Dotonbori/Namba, then 7–10 min walk back to Caption.'
             ],
             route: {
               label: 'Walk: Caption → Dotonbori Glico Sign',
@@ -908,31 +944,60 @@
         id: 'day2',
         pillDay: 'Mon 14',
         pillSub: 'LEGO Bay',
-        fullTitle: 'Day 2 — Monday, December 14: Slow Morning & Waterfront LEGO Day',
-        area: 'Osaka Bay (Sakaisuji → Chuo Line to Osakako)',
-        strategy: '(Why Monday: Kids Plaza Osaka [closed 2nd Monday of the month], Nakanoshima Children\'s Book Forest [closed Mondays], and both Nakanoshima art museums [closed Mondays] are all closed today, whereas LEGOLAND Discovery Center is open 10:00 AM – 6:00 PM.)',
+        fullTitle: 'Day 2 — Monday, December 14: Talk Shop Breakfast & Waterfront LEGO Day',
+        area: 'Osaka Bay (Brown Sakaisuji → Green Chuo Line)',
+        mustBring: [
+          'Physical passport (10% tax-free shopping & ID)',
+          'Phone with Digital ICOCA + portable charger',
+          'LEGOLAND Discovery Center online timed e-ticket QR',
+          'Mandatory socks for Ethan (required for LEGO City Play Zone)'
+        ],
+        directionsJp: [
+          {
+            badge: 'SAKAISUJI-HOMMACHI TRANSFER',
+            label: 'Transfer to Green Chuo Line (toward Cosmosquare)',
+            jp: 'すみません、堺筋本町駅で「中央線（緑色・コスモスクエア方面）」への乗り換えはどちらですか？',
+            romaji: 'Sumimasen, Sakaisuji-Hommachi-eki de "Chūō-sen (midori-iro / Kosumosukuea hōmen)" e no norikae wa dochira desu ka?',
+            en: 'Excuse me, which way is the transfer at Sakaisuji-Hommachi to the Green Chuo Line toward Cosmosquare?'
+          },
+          {
+            badge: 'OSAKAKO STATION → LEGOLAND',
+            label: 'Osakako Exit 1 Elevator → Tempozan Marketplace / LEGOLAND',
+            jp: 'すみません、大阪港駅の「1番出口（エレベーター）」／「天保山マーケットプレース（レゴランド）」はどちらですか？',
+            romaji: 'Sumimasen, Ōsakakō-eki no "Ichiban-deguchi (erebētā)" / "Tenpōzan Mākettopurēsu (Regorando)" wa dochira desu ka?',
+            en: 'Excuse me, which way is Osakako Station Exit 1 elevator / Tempozan Marketplace & LEGOLAND?'
+          },
+          {
+            badge: 'RETURN TO NAMBA / NIPPOMBASHI',
+            label: 'Sakaisuji-Hommachi Transfer to Brown Sakaisuji Line (toward Tengachaya)',
+            jp: 'すみません、堺筋本町駅で「堺筋線（茶色・天下茶屋・日本橋方面）」への乗り換えはどちらですか？',
+            romaji: 'Sumimasen, Sakaisuji-Hommachi-eki de "Sakaisuji-sen (chairo / Tengachaya / Nippombashi hōmen)" e no norikae wa dochira desu ka?',
+            en: 'Excuse me, which way is the transfer at Sakaisuji-Hommachi to the Brown Sakaisuji Line toward Tengachaya / Nippombashi?'
+          }
+        ],
         events: [
           {
-            time: '9:00 AM – 11:45 AM',
-            title: 'Unhurried Sleep-In & Go-With-the-Flow Breakfast/Coffee',
-            summary: 'No alarms or early trains—wake naturally, grab coffee and breakfast at your own pace around Namba/Nippombashi, and dress comfortably in layers.',
+            time: '8:30 AM – 10:30 AM',
+            title: 'Unhurried Breakfast at Talk Shop (Caption by Hyatt 1F)',
+            summary: 'Right downstairs in Caption 1F (open 7:00 AM – 11:00 AM; zero walking).',
             details: [
-              'No alarms or early trains—wake naturally, grab coffee and breakfast at your own pace around Namba/Nippombashi, and dress comfortably in layers (you will be indoors in a heated mall all afternoon).'
+              'Located on the ground floor of Caption by Hyatt (open 7:00 AM – 11:00 AM).',
+              'Breakfast plates with fries, fruit, coffee, and Osaka nikusui soup.'
             ]
           },
           {
-            time: '11:45 AM – 12:30 PM',
-            title: 'Transit to Osaka Bay (~25–30 min door-to-door)',
-            summary: 'Nippombashi → Sakaisuji Line (1 stop) → Chuo Line (7 stops) to Osakako Station Exit 1 elevator.',
+            time: '11:30 AM – 12:15 PM',
+            title: 'Subway to Osaka Bay (45 min buffer)',
+            summary: 'Nippombashi Exit 5 → Brown Sakaisuji Line (1 stop) → Green Chuo Line (7 stops) → Osakako Exit 1 elevator.',
             details: [
-              'Walk 4 minutes (300 m) from Caption to Nippombashi Station (Osaka Metro).',
-              'Board the Osaka Metro Sakaisuji Line (brown line, northbound toward Tenjimbashisuji 6-chome) for 1 stop (2 min) to Sakaisuji-Hommachi Station.',
-              'Transfer inside the station to the Osaka Metro Chuo Line (green line, westbound toward Yumeshima/Cosmosquare) for 7 stops (~14 min) to Osakako Station.',
-              'Take Exit 1 (elevator available) and walk 5 minutes straight north to Tempozan Marketplace.'
+              'Walk 5 min to Nippombashi Station — Exit 5 (or Higashi / East Gate elevator).',
+              'Board Osaka Metro Sakaisuji Line (BROWN — K17) northbound (toward Tenjimbashisuji 6-chome / Kita-Senri) 1 stop (2 min) to Sakaisuji-Hommachi (K15).',
+              'Follow GREEN signs inside the station to Osaka Metro Chuo Line (GREEN — C17) westbound (toward Cosmosquare / Yumeshima) 7 stops (~14 min) to Osakako (C11).',
+              'Take Exit 1 (elevator) and walk 5–8 min straight north to Tempozan Marketplace.'
             ],
             route: {
-              label: 'Transit: Caption → Osakako Station',
-              origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka',
+              label: 'Transit: Nippombashi → Osakako Station',
+              origin: 'Nippombashi Station, Osaka',
               destination: 'Osakako Station, Osaka',
               mode: 'transit'
             },
@@ -944,20 +1009,20 @@
             }
           },
           {
-            time: '12:30 PM – 1:30 PM',
-            title: 'Waterfront Lunch Inside Tempozan Marketplace',
-            summary: 'Eat in 2F food court overlooking Osaka Bay or retro 1960s Naniwa Kuishinbo Yokocho food alley.',
+            time: '12:15 PM – 1:45 PM',
+            title: 'Waterfront Lunch Inside Tempozan Marketplace (2F)',
+            summary: '2F bay-view food court or retro 1960s Naniwa Kuishinbo Yokocho food alley inside Tempozan.',
             details: [
-              'Go with the flow inside Tempozan Marketplace (2F food court overlooking Osaka Bay or the retro 1960s Naniwa Kuishinbo Yokocho food alley) before heading up to the 3rd floor.'
+              'Tempozan Marketplace 2F food court overlooking Osaka Bay or Naniwa Kuishinbo Yokocho food alley on the same floor.'
             ]
           },
           {
-            time: '1:30 PM – 4:30 PM',
-            title: 'LEGOLAND Discovery Center Osaka (Tempozan Marketplace 3F)',
-            summary: '100% indoor LEGO rides, 4D cinema, soft-play climbing zone & Miniland Osaka (open 10:00 AM – 6:00 PM).',
+            time: '1:45 PM – 4:30 PM',
+            title: 'LEGOLAND Discovery Center Osaka (Tempozan 3F)',
+            summary: '100% indoor LEGO rides, 4D Cinema, soft-play climbing zone & Miniland Osaka (open 10:00 AM – 6:00 PM).',
             details: [
-              'Hours & Entry: Open 10:00 AM – 6:00 PM on Mondays (last admission 4:00 PM; timed tickets allow up to a 3-hour stay). Pre-book your online timed slot (weekday entries after 2:00 PM qualify for a ~20% afternoon discount online).',
-              'Everything Ethan (~1.15 m) Can Do: Kingdom Quest interactive laser-zap dark ride & Merlin\'s Apprentice pedal-powered flying ride; 4D LEGO Cinema (wind, rain, and snow effects); LEGO City Play Zone (multi-story soft-play climbing structure—bring socks!); Miniland Osaka (illuminated LEGO replica of Dotonbori, Tsutenkaku, and Osaka landmarks cycling from day to night) and LEGO racer build-and-test ramps.'
+              'Open 10:00 AM – 6:00 PM (last admission 4:00 PM; 3-hour timed stay limit). Online timed ticket required (no walk-up counter).',
+              'Rides & Zones for Ethan (~1.15 m): Kingdom Quest, Merlin\'s Apprentice, 4D LEGO Cinema, Miniland Osaka, and LEGO City Play Zone (socks mandatory).'
             ],
             route: {
               label: 'Walk: Osakako → LEGOLAND Osaka',
@@ -968,14 +1033,17 @@
           },
           {
             time: '4:45 PM – 7:30 PM',
-            title: 'Return to Namba & Early Dinner',
-            summary: 'Chuo Line → Sakaisuji Line back to Nippombashi (~25 min), go-with-the-flow dinner near hotel & early bedtime.',
+            title: 'Return to Namba (Green Chuo → Brown Sakaisuji) & Dinner',
+            summary: 'Osakako Exit 1 elevator → Green Chuo Line eastbound (7 stops) → Brown Sakaisuji Line southbound (1 stop) → Nippombashi Exit 5.',
             details: [
-              'Reverse the Chuo Line → Sakaisuji Line route back to Nippombashi Station (~25 min), grab an easy go-with-the-flow dinner near the hotel, and turn in early for tomorrow\'s USJ start.'
+              'Walk 5–8 min south back to Osakako Station — Enter via Exit 1 (elevator) following GREEN Osaka Metro signs.',
+              'Board Osaka Metro Chuo Line (GREEN — C11) eastbound (toward Nagata / Ikoma / Gakken Nara-Tomigaoka) 7 stops (~14 min) to Sakaisuji-Hommachi (C17).',
+              'Follow BROWN transfer signs inside the station to Osaka Metro Sakaisuji Line (BROWN — K15) southbound (toward Tengachaya) 1 stop (2 min) to Nippombashi (K17).',
+              'Take Exit 5 (or Higashi / East Gate elevator) and walk 5 min south to Caption by Hyatt; grab an easy dinner nearby.'
             ],
             route: {
-              label: 'Transit: Tempozan → Caption Hotel',
-              origin: 'LEGOLAND Discovery Center Osaka, Tempozan Marketplace',
+              label: 'Transit: Osakako → Nippombashi Exit 5',
+              origin: 'Osakako Station, Osaka',
               destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka',
               mode: 'transit'
             }
@@ -986,24 +1054,69 @@
         id: 'day3',
         pillDay: 'Tue 15',
         pillSub: 'USJ Day',
-        fullTitle: 'Day 3 — Tuesday, December 15: Full Day at Universal Studios Japan (USJ)',
-        area: 'Sakurajima / Bay (Hanshin Namba → JR Yumesaki Line)',
-        strategy: '(Why Tuesday: Mid-December Tuesdays have Moderate crowd levels, and your booked Express Pass 5: Race & Minion Special locks in your non-coaster headliners with timed Super Nintendo World™ entry.)',
+        fullTitle: 'Day 3 — Tuesday, December 15: Yayoi-ken Breakfast & USJ Express Pass 5',
+        area: 'Sakurajima / Bay (Hanshin Blue → JR Navy Blue)',
+        mustBring: [
+          'Physical passports (USJ ID check & 10% tax-free shopping)',
+          'Uncropped original USJ Studio Pass & Express Pass 5 QR codes',
+          'Phone with Digital ICOCA + portable charger',
+          'Beanie, scarf, gloves & pocket warmers (kairo)',
+          'NO outside food/drinks past security • NO park re-entry'
+        ],
+        directionsJp: [
+          {
+            badge: 'KINTETSU-NIPPOMBASHI PLATFORM',
+            label: 'Confirm Westbound Train Stops at Nishikujo',
+            jp: 'すみません、この電車は「西九条（尼崎・神戸三宮方面）」に停まりますか？',
+            romaji: 'Sumimasen, kono densha wa "Nishikujō (Amagasaki / Kōbe-Sannomiya hōmen)" ni tomarimasu ka?',
+            en: 'Excuse me, does this train stop at Nishikujo toward Amagasaki / Kobe-Sannomiya?'
+          },
+          {
+            badge: 'NISHIKUJO TRANSFER TO USJ',
+            label: 'JR Nishikujo Gate & Platform 3 (JR Yumesaki Line to Universal City)',
+            jp: 'すみません、西九条駅で「JRゆめ咲線（3番のりば・ユニバーサルシティ方面）」の改札はどこですか？',
+            romaji: 'Sumimasen, Nishikujō-eki de "JR Yumesaki-sen (Sanban-noriba / Yunibāsaru Shiti hōmen)" no kaisatsu wa doko desu ka?',
+            en: 'Excuse me, where is the ticket gate at Nishikujo for JR Yumesaki Line Platform 3 toward Universal City?'
+          },
+          {
+            badge: 'NISHIKUJO RETURN TO NAMBA',
+            label: 'Hanshin Line to Kintetsu-Nippombashi (toward Nara)',
+            jp: 'すみません、この電車は「近鉄日本橋（奈良・東花園方面）」に行きますか？',
+            romaji: 'Sumimasen, kono densha wa "Kintetsu-Nippombashi (Nara / Higashi-Hanazono hōmen)" ni ikimasu ka?',
+            en: 'Excuse me, does this train go to Kintetsu-Nippombashi toward Nara / Higashi-Hanazono?'
+          }
+        ],
         isUsjDay: true,
         events: [
           {
-            time: '7:50 AM – 8:30 AM',
-            title: 'Morning Train to Universal City (~25–30 min door-to-door)',
-            summary: 'Kintetsu-Nippombashi → Hanshin Namba to Nishikujo → JR Yumesaki to Universal City; arrive security ~8:30 AM.',
+            time: '8:15 AM – 9:15 AM',
+            title: 'Relaxed Breakfast at Yayoi-ken Nipponbashi Branch',
+            summary: '3 min walk from Caption (1-21-23 Nipponbashi; open 24h) — warm Japanese breakfast sets before our 9:30 AM train.',
             details: [
-              'Walk 4 minutes (300 m) from Caption to Kintetsu-Nippombashi Station.',
-              'Board a Hanshin Namba Line train bound for Amagasaki/Kobe-Sannomiya (direct, 4 stops / ~11 min) to Nishikujo Station.',
-              'Exit the Hanshin gates at Nishikujo and walk 1 minute across to the JR Yumesaki Line platform (Platform 3/4, bound for Sakurajima) for 2 stops (5 min) to Universal City Station.',
-              'Walk 3 minutes through Universal CityWalk to reach the USJ security gates by ~8:30 AM (official hours 9:00 AM – 9:00 PM; gates routinely open 15–30 minutes early). Note: All bags go through X-ray/metal detector screening, outside food/drinks are prohibited, and once you exit the park, re-entry is not allowed.'
+              'Address: 1-21-23 Nipponbashi (3 min flat walk from Caption; open 24 hours).',
+              'Warm Japanese breakfast sets with grilled salmon, rice, egg & miso soup (~¥500–¥800; English ticket machine).'
             ],
             route: {
-              label: 'Transit: Caption → Universal City Station',
+              label: 'Walk: Caption → Yayoi-ken Nipponbashi',
               origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka',
+              destination: 'Yayoi-ken Nipponbashi, 1-21-23 Nipponbashi, Chuo-ku, Osaka',
+              mode: 'walking'
+            }
+          },
+          {
+            time: '9:30 AM – 10:15 AM',
+            title: 'Step-by-Step Train to Universal City (45 min buffer)',
+            summary: 'Nippombashi Exit 5 → Kintetsu/Hanshin Blue Line (5 stops to Nishikujo) → Tap out/in JR Platform 3 Navy Blue Line (2 stops to Universal City).',
+            details: [
+              'Walk 5 min to Nippombashi Station — Exit 5 (elevator) and follow underground signs to Kintetsu-Nippombashi Station (RED "A" / through-service onto Hanshin Namba Line — BLUE "HS").',
+              'Board a westbound train bound for Amagasaki (尼崎) or Kobe-Sannomiya (神戸三宮) — skip trains ending at Osaka-Namba. Ride 5 stops (~13 min) to Nishikujo (HS 45).',
+              'Tap out of Hanshin gates at Nishikujo, follow "JR Lines / JR線のりば" signs (1–2 min walk), and tap in at JR Nishikujo.',
+              'Go to Platform 3 for JR Yumesaki Line / Sakurajima Line (NAVY BLUE "P") bound for Sakurajima (桜島) / Universal City — ride 2 stops (5 min) to Universal City.',
+              'Exit Universal City main gate, turn left, and walk 5–10 min along Universal CityWalk to USJ security.'
+            ],
+            route: {
+              label: 'Transit: Kintetsu-Nippombashi → Universal City',
+              origin: 'Kintetsu-Nippombashi Station, Osaka',
               destination: 'Universal City Station, Osaka',
               mode: 'transit'
             },
@@ -1015,53 +1128,49 @@
             }
           },
           {
-            time: '8:45 AM – 11:15 AM',
-            title: 'Early Rope-Drop Rides & Nintendo Arrival Prep',
-            summary: 'Confirmed QR codes ready (Studio Passes JNPMM/JNPMN + Express Pass 5 102MV/102MW); early family rides.',
+            time: '10:15 AM – 11:10 AM',
+            title: 'Calm Security Entry & Super Nintendo World™ Buffer',
+            summary: 'Clear X-ray security after the morning rush, get Ethan\'s 107 cm+ height wristband & stroll to Nintendo World.',
             details: [
-              'Confirmed Tickets Ready (Uncropped Original QR Codes): 1-Day Studio Passes (Adult USJ-P1X000000JNPMM / Child USJ-P1X000000JNPMN) + 2x Express Pass 5: Race & Minion Special (USJ-P1X000000102MV / USJ-P1X000000102MW). Keep passports on hand for ID verification if requested.',
-              'Use early morning low-wait hours for Universal Wonderland family rides or an early standby ride on Despicable Me: Minion Mayhem (102 cm+ with companion), and arrive at the Super Nintendo World™ entrance by 11:10–11:15 AM ahead of your 11:20 AM timed window.'
+              'Keep physical passports and uncropped Klook QR codes ready at the gate.',
+              'Ask any crew member for Ethan\'s 107 cm+ height-confirmation wristband before heading to Super Nintendo World™.'
             ]
           },
           {
-            time: '11:20 AM – 12:20 PM',
-            title: 'Super Nintendo World™ Timed Entry & Mario Kart Express Slot',
-            summary: 'Guaranteed land entry (11:20 AM–12:20 PM) & strict 30-min Express slot for Mario Kart (11:20 AM–11:50 AM).',
+            time: '11:20 AM – 12:30 PM',
+            title: 'Super Nintendo World™ (11:20–12:20) & Mario Kart (11:20–11:50)',
+            summary: 'Guaranteed land entry (11:20–12:20) & strict 30-min Express slot for Mario Kart: Koopa\'s Challenge™ (11:20–11:50).',
             details: [
-              '11:20 AM – 12:20 PM: Enter Super Nintendo World™ during your guaranteed Express Pass timed-entry window.',
-              '11:20 AM – 11:50 AM (Strict 30-Min Express Window): Head straight to Mario Kart: Koopa\'s Challenge™ (107 cm+ with companion; non-coaster AR dark ride). Ask a crew member at the entrance for Ethan\'s 107 cm+ height-confirmation wristband.',
-              'Optional Nintendo Extras: Pick up a Power-Up Band™ (¥5,600) at kiosks inside the land to punch ? blocks and collect digital coins/keys, or join standby for Yoshi\'s Adventure™ (92 cm+ gentle track ride). Skip Mine-Cart Madness™ (rollercoaster).'
+              '11:20 AM – 12:20 PM: Enter Super Nintendo World™ during your Express Pass timed-entry window.',
+              '11:20 AM – 11:50 AM (Strict 30-Min Express Window): Mario Kart: Koopa\'s Challenge™ (107 cm+ with companion; non-coaster AR dark ride).',
+              'Optional: Power-Up Band™ (¥5,600) inside the land + Yoshi\'s Adventure™ standby (92 cm+). Skip Mine-Cart Madness™ (coaster).'
             ]
           },
           {
-            time: '12:20 PM – 1:30 PM',
-            title: 'Warm Indoor Lunch',
-            summary: 'Indoor sit-down lunch at Kinopio\'s Cafe, Three Broomsticks™, or Discovery Restaurant.',
+            time: '12:30 PM – 5:30 PM',
+            title: 'Warm Indoor Lunch + Afternoon Non-Coaster Express Slots',
+            summary: 'Indoor lunch (12:30–2:00 PM), Minion Mayhem (untimed), Villain-Con Minion Blast (3:00–3:30 PM slot) & JAWS™.',
             details: [
-              'Indoor lunch options: Kinopio\'s Cafe (scan QR near entrance right when entering Nintendo World to secure table), Three Broomsticks™ (Hogsmeade), or Discovery Restaurant (Jurassic Park).'
-            ]
-          },
-          {
-            time: '1:30 PM – 5:30 PM',
-            title: 'Afternoon Non-Coaster Express Slots & Park Exploring',
-            summary: 'Minion Mayhem (untimed), Villain-Con Minion Blast (3:00 PM–3:30 PM slot) & JAWS™ (untimed Choice A).',
-            details: [
-              'Despicable Me: Minion Mayhem (Untimed Express Slot): Indoor motion simulator (102 cm+ with companion).',
-              '3:00 PM – 3:30 PM / 15:00–15:30 (Strict 30-Min Express Window): Illumination\'s Villain-Con Minion Blast (no height limit; stand-up interactive blaster).',
-              'JAWS™ (Untimed Choice A Express Slot): Choose JAWS™ over Jurassic Park - The Ride so you stay completely dry in December (no height minimum).',
-              'Note: Skip Harry Potter and the Forbidden Journey™ on the Express Pass (strict 122 cm minimum; Ethan is ~1.15 m) and skip Flight of the Hippogriff™ (rollercoaster).'
+              '12:30 PM – 2:00 PM: Warm indoor lunch (Kinopio\'s Cafe, Three Broomsticks™, or Discovery Restaurant).',
+              'Despicable Me: Minion Mayhem (Untimed Express slot; 102 cm+ with companion).',
+              '3:00 PM – 3:30 PM / 15:00–15:30 (Strict 30-Min Express Window): Illumination\'s Villain-Con Minion Blast (no height limit).',
+              'JAWS™ (Untimed Choice A Express slot — choose JAWS™ over Jurassic Park to stay dry; no height limit). Skip Forbidden Journey (122 cm min).'
             ]
           },
           {
             time: '5:30 PM – 7:00 PM',
-            title: 'Christmas Light Show & Return to Hotel',
-            summary: 'Gramercy Park Light Up the Night (~5:30 PM) & Joy of Lights (~6:00 PM) → train back to Namba.',
+            title: 'Optional Christmas Shows & Step-by-Step Return to Caption',
+            summary: 'Universal City JR Navy Blue Line (2 stops to Nishikujo) → Tap out/in Hanshin Blue/Red Line (5 stops to Kintetsu-Nippombashi Exit 5).',
             details: [
-              'At dusk (~5:30 PM), watch the free Light Up the Night (~5:30 PM) and Joy of Lights (~6:00 PM) Christmas shows at Gramercy Park if Ethan still has energy, or head straight back via Universal City → Nishikujo → Kintetsu-Nippombashi (~25 min) for dinner near your hotel.'
+              'Optional: Gramercy Park Light Up the Night (~5:30 PM) / Joy of Lights (~6:00 PM).',
+              'Walk 5–10 min through CityWalk to Universal City Station (JR — NAVY BLUE "P") and ride JR Yumesaki Line bound for Nishikujo / Osaka (西九条・大阪) 2 stops (5 min) to Nishikujo.',
+              'Tap out of JR gates, follow orange/blue "Hanshin Line / 阪神線" signs (1–2 min walk), and tap in at Hanshin Nishikujo.',
+              'Board Hanshin Namba Line (BLUE "HS" → Kintetsu Nara Line RED "A") bound for Kintetsu-Nara (近鉄奈良), Higashi-Hanazono (東花園), or Yamato-Saidaiji (大和西大寺) 5 stops (~13 min) straight to Kintetsu-Nippombashi (if train ends at Osaka-Namba, catch next eastbound train 1 stop).',
+              'Take Exit 5 (or Higashi / East Gate elevator) and walk 5 min south to Caption.'
             ],
             route: {
-              label: 'Transit: USJ → Caption by Hyatt Namba',
-              origin: 'Universal Studios Japan, Osaka',
+              label: 'Transit: Universal City → Kintetsu-Nippombashi',
+              origin: 'Universal City Station, Osaka',
               destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka',
               mode: 'transit'
             }
@@ -1072,57 +1181,78 @@
         id: 'day4',
         pillDay: 'Wed 16',
         pillSub: 'Play & Art',
-        fullTitle: 'Day 4 — Wednesday, December 16: Indoor Play Town, Tadao Ando Book Forest & Contemporary Art',
-        area: 'Kita / Nakanoshima (Sakaisuji Line: Ogimachi → Kitahama)',
-        strategy: '(Every stop today runs cleanly along one compact corridor from Ogimachi down to Nakanoshima.)',
+        fullTitle: 'Day 4 — Wednesday, December 16: Caffè Veloce, Kids Plaza, Book Forest & Art',
+        area: 'Kita / Nakanoshima (Brown Sakaisuji & Teal Keihan)',
+        mustBring: [
+          'Physical passport (10% tax-free shopping & ID)',
+          'Phone with Digital ICOCA + portable charger',
+          'Kids Plaza Osaka pre-booked Klook/KKday mobile voucher',
+          'Nakanoshima Children\'s Book Forest reservation QR/number (Session C 13:30–15:00)',
+          'Lidded water bottle (NO food & NO coin lockers inside Book Forest)'
+        ],
+        directionsJp: [
+          {
+            badge: 'OGIMACHI STATION EXIT 2',
+            label: 'Ogimachi Exit 2 Elevator → Kids Plaza Osaka',
+            jp: 'すみません、扇町駅の「2番出口（エレベーター）」／「キッズプラザ大阪」はどちらですか？',
+            romaji: 'Sumimasen, Ōgimachi-eki no "Niban-deguchi (erebētā)" / "Kizzu Puraza Ōsaka" wa dochira desu ka?',
+            en: 'Excuse me, which way is Ogimachi Station Exit 2 elevator / Kids Plaza Osaka?'
+          },
+          {
+            badge: 'KITAHAMA / NANIWABASHI → BOOK FOREST',
+            label: 'Naniwabashi Exits 2/3 Elevator → Nakanoshima Children\'s Book Forest',
+            jp: 'すみません、「こども本の森 中之島」（なにわ橋駅 2番・3番出口方面）はどちらですか？',
+            romaji: 'Sumimasen, "Kodomo Hon no Mori Nakanoshima" (Naniwabashi-eki Niban / Sanban-deguchi hōmen) wa dochira desu ka?',
+            en: 'Excuse me, which way is Nakanoshima Children\'s Book Forest toward Naniwabashi Station Exits 2 & 3?'
+          },
+          {
+            badge: 'WATANABEBASHI EXIT 2 → ART MUSEUM & DINNER',
+            label: 'Nakanoshima Museum of Art & Festival Plaza B1F (Ramen Jikon)',
+            jp: 'すみません、「大阪中之島美術館」／「中之島フェスティバルプラザ（地下1階）」はどちらですか？',
+            romaji: 'Sumimasen, "Ōsaka Nakanoshima Bijutsukan" / "Nakanoshima Fesutibaru Puraza (Chika ikkai)" wa dochira desu ka?',
+            en: 'Excuse me, which way is Nakanoshima Museum of Art / Nakanoshima Festival Plaza B1F?'
+          }
+        ],
         events: [
           {
-            time: '9:05 AM – 9:30 AM',
-            title: 'Direct Subway to Kids Plaza Osaka (~15 min door-to-door)',
-            summary: 'Sakaisuji Line 5 stops northbound from Nippombashi to Ogimachi Station Exit 2 elevator.',
+            time: '8:15 AM – 9:15 AM',
+            title: 'Relaxed Breakfast at Caffè Veloce — Namba Nansan-dori Street',
+            summary: '~5 min flat walk west on Nansan-dori (opens 7:00 AM; English menu, sandwiches/coffee sets under ¥600).',
             details: [
-              'Walk 4 minutes (300 m) to Nippombashi Station.',
-              'Board the Osaka Metro Sakaisuji Line (brown line, northbound) directly 5 stops (9 min) to Ogimachi Station.',
-              'Take Exit 2 (elevator available)—it opens directly in front of the Kids Plaza Osaka entrance.'
+              'Address: Marutan Bldg 1F, 2-1-18 Nambanaka (~5 min flat walk west on Nansan-dori; opens 7:00 AM).',
+              'English menu, sandwiches/toast/hotdogs & coffee sets under ¥600, spacious non-smoking seating.'
             ],
             route: {
-              label: 'Transit: Caption → Kids Plaza Osaka',
+              label: 'Walk: Caption → Caffè Veloce Nansan-dori',
               origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka',
+              destination: 'Caffe Veloce Namba Nansan-dori, 2-1-18 Nambanaka, Naniwa-ku, Osaka',
+              mode: 'walking'
+            }
+          },
+          {
+            time: '9:20 AM – 12:15 PM',
+            title: 'Brown Sakaisuji Line to Ogimachi Exit 2 → Kids Plaza Osaka',
+            summary: 'Nippombashi Exit 5 → Brown Line 5 stops north to Ogimachi Exit 2 elevator → Kids Plaza Osaka.',
+            details: [
+              'Walk 5 min to Nippombashi Station — Exit 5 (or Higashi / East Gate elevator) → Osaka Metro Sakaisuji Line (BROWN — K17) northbound (toward Tenjimbashisuji 6-chome / Kita-Senri) 5 stops (9 min) to Ogimachi Station (K12).',
+              'Take Ogimachi Exit 2 (elevator) — opens directly outside Kids Plaza Osaka.',
+              'Show pre-booked Klook/KKday mobile voucher to skip the 1F ticket line (Kids Town 4F, supermarket/post office 4F, Kantele TV Studio 3F, soap bubbles 5F).'
+            ],
+            route: {
+              label: 'Transit: Nippombashi → Kids Plaza (Ogimachi Exit 2)',
+              origin: 'Nippombashi Station, Osaka',
               destination: 'Kids Plaza Osaka, Ogimachi, Osaka',
               mode: 'transit'
             }
           },
           {
-            time: '9:30 AM – 12:15 PM',
-            title: 'Kids Plaza Osaka (Open 9:30 AM – 5:00 PM; Last Entry 4:15 PM)',
-            summary: 'Hundertwasser Kids Town (4F), pretend supermarket/post office (4F), Kantele TV Studio (3F) & soap bubbles (5F).',
+            time: '12:15 PM – 1:30 PM',
+            title: 'Tenjinbashisuji Arcade Lunch + Subway to Book Forest',
+            summary: 'Lunch next door (12:15–1:05 PM), then Brown Line 2 stops south to Kitahama Exit 26 / Naniwabashi Exit 2–3 elevator.',
             details: [
-              'Buy tickets at the 1F counter (¥1,500 adult; ¥500 preschooler ages 3–5 / ¥800 age 6+; ICOCA accepted).',
-              'Arriving right at 9:30 AM gives Ethan first run of the giant Hundertwasser Kids Town (winding tube slides, suspension bridges, and climbable towers on 4F), the pretend-play supermarket and post office (4F), the Kantele TV Studio (3F), and the giant soap-bubble and water-physics exhibits (5F).'
-            ]
-          },
-          {
-            time: '12:15 PM – 1:15 PM',
-            title: 'Covered Arcade Lunch (Tenjinbashisuji Shopping Street)',
-            summary: 'Step immediately next door into Japan\'s longest covered arcade for a warm, sit-down lunch.',
-            details: [
-              'Step immediately next door into Tenjinbashisuji Shopping Street (Japan\'s longest covered shopping arcade) for a warm, go-with-the-flow sit-down lunch without walking in the cold.'
-            ],
-            route: {
-              label: 'Walk: Kids Plaza → Tenjinbashisuji Arcade',
-              origin: 'Kids Plaza Osaka, Ogimachi, Osaka',
-              destination: 'Tenjinbashisuji Shopping Street, Osaka',
-              mode: 'walking'
-            }
-          },
-          {
-            time: '1:30 PM – 3:00 PM',
-            title: 'Nakanoshima Children\'s Book Forest (Kodomo Hon no Mori Nakanoshima)',
-            summary: 'Subway hop to Kitahama, then Session C (1:30 PM – 3:00 PM) in Tadao Ando\'s timber-and-concrete library.',
-            details: [
-              '1:15 PM – 1:30 PM | 2-Stop Subway Hop to Nakanoshima Book Forest: Return to Ogimachi Station and ride the Osaka Metro Sakaisuji Line 2 stops south (4 min) to Kitahama Station. Take Exit 26 (or the Keihan Naniwabashi Station Exit 3 elevator) and walk 4 minutes across Naniwabashi Bridge onto Nakanoshima island.',
-              '1:30 PM – 3:00 PM | Nakanoshima Children\'s Book Forest (Kodomo Hon no Mori Nakanoshima): Session C (1:30 PM – 3:00 PM) — strict 90-minute complete changeover system (free admission). Show your reservation QR/number at the door (booked 14 days prior on Wed, Dec 2 at 9:00 AM SGT).',
-              'Nuances to Know: There are no coin lockers inside (keep backpacks with you), no eating (lidded water bottles only), and no tripods/selfie sticks. Enjoy Tadao Ando\'s three-story curved timber-and-concrete architecture and river views while Ethan explores ~20,000 Japanese and English picture books in cozy reading nooks.'
+              '12:15 PM – 1:05 PM: Covered arcade lunch directly next door at Tenjinbashisuji Shopping Street.',
+              '1:05 PM – 1:30 PM (25 min buffer): Re-enter Ogimachi Station (K12) via Exit 2 → Osaka Metro Sakaisuji Line (BROWN — K12) southbound (toward Tengachaya) 2 stops (4 min) to Kitahama Station (K14).',
+              'Exit via Kitahama Exit 26 (stairs) OR walk through the underground concourse to Keihan Naniwabashi Station Exit 2 / Exit 3 (elevator), then cross Naniwabashi Bridge (4–5 min walk).'
             ],
             route: {
               label: 'Transit: Ogimachi → Nakanoshima Book Forest',
@@ -1132,38 +1262,47 @@
             }
           },
           {
-            time: '3:15 PM – 4:45 PM',
-            title: 'Contemporary Art Museums (West Nakanoshima — Both Close at 5:00 PM)',
-            summary: 'Ship\'s Cat at Nakanoshima Museum of Art + National Museum of Art next door.',
+            time: '1:30 PM – 3:00 PM',
+            title: 'Nakanoshima Children\'s Book Forest (Session C)',
+            summary: 'Strict 90-min session (1:30 PM – 3:00 PM; free admission) — show reservation QR/number at entrance.',
             details: [
-              'Fastest Transfer: Walk 1 minute to Naniwabashi Station and take the Keihan Nakanoshima Line 1 stop west (2 min) to Watanabebashi Station (Exit 2, 4-minute walk), OR take a 5-minute taxi (~¥800–¥1,000) straight to the museum plaza to save Ethan\'s legs.',
-              'Stop A — Nakanoshima Museum of Art, Osaka (10:00 AM – 5:00 PM; Last Entry 4:30 PM): Snap photos with the giant Ship\'s Cat sculpture on the 2F entrance deck, visit the 5F galleries (including Tomoko Konoike\'s interactive touch-and-sit installation), and browse the 1F design shop.',
-              'Stop B — The National Museum of Art, Osaka (10:00 AM – 5:00 PM; Last Entry 4:30 PM): Immediately next door; walk beneath its dramatic steel-and-bamboo-inspired sculpture down into the underground collection galleries (¥1,000 adult, free for under-18s).'
+              'Show your reservation QR/number at the door (booked 14 days prior on Wed, Dec 2 at 9:00 AM SGT).',
+              'Strict Rules: No coin lockers inside (keep bags with you), no eating (lidded water bottles only), no tripods/selfie sticks.'
+            ]
+          },
+          {
+            time: '3:05 PM – 4:50 PM',
+            title: 'Nakanoshima Museum of Art, Osaka (Closes 5:00 PM; Last Entry 4:30 PM)',
+            summary: 'Teal Keihan Nakanoshima Line 1 stop west to Watanabebashi Exit 2 elevator (or 5-min taxi) → giant Ship\'s Cat & 5F galleries.',
+            details: [
+              '3:05 PM – 3:30 PM (25 min buffer): Enter Keihan Naniwabashi Station (KH51 — TEAL / LIGHT BLUE Keihan Nakanoshima Line) westbound (toward Nakanoshima) 1 stop (2 min) to Watanabebashi Station (KH53) → Exit 2 (elevator) → 5 min walk west (or 5-min taxi ~¥800–¥1,000).',
+              '2F deck giant Ship\'s Cat sculpture, 5F galleries (interactive installations), and 1F design shop.'
             ],
             route: {
-              label: 'Transit: Book Forest → Nakanoshima Art Museum',
+              label: 'Transit: Book Forest → Nakanoshima Museum of Art',
               origin: 'Nakanoshima Children\'s Book Forest, Osaka',
               destination: 'Nakanoshima Museum of Art, Osaka',
               mode: 'transit'
-            },
-            secondaryRoute: {
-              label: 'Walk: Nakanoshima Art → National Art Museum',
-              origin: 'Nakanoshima Museum of Art, Osaka',
-              destination: 'The National Museum of Art, Osaka',
-              mode: 'walking'
             }
           },
           {
-            time: '5:00 PM – 7:30 PM',
-            title: 'OSAKA Hikari-Renaissance waterfront lights → go-with-the-flow dinner & pack bags',
-            summary: '5:00 PM waterfront lights outside museums, Midosuji Line back to Namba, final dinner & pack bags.',
+            time: '5:00 PM – 7:35 PM',
+            title: 'OSAKA Hikari-Renaissance Lights + Ramen Jikon Dinner + Subway Home',
+            summary: '5:00 PM river lights → Ramen Jikon at Nakanoshima Festival Plaza B1F (5:45–7:00 PM) → Brown Line from Kitahama home.',
             details: [
-              'Stepping out at 5:00 PM, you walk straight into OSAKA Hikari-Renaissance 2026 (running Dec 11 – Dec 25, 2026, lit from 5:00 PM) illuminating Nakanoshima\'s waterfront bridges and Osaka City Central Public Hall.',
-              'Walk 6 minutes south to Yodoyabashi Station (Midosuji Line, red line) for a 3-stop (6-minute) direct ride back to Namba Station, enjoy your final go-with-the-flow dinner, and pack your suitcases tonight.'
+              '5:00 PM – 5:45 PM: Stroll east along the illuminated Nakanoshima river promenade toward Osaka City Central Public Hall (lights turn on at 5:00 PM).',
+              '5:45 PM – 7:00 PM: Dinner at Ramen Jikon (Nakanoshima Festival Plaza B1F, 3-2-4 Nakanoshima — right beside Watanabebashi & the lights; open Wed 5:00–9:00 PM; ~¥950–¥1,200/bowl for mild clam-salt shio or soy shoyu ramen, plus casual udon/tonkatsu on the same B1F floor).',
+              '7:00 PM – 7:35 PM: Walk 6 min east to Kitahama Station (K14) → Osaka Metro Sakaisuji Line (BROWN — K14) southbound (toward Tengachaya) 3 stops (6 min) directly to Nippombashi Station (K17) → Exit 5 (elevator) → 5 min walk south to Caption (alternative: Red Midosuji Line from Yodoyabashi M17 → Namba M20).'
             ],
             route: {
-              label: 'Transit: Yodoyabashi → Caption Hotel',
-              origin: 'Yodoyabashi Station, Osaka',
+              label: 'Walk: Museum → Ramen Jikon (Festival Plaza B1F)',
+              origin: 'Nakanoshima Museum of Art, Osaka',
+              destination: 'Nakanoshima Festival Plaza, Osaka',
+              mode: 'walking'
+            },
+            secondaryRoute: {
+              label: 'Transit: Kitahama (Brown Line) → Caption Hotel',
+              origin: 'Kitahama Station, Osaka',
               destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka',
               mode: 'transit'
             }
@@ -1175,15 +1314,30 @@
         pillDay: 'Thu 17',
         pillSub: 'Fly Home',
         fullTitle: 'Day 5 — Thursday, December 17: 8:00 AM Checkout & 11:30 AM Flight Home (TR 881)',
-        area: 'KIX Airport',
-        strategy: 'Prompt Checkout & Cushion: Checking out at 8:00 AM sharp puts you on the 8:30 AM Nankai Rapi:t β arriving KIX T1 at 9:09 AM—2 hours 21 minutes before your 11:30 AM Scoot TR 881 departure (giving you over 80 minutes of cushion before Scoot\'s strict 60-minute / 10:30 AM bag-drop deadline for your two 20 kg bags).',
+        area: 'Namba → KIX T1 → SIN',
+        mustBring: [
+          'Physical passports (immigration & tax-free receipts)',
+          'Scoot TR 881 booking confirmation (EYC6JZ)',
+          'Phone with Digital ICOCA + portable charger',
+          'Two 20 kg checked suitcases (strict bag drop cutoff 10:30 AM)'
+        ],
+        directionsJp: [
+          {
+            badge: 'NANKAI NAMBA STATION',
+            label: 'South Exit 1F Elevator up to 3F North Ticket Gate (Rapi:t to KIX)',
+            jp: 'すみません、南海なんば駅の「3階北改札口（関西空港行きラピート乗り場）」へのエレベーターはどこですか？',
+            romaji: 'Sumimasen, Nankai Namba-eki no "Sangai Kita-kaisatsuguchi (Kansai-Kūkō-yuki Rapīto noriba)" e no erebētā wa doko desu ka?',
+            en: 'Excuse me, where is the elevator to Nankai Namba Station 3F North Ticket Gate for the Rapi:t to Kansai Airport?'
+          }
+        ],
         events: [
           {
             time: '7:25 AM – 7:55 AM',
-            title: 'Quick konbini breakfast run',
-            summary: 'Walk 3–4 minutes (260 m) south to 7-Eleven Nipponbashi 3-chome; eat upstairs at room table.',
+            title: 'Morning Konbini Breakfast Run (7-Eleven Nipponbashi 3-chome)',
+            summary: '3–4 min (260 m) flat walk south on Sakaisuji Ave; eat upstairs at your room table.',
             details: [
-              '7:25 AM – 7:55 AM | Walk 3–4 minutes (260 m) south down Sakaisuji Avenue to 7-Eleven Osaka Nipponbashi 3-chome (open 24 hours) for hot coffee, pastries, or onigiri, and eat upstairs at your room table (no outside food in Caption\'s lobby).'
+              'Walk 3–4 min (260 m) south down Sakaisuji Ave to 7-Eleven Osaka Nipponbashi 3-chome (open 24h) for coffee, pastries & onigiri.',
+              'Eat upstairs at your room table (outside food is not permitted in Caption\'s 1F lounge).'
             ],
             route: {
               label: 'Walk: Caption → 7-Eleven Nipponbashi 3-chome',
@@ -1194,14 +1348,15 @@
           },
           {
             time: '8:00 AM – 9:09 AM',
-            title: 'Hotel checkout → walk to Nankai Namba → 8:30 AM Rapi:t to KIX T1 (arrives 9:09 AM)',
-            summary: 'Check out at 8:00 AM sharp; walk 400 m flat west down Nansan-dori to Nankai Namba 3F North Gate.',
+            title: 'Prompt 8:00 AM Checkout → 8:30 AM Nankai Rapi:t β to KIX T1',
+            summary: 'Check out 8:00 AM sharp → walk 400 m west on Nansan-dori to Nankai Namba South Exit elevator up to 3F North Gate → 8:30 AM Rapi:t β.',
             details: [
-              '8:00 AM – 8:15 AM | Check out of Caption by Hyatt Namba Osaka at 8:00 AM sharp. Walk 400 meters (6–7 min with two 20 kg bags) straight west down Nansan-dori to Nankai Namba Station, take the elevator up to the 3F North Ticket Gate, and pick up your reserved Rapi:t tickets (or tap ICOCA for the Airport Express).',
-              '8:30 AM – 9:09 AM | Board the 8:30 AM Nankai Rapi:t β (weekday schedule), arriving directly at Kansai Airport Station (Terminal 1) at 9:09 AM (backup: the 8:15 AM Nankai Airport Express arrives at 9:00 AM).'
+              'Check out of Caption by Hyatt Namba Osaka at 8:00 AM sharp.',
+              'Walk 400 m (6–7 min flat with two 20 kg bags) straight west down Nansan-dori to Nankai Namba Station — South Exit (1F elevator up to 3F North Ticket Gate).',
+              'Board the 8:30 AM Nankai Rapi:t β (weekday schedule), arriving directly at Kansai Airport Station (Terminal 1) at 9:09 AM (backup: 8:15 AM Airport Express arrives 9:00 AM).'
             ],
             route: {
-              label: 'Walk: Caption → Nankai Namba Station (400m)',
+              label: 'Walk: Caption → Nankai Namba South Exit (400m)',
               origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka',
               destination: 'Nankai Namba Station, Osaka',
               mode: 'walking'
@@ -1215,15 +1370,16 @@
           },
           {
             time: '9:09 AM – 11:30 AM',
-            title: 'Scoot TR 881 departs KIX → lands SIN T1 at 5:30 PM',
-            summary: 'Arrives 9:09 AM (over 80 mins before 10:30 AM bag-drop cutoff). Scoot TR 881 (Seats 11D/11E) lands SIN T1 at 5:30 PM.',
+            title: 'KIX Terminal 1 Bag Drop, Security & Scoot TR 881 Home',
+            summary: 'Arrives 9:09 AM (80+ min cushion before 10:30 AM bag-drop cutoff); TR 881 (Seats 11D/11E) lands SIN T1 at 5:30 PM.',
             details: [
-              '9:09 AM – 11:30 AM | KIX Terminal 1 Bag Drop, Security & Flight Home: Arrives 2 hours 21 minutes before your 11:30 AM Scoot TR 881 departure (giving you over 80 minutes of cushion before Scoot\'s strict 60-minute / 10:30 AM bag-drop deadline for your two 20 kg bags), landing back at Singapore Changi Terminal 1 at 5:30 PM.'
+              'Drop two 20 kg checked bags before Scoot\'s strict 10:30 AM cutoff; TR 881 departs 11:30 AM and lands Singapore Changi Terminal 1 at 5:30 PM.'
             ]
           }
         ]
       }
     ];
+    // === ITINERARY_DAYS_END ===
 
     // 2. BOOKED USJ EXPRESS PASS 5 TRACKER (DAY 3 - RACE & MINION SPECIAL)
     const USJ_PASS5_RIDES = [
@@ -1246,70 +1402,70 @@
     const INITIAL_TASKS = [
       { id: 't-bookforest', title: 'Set Calendar Alert for Wed, Dec 2 at 9:00 AM SGT (10:00 AM JST)', desc: 'Reserve your free Wed, Dec 16 (13:30–15:00) session at Nakanoshima Children\'s Book Forest (kodomohonnomori-osaka.resv.jp).', done: false },
       { id: 't-legoland', title: 'Book LEGOLAND Discovery Center Osaka Online (1–2 weeks prior)', desc: 'Reserve timed entry for Mon, Dec 14 at 1:30 PM or 2:00 PM (after 2:00 PM gets the weekday afternoon discount).', done: false },
+      { id: 't-kidsplaza', title: 'Buy Kids Plaza Osaka Tickets in Advance (Online via Klook or KKday)', desc: 'Purchase 1 Adult + 1 Child mobile voucher before Wed, Dec 16 so you skip the 1F ticket counter queue on arrival.', done: false },
       { id: 't-flights', title: 'Scoot Flights Booked (EYC6JZ • TR 880 & TR 881)', desc: 'Confirmed: Seats 32B/32C outbound, 11D/11E return, 2x 20kg checked bags.', done: true },
       { id: 't-hyatt', title: 'Caption by Hyatt Namba Osaka Booked (#40023B32617210)', desc: 'Paid SGD 728.03: 1 Queen Bed City View, High Floor 10/11 & 11:00 AM arrival logged.', done: true },
       { id: 't-usj', title: 'USJ Tickets Booked via Klook (Tue, Dec 15)', desc: '1-Day Studio Passes (JNPMM/JNPMN) + 2x Express Pass 5: Race & Minion Special (102MV/102MW).', done: true }
     ];
 
-    // 5. GUIDE -> VENUE HOURS & CLOSURES (MATCHING DOC 100%)
+    // 5. GUIDE -> VENUE HOURS & CLOSURES (NATIONAL MUSEUM REMOVED)
     const VENUE_HOURS = [
-      { name: 'Kuromon Market', hours: 'Daily 9:00 AM – 6:00 PM (individual stalls vary; most close 5:00–5:30 PM)', cutoff: 'Best window: 9:00 AM – 2:00 PM', status: 'Open daily (a few fish stalls close Sundays)', tags: ['mon', 'wed'], nuance: 'Free entry; arrive at 12:15 PM Sunday for full seafood stock before afternoon wind-down.' },
+      { name: 'Kuromon Market', hours: 'Daily 9:00 AM – 6:00 PM (individual stalls vary; most close 5:00–5:30 PM)', cutoff: 'Best window: 9:00 AM – 2:00 PM', status: 'Open daily (a few fish stalls close Sundays)', tags: ['mon', 'wed'], nuance: 'Free entry; arrive at 1:00 PM Sunday for midday seafood grazing.' },
       { name: 'Shinsaibashi PARCO (6F) & Daimaru (9F)', hours: 'Retail: 10:00 AM – 8:00 PM | Dining floors: 11:00 AM – 10:00/11:00 PM', cutoff: 'Retail doors shut promptly at 8:00 PM', status: 'Open daily', tags: ['mon', 'wed'], nuance: 'Indoor & heated; 6F PARCO houses LEGO, SEGA, Godzilla, CAPCOM, Ghibli & Shin-chan; 9F Daimaru has Pokémon Center DX.' },
       { name: 'Midosuji Boulevard Illuminations', hours: 'Nightly 5:00 PM – 1:00 AM (Nov 3 – Dec 31, 2026)', cutoff: 'Lights stay on past midnight', status: 'Nightly', tags: ['mon', 'wed', 'night'], nuance: 'Free; 4 km of glowing ginkgo trees right beside Shinsaibashi-Suji.' },
       { name: 'LEGOLAND Discovery Center Osaka', hours: 'Mon–Fri: 10:00 AM – 6:00 PM | Sat–Sun: 10:00 AM – 7:00 PM', cutoff: 'Last entry: 4:00 PM on weekdays (3-hour timed stay limit)', status: 'Open Mon, Dec 14', tags: ['mon', 'wed'], nuance: 'No walk-up counter tickets—must buy online in advance. Adults can only enter with a child. Weekday entries after 2:00 PM save ~20% online.' },
       { name: 'Universal Studios Japan (USJ)', hours: '9:00 AM – 9:00 PM (gates often open 15–30 min early)', cutoff: 'Evening Christmas show at Gramercy Park starts ~5:30 PM', status: 'Open Tue, Dec 15 (Moderate crowds)', tags: ['mon', 'wed'], nuance: 'BOOKED (Klook): 1-Day Studio Passes (USJ-P1X000000JNPMM / JNPMN) + 2x Express Pass 5: Race & Minion Special (USJ-P1X000000102MV / 102MW). Timed slots: 11:20–12:20 Super Nintendo World™, 11:20–11:50 Mario Kart, 15:00–15:30 Villain-Con Minion Blast + untimed Minion Mayhem & JAWS. No re-entry; no outside food.' },
-      { name: 'Kids Plaza Osaka', hours: '9:30 AM – 5:00 PM', cutoff: 'Last entry: 4:15 PM', status: 'CLOSED Mon, Dec 14 (2nd Monday of month); Open Wed, Dec 16', tags: ['wed'], nuance: '¥1,500 adult / ¥500 preschooler (ages 3–5) or ¥800 age 6+. Walk-up tickets available; same-day re-entry allowed with stub.' },
+      { name: 'Kids Plaza Osaka', hours: '9:30 AM – 5:00 PM', cutoff: 'Last entry: 4:15 PM', status: 'CLOSED Mon, Dec 14 (2nd Monday of month); Open Wed, Dec 16', tags: ['wed'], nuance: '¥1,500 adult / ¥500 preschooler (ages 3–5) or ¥800 age 6+. Advance online vouchers (Klook/KKday) let you skip the 1F ticket queue; same-day re-entry allowed with stub.' },
       { name: 'Nakanoshima Children\'s Book Forest', hours: '9:30 AM – 5:00 PM (four 90-min sessions)', cutoff: 'Strict changeover: 9:30–11:00, 11:30–13:00, 13:30–15:00, 15:30–17:00', status: 'CLOSED Mondays; Open Wed, Dec 16', tags: ['wed'], nuance: 'Free admission. Online booking (100 slots/session) opens 14 days prior at 10:00 AM JST (9:00 AM SGT) = Wed, Dec 2 at 9:00 AM SGT (plus 50 walk-in spots 10 min before session).' },
       { name: 'Nakanoshima Museum of Art, Osaka', hours: '10:00 AM – 5:00 PM (Fri until 8:00 PM)', cutoff: 'Last entry: 4:30 PM', status: 'CLOSED Mondays; Open Wed, Dec 16', tags: ['wed'], nuance: 'Walk-in tickets on 2F; giant Ship\'s Cat sculpture sits outside on the 2F deck.' },
-      { name: 'The National Museum of Art, Osaka', hours: '10:00 AM – 5:00 PM (Fri until 8:00 PM)', cutoff: 'Last entry: 4:30 PM', status: 'CLOSED Mondays; Open Wed, Dec 16', tags: ['wed'], nuance: 'Collection gallery: ¥1,000 adult, free for under-18s; entirely underground below its steel-bamboo sculpture.' },
-      { name: 'OSAKA Hikari-Renaissance (Nakanoshima)', hours: 'Nightly 5:00 PM – 10:00 PM (Dec 11 – Dec 25, 2026)', cutoff: 'Lights turn on at 5:00 PM', status: 'Nightly during run', tags: ['mon', 'wed', 'night'], nuance: 'Free waterfront light installations right outside the museums/Book Forest on Wed, Dec 16.' }
+      { name: 'OSAKA Hikari-Renaissance (Nakanoshima)', hours: 'Nightly 5:00 PM – 10:00 PM (Dec 11 – Dec 25, 2026)', cutoff: 'Lights turn on at 5:00 PM', status: 'Nightly during run', tags: ['mon', 'wed', 'night'], nuance: 'Free waterfront light installations right outside Book Forest / Festival Plaza on Wed, Dec 16.' }
     ];
 
-    // 6. GUIDE -> ALL 28 DOOR-TO-DOOR GOOGLE MAPS ROUTES
+    // 6. GUIDE -> ALL 27 DOOR-TO-DOOR GOOGLE MAPS ROUTES
     const ALL_ROUTES = [
-      { day: 'hub', dayLabel: 'Hotel Hub', mode: 'walking', time: '6–7m (400m)', title: 'Nankai Namba Station ⇄ Caption by Hyatt', origin: 'Nankai Namba Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Flat walk straight down Nansan-dori; 1 crossing at Sakaisuji Ave; zero stairs via South/East elevator.' },
+      { day: 'hub', dayLabel: 'Hotel Hub', mode: 'walking', time: '6–8m (400m)', title: 'Nankai Namba South Exit ⇄ Caption by Hyatt', origin: 'Nankai Namba Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'South Exit (南口) 1F street-level elevator onto Nansan-dori; flat walk east across Sakaisuji Ave.' },
       { day: 'hub', dayLabel: 'Hotel Hub', mode: 'walking', time: '3–4m (260m)', title: 'Caption by Hyatt → 7-Eleven Nipponbashi 3-chome', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: '7-Eleven Osaka Nipponbashi 3-chome, Osaka', notes: '24-hour konbini straight south on Sakaisuji Ave.' },
       { day: 'hub', dayLabel: 'Hotel Hub', mode: 'walking', time: '4m (290m)', title: 'Caption by Hyatt → FamilyMart Nihonbashi 2-chome', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'FamilyMart Nihonbashi 2-chome, Osaka', notes: '24-hour konbini one block east behind the hotel.' },
 
-      { day: 'day1', dayLabel: 'Day 1', mode: 'transit', time: '35m', title: 'KIX Terminal 1 → Nankai Namba Station', origin: 'Kansai International Airport Terminal 1, Osaka', destination: 'Nankai Namba Station, Osaka', notes: 'Nankai Rapi:t β at 11:05 AM or 11:35 AM (¥1,490 adult; Ethan free on lap).' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '6–7m (400m)', title: 'Nankai Namba → Caption by Hyatt (Bag Drop)', origin: 'Nankai Namba Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Elevator to street level; walk flat east down Nansan-dori.' },
+      { day: 'day1', dayLabel: 'Day 1', mode: 'transit', time: '39m', title: 'KIX Terminal 1 → Nankai Namba Station', origin: 'Kansai International Airport Terminal 1, Osaka', destination: 'Nankai Namba Station, Osaka', notes: 'Sunday/Holiday Nankai Rapi:t β at 11:35 AM or 12:05 PM Rapi:t α (¥1,490 adult; Ethan free on lap).' },
+      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '6–8m (400m)', title: 'Nankai Namba South Exit → Caption by Hyatt', origin: 'Nankai Namba Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'South Exit (南口) 1F elevator onto Nansan-dori; flat walk east to hotel.' },
       { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '2m (190m)', title: 'Caption by Hyatt → Kuromon Market', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Kuromon Market, Osaka', notes: 'Cross Sakaisuji Ave straight into the covered seafood arcade.' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '8m', title: 'Kuromon Market → Shinsaibashi PARCO & Daimaru', origin: 'Kuromon Market, Osaka', destination: 'Shinsaibashi PARCO, Osaka', notes: 'Glass-roofed Shinsaibashi-Suji arcade to PARCO (6F Pop-Culture & 9F-11F Hands) & Daimaru (9F Pokémon DX & Shoes).' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '10m', title: 'Shinsaibashi PARCO → Caption Hotel (Pit Stop)', origin: 'Shinsaibashi PARCO, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Optional 3:30 PM stop for room key & coats without napping.' },
+      { day: 'day1', dayLabel: 'Day 1', mode: 'transit', time: '10m', title: 'Nippombashi Exit 5 → Shinsaibashi PARCO', origin: 'Nippombashi Station, Osaka', destination: 'Shinsaibashi PARCO, Osaka', notes: 'Brown Sakaisuji Line 1 stop north to Nagahoribashi (K16) → Crysta Nagahori indoor walk into PARCO.' },
+      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '10m', title: 'Shinsaibashi PARCO → Caption Hotel (Pit Stop)', origin: 'Shinsaibashi PARCO, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Optional 3:30 PM stop for room key & coats.' },
       { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '7–8m', title: 'Caption by Hyatt → Dotonbori Glico Sign', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Dotonbori Glico Sign, Ebisu Bridge, Osaka', notes: '5:00 PM sunset neon canal walk.' },
       { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '3m', title: 'Dotonbori Canal → Midosuji Illuminations', origin: 'Dotonbori Glico Sign, Osaka', destination: 'Midosuji Boulevard, Shinsaibashi, Osaka', notes: '4 km of glowing ginkgo trees lit 5:00 PM – 1:00 AM.' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '8–10m', title: 'Dotonbori / Midosuji → Caption by Hyatt', origin: 'Dotonbori, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Return by 7:30–8:00 PM for sleep reset.' },
+      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '8–10m', title: 'Dotonbori / Midosuji → Caption by Hyatt', origin: 'Dotonbori, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Walk back to Caption by 7:30–8:00 PM.' },
 
-      { day: 'day2', dayLabel: 'Day 2', mode: 'walking', time: '4m (300m)', title: 'Caption by Hyatt → Nippombashi Station', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Nippombashi Station, Osaka', notes: 'Osaka Metro Sakaisuji Line entrance.' },
-      { day: 'day2', dayLabel: 'Day 2', mode: 'transit', time: '18m', title: 'Nippombashi → Osakako Station (Bay)', origin: 'Nippombashi Station, Osaka', destination: 'Osakako Station, Osaka', notes: 'Sakaisuji Line 1 stop north → Chuo Line 7 stops west to Osakako Exit 1.' },
-      { day: 'day2', dayLabel: 'Day 2', mode: 'walking', time: '5m', title: 'Osakako Exit 1 → LEGOLAND / Tempozan', origin: 'Osakako Station, Osaka', destination: 'LEGOLAND Discovery Center Osaka, Tempozan Marketplace', notes: 'Elevator at Exit 1; walk north into Tempozan Marketplace 2F/3F.' },
-      { day: 'day2', dayLabel: 'Day 2', mode: 'transit', time: '25m', title: 'LEGOLAND (Tempozan) → Caption by Hyatt', origin: 'LEGOLAND Discovery Center Osaka, Tempozan Marketplace', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Chuo Line → Sakaisuji Line back to Nippombashi.' },
+      { day: 'day2', dayLabel: 'Day 2', mode: 'walking', time: '5m (300m)', title: 'Caption by Hyatt → Nippombashi Exit 5', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Nippombashi Station, Osaka', notes: 'Exit 5 (or Higashi / East Gate elevator) for Brown Sakaisuji Line.' },
+      { day: 'day2', dayLabel: 'Day 2', mode: 'transit', time: '18m', title: 'Nippombashi → Osakako Station (Bay)', origin: 'Nippombashi Station, Osaka', destination: 'Osakako Station, Osaka', notes: 'Brown Sakaisuji Line 1 stop north (K15) → Green Chuo Line 7 stops west to Osakako (C11) Exit 1 elevator.' },
+      { day: 'day2', dayLabel: 'Day 2', mode: 'walking', time: '5–8m', title: 'Osakako Exit 1 → LEGOLAND / Tempozan', origin: 'Osakako Station, Osaka', destination: 'LEGOLAND Discovery Center Osaka, Tempozan Marketplace', notes: 'Elevator at Exit 1; walk north into Tempozan Marketplace 2F/3F.' },
+      { day: 'day2', dayLabel: 'Day 2', mode: 'transit', time: '25m', title: 'Osakako Exit 1 → Nippombashi Exit 5', origin: 'Osakako Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Green Chuo Line eastbound (7 stops to C17) → Brown Sakaisuji Line southbound (1 stop to K17 Exit 5).' },
 
-      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'walking', time: '4m (300m)', title: 'Caption by Hyatt → Kintetsu-Nippombashi', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Kintetsu-Nippombashi Station, Osaka', notes: '7:50 AM departure walk.' },
-      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'transit', time: '18–20m', title: 'Kintetsu-Nippombashi → Universal City Station', origin: 'Kintetsu-Nippombashi Station, Osaka', destination: 'Universal City Station, Osaka', notes: 'Hanshin Namba Line (4 stops) to Nishikujo → JR Yumesaki Line (2 stops).' },
-      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'walking', time: '3m', title: 'Universal City Station → USJ Gates', origin: 'Universal City Station, Osaka', destination: 'Universal Studios Japan, Osaka', notes: 'Walk straight through Universal CityWalk.' },
-      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'transit', time: '25–30m', title: 'Universal Studios Japan → Caption by Hyatt', origin: 'Universal Studios Japan, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'JR Yumesaki Line → Nishikujo → Hanshin Namba Line back.' },
+      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'walking', time: '3m', title: 'Caption → Yayoi-ken Nipponbashi (Breakfast)', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Yayoi-ken Nipponbashi, 1-21-23 Nipponbashi, Chuo-ku, Osaka', notes: '8:15 AM warm Japanese breakfast sets before 9:30 AM USJ train.' },
+      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'transit', time: '20m', title: 'Kintetsu-Nippombashi → Universal City Station', origin: 'Kintetsu-Nippombashi Station, Osaka', destination: 'Universal City Station, Osaka', notes: 'Hanshin Blue Line westbound (5 stops to Nishikujo) → Tap out/in JR Platform 3 Navy Blue Line (2 stops).' },
+      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'walking', time: '5–10m', title: 'Universal City Station → USJ Gates', origin: 'Universal City Station, Osaka', destination: 'Universal Studios Japan, Osaka', notes: 'Exit main gate, turn left, walk through Universal CityWalk.' },
+      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'transit', time: '25m', title: 'Universal City → Kintetsu-Nippombashi Exit 5', origin: 'Universal City Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'JR Navy Blue Line (2 stops to Nishikujo) → Tap out/in Hanshin Blue/Red Line toward Nara (5 stops).' },
 
-      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '15m', title: 'Caption by Hyatt → Kids Plaza Osaka', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Kids Plaza Osaka, Ogimachi, Osaka', notes: 'Sakaisuji Line 5 stops north to Ogimachi Exit 2 elevator.' },
+      { day: 'day4', dayLabel: 'Day 4', mode: 'walking', time: '5m', title: 'Caption → Caffè Veloce Nansan-dori (Breakfast)', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Caffe Veloce Namba Nansan-dori, 2-1-18 Nambanaka, Naniwa-ku, Osaka', notes: 'Flat walk west on Nansan-dori; opens 7:00 AM.' },
+      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '15m', title: 'Nippombashi Exit 5 → Kids Plaza (Ogimachi Exit 2)', origin: 'Nippombashi Station, Osaka', destination: 'Kids Plaza Osaka, Ogimachi, Osaka', notes: 'Brown Sakaisuji Line 5 stops north to Ogimachi (K12) Exit 2 elevator.' },
       { day: 'day4', dayLabel: 'Day 4', mode: 'walking', time: '1m', title: 'Kids Plaza → Tenjinbashisuji Covered Arcade', origin: 'Kids Plaza Osaka, Ogimachi, Osaka', destination: 'Tenjinbashisuji Shopping Street, Osaka', notes: 'Step immediately next door for warm lunch.' },
-      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '10m', title: 'Ogimachi → Nakanoshima Children\'s Book Forest', origin: 'Ogimachi Station, Osaka', destination: 'Nakanoshima Children\'s Book Forest, Osaka', notes: 'Sakaisuji Line 2 stops south to Kitahama Exit 26 + 4m bridge walk.' },
-      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '6m', title: 'Book Forest → Nakanoshima Museum of Art', origin: 'Nakanoshima Children\'s Book Forest, Osaka', destination: 'Nakanoshima Museum of Art, Osaka', notes: 'Keihan Nakanoshima Line 1 stop west to Watanabebashi Exit 2 (or ¥800 taxi).' },
-      { day: 'day4', dayLabel: 'Day 4', mode: 'walking', time: '1m', title: 'Nakanoshima Art → National Museum of Art', origin: 'Nakanoshima Museum of Art, Osaka', destination: 'The National Museum of Art, Osaka', notes: 'Adjacent plazas on West Nakanoshima.' },
-      { day: 'day4', dayLabel: 'Day 4', mode: 'walking', time: '8m', title: 'Art Museums → OSAKA Hikari-Renaissance', origin: 'The National Museum of Art, Osaka', destination: 'Osaka City Central Public Hall, Nakanoshima', notes: 'Waterfront illuminations lit from 5:00 PM.' },
-      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '15m', title: 'Yodoyabashi Station → Caption by Hyatt', origin: 'Yodoyabashi Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Midosuji Line (red line) 3 stops direct to Namba.' },
+      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '12m', title: 'Ogimachi Exit 2 → Nakanoshima Book Forest', origin: 'Ogimachi Station, Osaka', destination: 'Nakanoshima Children\'s Book Forest, Osaka', notes: 'Brown Sakaisuji Line 2 stops south to Kitahama (K14) Exit 26 or Naniwabashi Exit 2/3 elevator.' },
+      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '8m', title: 'Book Forest → Nakanoshima Museum of Art', origin: 'Nakanoshima Children\'s Book Forest, Osaka', destination: 'Nakanoshima Museum of Art, Osaka', notes: 'Teal Keihan Nakanoshima Line 1 stop west to Watanabebashi Exit 2 elevator (or ~¥800 taxi).' },
+      { day: 'day4', dayLabel: 'Day 4', mode: 'walking', time: '5m', title: 'Art Museum → Ramen Jikon (Festival Plaza B1F)', origin: 'Nakanoshima Museum of Art, Osaka', destination: 'Nakanoshima Festival Plaza, Osaka', notes: 'Walk east along OSAKA Hikari-Renaissance waterfront lights to Festival Plaza B1F.' },
+      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '15m', title: 'Kitahama (Brown Line) → Nippombashi Exit 5', origin: 'Kitahama Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Brown Sakaisuji Line 3 stops south directly to Nippombashi Exit 5 (or Red Midosuji Line from Yodoyabashi).' },
 
-      { day: 'day5', dayLabel: 'Day 5 KIX', mode: 'walking', time: '6–7m (400m)', title: '8:00 AM Checkout: Caption → Nankai Namba', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Nankai Namba Station, Osaka', notes: 'Flat walk west down Nansan-dori → elevator to 3F North Ticket Gate.' },
+      { day: 'day5', dayLabel: 'Day 5 KIX', mode: 'walking', time: '6–7m (400m)', title: '8:00 AM Checkout: Caption → Nankai Namba South Exit', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Nankai Namba Station, Osaka', notes: 'Flat walk west on Nansan-dori → South Exit 1F elevator up to 3F North Ticket Gate.' },
       { day: 'day5', dayLabel: 'Day 5 KIX', mode: 'transit', time: '39m', title: 'Nankai Namba → KIX T1 (8:30 AM Rapi:t β)', origin: 'Nankai Namba Station, Osaka', destination: 'Kansai International Airport Terminal 1, Osaka', notes: 'Arrives KIX T1 at 9:09 AM for 11:30 AM Scoot TR 881.' }
     ];
 
-    // 7. JAPANESE BILINGUAL SHOW-CARDS
+    // 7. JAPANESE STATION & LANDMARK SHOW-CARDS (WALLET TAB)
     const JP_PHRASES = {
-      hotel: {
-        badge: 'CAPTION BY HYATT FRONT DESK',
-        title: 'High Floor (10/11) + 11:00 AM Bag Drop',
-        jp: '予約番号 #40023B32617210（WANG HEPING）です。\n高層階（10階または11階）で、見晴らしの良い街側の静かな部屋をお願いできますか？\nチェックイン前ですが、荷物を預かっていただけますか？ありがとうございます。',
-        romaji: 'Yoyaku bangō #40023B32617210 (Wang Heping) desu. Kōsōkai (10-kai matawa 11-kai) de, miharashi no yoi machigawa no shizuka na heya wo onegai dekimasu ka? Chekku-in mae desu ga, nimotsu wo azukatte itadakemasu ka?',
-        en: 'Reservation #40023B32617210 (MR HEPING WANG). May we please have a quiet room on a high floor (Floor 10 or 11) with an unblocked city view, and leave our bags before check-in?'
+      namba_exit: {
+        badge: 'NANKAI NAMBA STATION',
+        title: 'South Exit (南口) 1F Elevator → Nansan-dori / Hotel',
+        jp: 'すみません、南海なんば駅の「南口（なんさん通り方面）」の1階エレベーターはどこですか？\n（「キャプション by Hyatt なんば 大阪」へ行きたいです）',
+        romaji: 'Sumimasen, Nankai Namba-eki no "Minami-guchi (Nansan-dōri hōmen)" no ikkai erebētā wa doko desu ka? ("Caption by Hyatt Namba Osaka" e ikitai desu.)',
+        en: 'Excuse me, where is the 1F street-level elevator for Nankai Namba Station\'s South Exit toward Nansan-dori? (We are going to Caption by Hyatt Namba Osaka.)'
       },
       yoji: {
         badge: 'TRAIN & SUBWAY STATION GATE',
@@ -1318,19 +1474,19 @@
         romaji: 'Kono ko wa roku-sai desu ga, mada shōgakkō nyūgaku mae (mishūgakuji / yōji) desu. Otona ichi-mei to issho ni jōsha shimasu.',
         en: 'This child is 6 years old, but has not yet entered elementary school (preschooler / Yōji class), riding together with 1 paying adult.'
       },
-      rapit: {
-        badge: 'NANKAI TICKET COUNTER',
-        title: 'Nankai Rapi:t Limited Express Ticket',
-        jp: '次のラピート（なんば ⇄ 関西空港）の特急券を大人1枚お願いします。\n（※6歳の未就学児1名は膝の上に乗せます）',
-        romaji: 'Tsugi no Rapīto no tokkyūken wo otona ichi-mai onegaishimasu. (Roku-sai no mishūgakuji ichi-mei wa hiza no ue ni nosemasu.)',
-        en: 'One adult ticket for the next Nankai Rapi:t Limited Express, please. (My 6-year-old preschooler will sit on my lap.)'
+      usj_nishikujo: {
+        badge: 'NISHIKUJO TRANSFER (DAY 3 USJ)',
+        title: 'JR Nishikujo Gate & Platform 3 (JR Yumesaki Line)',
+        jp: 'すみません、西九条駅で「JRゆめ咲線（3番のりば・ユニバーサルシティ方面）」の改札はどこですか？',
+        romaji: 'Sumimasen, Nishikujō-eki de "JR Yumesaki-sen (Sanban-noriba / Yunibāsaru Shiti hōmen)" no kaisatsu wa doko desu ka?',
+        en: 'Excuse me, where is the ticket gate at Nishikujo for JR Yumesaki Line Platform 3 toward Universal City?'
       },
-      taxi: {
-        badge: 'TAXI DRIVER (DAY 4 • 3:05 PM)',
-        title: 'To Nakanoshima Museum of Art',
-        jp: '大阪中之島美術館（北区中之島4-3-1）までお願いします。',
-        romaji: 'Ōsaka Nakanoshima Bijutsukan (Kita-ku Nakanoshima 4-3-1) made onegaishimasu.',
-        en: 'Please take us to the Nakanoshima Museum of Art, Osaka (4-3-1 Nakanoshima, Kita-ku).'
+      nakanoshima_landmarks: {
+        badge: 'DAY 4 KITA & NAKANOSHIMA',
+        title: 'Kids Plaza, Book Forest & Nakanoshima Museum of Art',
+        jp: 'すみません、「キッズプラザ大阪」（扇町駅 2番出口）／「こども本の森 中之島」／「大阪中之島美術館」はどちらですか？',
+        romaji: 'Sumimasen, "Kizzu Puraza Ōsaka" (Ōgimachi-eki Niban-deguchi) / "Kodomo Hon no Mori Nakanoshima" / "Ōsaka Nakanoshima Bijutsukan" wa dochira desu ka?',
+        en: 'Excuse me, which way is Kids Plaza Osaka (Ogimachi Exit 2) / Nakanoshima Children\'s Book Forest / Nakanoshima Museum of Art?'
       }
     };
 
@@ -1339,7 +1495,7 @@
       scoot: 'Scoot Flights Itinerary (EYC6JZ)',
       usj_studio: 'USJ 1-Day Studio Passes (JNPMM / JNPMN)',
       usj_express: 'USJ Express Pass 5 (102MV / 102MW)',
-      osaka: 'Master Osaka.pdf (13-Page Reference)'
+      osaka: 'Master Osaka.pdf (Reference Plan)'
     };
 
     // STATE
@@ -1431,7 +1587,7 @@
     }
 
     // ========================================================
-    // TAB 1: PLAN (BREATHABLE PROGRESSIVE DISCLOSURE)
+    // TAB 1: PLAN (RED PASSPORT CARD + CLEAN DETAILS + JP CARDS)
     // ========================================================
     function renderDayPills() {
       const container = document.getElementById('day-pills-container');
@@ -1455,6 +1611,36 @@
       renderDayPills();
       renderPlanDay();
       lucide.createIcons();
+    }
+
+    function scrollToDayDirections() {
+      switchMainTab('plan');
+      setTimeout(() => {
+        const el = document.getElementById('day-directions-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 60);
+    }
+
+    function openDayDirection(idx) {
+      const day = ITINERARY_DAYS.find(d => d.id === activeDayId);
+      if (!day || !day.directionsJp || !day.directionsJp[idx]) return;
+      const d = day.directionsJp[idx];
+      document.getElementById('fs-modal-badge').textContent = d.badge || 'SHOW TO STATION STAFF / LOCAL';
+      document.getElementById('fs-modal-title').textContent = d.label;
+      document.getElementById('fs-modal-body').innerHTML = `
+        <div class="p-4 rounded-2xl bg-stone-100 space-y-3">
+          <div class="text-xl font-bold leading-relaxed text-slate-950 whitespace-pre-line">${d.jp}</div>
+          <div class="text-xs italic text-slate-600 border-t border-stone-200 pt-2.5">${d.romaji}</div>
+          <div class="text-xs text-slate-700 border-t border-stone-200 pt-2.5 leading-relaxed">${d.en}</div>
+        </div>
+      `;
+      document.getElementById('fullscreen-modal').classList.remove('hidden');
+    }
+
+    function copyDayDirection(idx) {
+      const day = ITINERARY_DAYS.find(d => d.id === activeDayId);
+      if (!day || !day.directionsJp || !day.directionsJp[idx]) return;
+      copyText(day.directionsJp[idx].jp, 'Japanese phrase');
     }
 
     function renderPlanDay() {
@@ -1497,32 +1683,41 @@
             </div>
 
             <p class="text-xs text-slate-500 dark:text-slate-400 pt-1">
-              Skipped: <em>Forbidden Journey™</em> (122 cm min) and all rollercoasters (<em>Mine-Cart Madness™</em>, <em>Flight of the Hippogriff™</em>).
+              Skipped: <em>Forbidden Journey™</em> (122 cm min) and rollercoasters (<em>Mine-Cart Madness™</em>, <em>Flight of the Hippogriff™</em>).
             </p>
           </div>
         `;
       }
 
+      const mustBringList = day.mustBring || [
+        'Physical passport (10% tax-free shopping & ID)',
+        'Phone with Digital ICOCA + portable charger'
+      ];
+
       const container = document.getElementById('plan-day-container');
       container.innerHTML = `
-        <div class="px-1 space-y-2">
-          <div class="flex items-baseline justify-between gap-2">
-            <h2 class="text-base font-bold tracking-tight text-slate-900 dark:text-white">${day.fullTitle}</h2>
+        <!-- RED BACKGROUND DAILY PASSPORT & MUST-BRING CARD -->
+        <div class="rounded-3xl bg-red-600 text-white p-4 shadow-float border border-red-500 space-y-2">
+          <div class="flex items-center gap-2 font-extrabold text-xs uppercase tracking-wider">
+            <span>🛂</span>
+            <span>Daily Must-Bring: Physical Passport + Essentials</span>
           </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400">${day.area}</p>
+          <p class="text-xs text-red-100 leading-snug">
+            Carry your physical passport every day for 10% tax-free shopping (¥5,500+) and ID checks.
+          </p>
+          <ul class="space-y-1 text-xs font-medium text-white pt-1 border-t border-red-500/70">
+            ${mustBringList.map(item => `
+              <li class="flex items-start gap-2">
+                <span class="text-red-200 font-bold">✓</span>
+                <span>${item}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
 
-          <div class="bg-white dark:bg-slate-900 rounded-2xl px-4 py-2.5 shadow-editorial dark:border dark:border-slate-800/80">
-            <button onclick="toggleDetails('day-strategy-box', this)" class="w-full flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-200">
-              <span class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                Day strategy & pacing note
-              </span>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform duration-200"></i>
-            </button>
-            <div id="day-strategy-box" class="hidden pt-2 mt-2 border-t border-stone-100 dark:border-slate-800 text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed">
-              ${day.strategy}
-            </div>
-          </div>
+        <div class="px-1 space-y-1">
+          <h2 class="text-base font-bold tracking-tight text-slate-900 dark:text-white">${day.fullTitle}</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">${day.area}</p>
         </div>
 
         ${usjTrackerHtml}
@@ -1555,7 +1750,7 @@
 
                 <div class="pt-1">
                   <button onclick="toggleDetails('${detailId}', this)" class="w-full pt-2.5 border-t border-stone-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
-                    <span>More details & nuances</span>
+                    <span>Station exits, links & essential details</span>
                     <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i>
                   </button>
 
@@ -1564,7 +1759,7 @@
                       ${ev.details.map(line => `
                         <li class="flex items-start gap-2.5">
                           <span class="text-rose-500 font-bold mt-0.5">•</span>
-                          <span>${line}</span>
+                          <span>${linkifyText(line)}</span>
                         </li>
                       `).join('')}
                     </ul>
@@ -1588,6 +1783,33 @@
             `;
           }).join('')}
         </div>
+
+        <!-- JAPANESE STATION & LANDMARK DIRECTION SHOW-CARDS FOR THIS DAY -->
+        ${day.directionsJp && day.directionsJp.length ? `
+          <div id="day-directions-section" class="bg-amber-50/90 dark:bg-slate-900 rounded-3xl p-4 border border-amber-200/90 dark:border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-amber-800 dark:text-amber-400">
+                🗣️ Ask for Directions (Tap Card to Zoom for Staff)
+              </span>
+            </div>
+            <div class="space-y-2.5">
+              ${day.directionsJp.map((d, dIdx) => `
+                <div onclick="openDayDirection(${dIdx})" class="cursor-pointer rounded-2xl bg-white dark:bg-slate-800/90 p-3.5 border border-amber-200/80 dark:border-slate-700 hover:border-amber-400 transition">
+                  <div class="flex items-center justify-between gap-2 mb-1">
+                    <span class="text-[11px] font-bold text-amber-700 dark:text-amber-300">${d.label}</span>
+                    <button
+                      type="button"
+                      onclick="event.stopPropagation(); copyDayDirection(${dIdx});"
+                      class="px-2 py-0.5 rounded bg-stone-100 dark:bg-slate-700 text-[11px] font-semibold text-slate-700 dark:text-slate-200 shrink-0"
+                    >Copy JP</button>
+                  </div>
+                  <p class="text-sm font-bold text-slate-900 dark:text-white leading-snug">${d.jp}</p>
+                  <p class="text-[11.5px] text-slate-500 dark:text-slate-400 mt-1">${d.en}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
       `;
     }
 

@@ -496,20 +496,17 @@
           </button>
         </div>
 
-        <!-- GUIDE SUB-VIEW 1: LIVE OSAKA WEATHER & LAYERING -->
+        <!-- GUIDE SUB-VIEW 1: AUTO-UPDATED LIVE OSAKA WEATHER -->
         <div id="guide-view-weather" class="space-y-4">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
             <div class="flex items-start justify-between">
               <div>
                 <div class="flex items-center gap-1.5">
                   <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                  <span class="text-xs font-medium text-slate-500 dark:text-slate-400">Live Osaka Telemetry</span>
+                  <span class="text-xs font-medium text-slate-500 dark:text-slate-400">Auto-Updated Osaka Weather</span>
                 </div>
                 <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-0.5">Osaka-shi, Japan</h2>
               </div>
-              <button onclick="fetchOsakaWeather(true)" class="p-2 rounded-full bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-rose-600 transition" title="Refresh Weather">
-                <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-              </button>
             </div>
 
             <div class="flex items-baseline justify-between">
@@ -531,35 +528,24 @@
             </div>
           </div>
 
-          <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
-            <div>
-              <span class="text-xs font-semibold uppercase tracking-wider text-rose-600">Dec 13–17 Packing & Layering</span>
-              <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-0.5">Daytime (10–12°C) vs. Evening (4–5°C)</h3>
-            </div>
+          <!-- LIVE ACTUAL DAYTIME VS. NIGHTTIME TEMPERATURES -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-3">
+            <h3 class="text-[15px] font-bold text-slate-900 dark:text-white">Daytime vs. Nighttime</h3>
 
             <div class="grid grid-cols-2 gap-3">
               <div class="p-3.5 rounded-2xl bg-stone-50 dark:bg-slate-800/60">
                 <div class="text-xs font-semibold text-amber-600 dark:text-amber-400">☀️ Daytime</div>
-                <div class="text-lg font-bold font-mono mt-0.5">10°C – 12°C</div>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Crisp & dry. Indoor malls, LEGOLAND & Kids Plaza are heated (22°C+).</p>
+                <div id="weather-day-temp" class="text-lg font-bold font-mono mt-1 text-slate-900 dark:text-white">--°C</div>
               </div>
               <div class="p-3.5 rounded-2xl bg-stone-50 dark:bg-slate-800/60">
-                <div class="text-xs font-semibold text-indigo-600 dark:text-indigo-400">🌙 After 4:50 PM</div>
-                <div class="text-lg font-bold font-mono mt-0.5">4°C – 5°C</div>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Brisk wind along Dotonbori Canal, USJ Bay & Nakanoshima rivers.</p>
+                <div class="text-xs font-semibold text-indigo-600 dark:text-indigo-400">🌙 Nighttime</div>
+                <div id="weather-night-temp" class="text-lg font-bold font-mono mt-1 text-slate-900 dark:text-white">--°C</div>
               </div>
             </div>
-
-            <ul class="space-y-2 text-[13.5px] text-slate-600 dark:text-slate-300">
-              <li>• <strong>Peelable Layers:</strong> Breathable base + fleece/sweater + zip puffer for indoor/outdoor transitions.</li>
-              <li>• <strong>Day 1 (3:30 PM Pit Stop):</strong> Pick up room key & heavy coats at Caption after PARCO before the 5:00 PM lights.</li>
-              <li>• <strong>Day 2 Mandatory Socks:</strong> Required for Ethan inside LEGOLAND's LEGO City Play Zone.</li>
-              <li>• <strong>Day 3 USJ Bay Breeze:</strong> Bring beanie, scarf/neck gaiter & pocket hand-warmers (<em>kairo</em>).</li>
-            </ul>
           </div>
         </div>
 
-        <!-- GUIDE SUB-VIEW 2: VENUE HOURS & CLOSURES (DEC 13-17) -->
+        <!-- GUIDE SUB-VIEW 2: VENUE HOURS (OPEN HOURS ONLY) -->
         <div id="guide-view-hours" class="hidden space-y-3">
           <div class="space-y-2.5">
             <div class="relative">
@@ -816,16 +802,6 @@
         // Silently retain cached FX rate when offline
       }
     }
-
-    // Auto-sync FX when app returns to foreground or comes back online
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
-        fetchJpyToSgdRate(false);
-      }
-    });
-    window.addEventListener('online', () => {
-      fetchJpyToSgdRate(true);
-    });
 
     // ========================================================
     // 1. COMPLETE 5-DAY ITINERARY DATA (ADHD-PACED & DETAILED)
@@ -1395,17 +1371,17 @@
       { id: 'qr-usj-studio', title: 'USJ 1-Day Studio Pass', subtitle: 'JNPMM / JNPMN • Tue Dec 15', tag: 'USJ STUDIO', code: 'P:1302.0.261121.21657', fullWidth: true }
     ];
 
-    // 4. GUIDE -> VENUE HOURS & CLOSURES
+    // 4. GUIDE -> VENUE OPEN HOURS ONLY (NO CLOSED HOURS LABELS)
     const VENUE_HOURS = [
-      { name: 'Kuromon Market', hours: 'Daily 9:00 AM – 6:00 PM (individual stalls vary; most close 5:00–5:30 PM)', cutoff: 'Best window: 9:00 AM – 2:00 PM', status: 'Open daily (a few fish stalls close Sundays)', tags: ['mon', 'wed'], nuance: 'Free entry; arrive at 1:00 PM Sunday for midday seafood grazing.' },
+      { name: 'Kuromon Market', hours: 'Daily 9:00 AM – 6:00 PM (individual stalls vary; most close 5:00–5:30 PM)', cutoff: 'Best window: 9:00 AM – 2:00 PM', status: 'Open daily', tags: ['mon', 'wed'], nuance: 'Free entry; arrive at 1:00 PM Sunday for midday seafood grazing.' },
       { name: 'Shinsaibashi PARCO (6F) & Daimaru (9F)', hours: 'Retail: 10:00 AM – 8:00 PM | Dining floors: 11:00 AM – 10:00/11:00 PM', cutoff: 'Retail doors shut promptly at 8:00 PM', status: 'Open daily', tags: ['mon', 'wed'], nuance: 'Indoor & heated; 6F PARCO houses LEGO, SEGA, Godzilla, CAPCOM, Ghibli & Shin-chan; 9F Daimaru has Pokémon Center DX.' },
-      { name: 'Midosuji Boulevard Illuminations', hours: 'Nightly 5:00 PM – 1:00 AM (Nov 3 – Dec 31, 2026)', cutoff: 'Lights stay on past midnight', status: 'Nightly', tags: ['mon', 'wed', 'night'], nuance: 'Free; 4 km of glowing ginkgo trees right beside Shinsaibashi-Suji.' },
-      { name: 'LEGOLAND Discovery Center Osaka', hours: 'Mon–Fri: 10:00 AM – 6:00 PM | Sat–Sun: 10:00 AM – 7:00 PM', cutoff: 'Last entry: 4:00 PM on weekdays (3-hour timed stay limit)', status: 'Open Mon, Dec 14', tags: ['mon', 'wed'], nuance: 'No walk-up counter tickets—must buy online in advance. Adults can only enter with a child. Weekday entries after 2:00 PM save ~20% online.' },
-      { name: 'Universal Studios Japan (USJ)', hours: '9:00 AM – 9:00 PM (gates often open 15–30 min early)', cutoff: 'Evening Christmas show at Gramercy Park starts ~5:30 PM', status: 'Open Tue, Dec 15 (Moderate crowds)', tags: ['mon', 'wed'], nuance: 'BOOKED (Klook): 1-Day Studio Passes (USJ-P1X000000JNPMM / JNPMN) + 2x Express Pass 5: Race & Minion Special (USJ-P1X000000102MV / 102MW). Timed slots: 11:20–12:20 Super Nintendo World™, 11:20–11:50 Mario Kart, 15:00–15:30 Villain-Con Minion Blast + untimed Minion Mayhem & JAWS. No re-entry; no outside food.' },
-      { name: 'Kids Plaza Osaka', hours: '9:30 AM – 5:00 PM', cutoff: 'Last entry: 4:15 PM', status: 'CLOSED Mon, Dec 14 (2nd Monday of month); Open Wed, Dec 16', tags: ['wed'], nuance: '¥1,500 adult / ¥500 preschooler (ages 3–5) or ¥800 age 6+. Advance online vouchers (Klook/KKday) let you skip the 1F ticket queue; same-day re-entry allowed with stub.' },
-      { name: 'Nakanoshima Children\'s Book Forest', hours: '9:30 AM – 5:00 PM (four 90-min sessions)', cutoff: 'Strict changeover: 9:30–11:00, 11:30–13:00, 13:30–15:00, 15:30–17:00', status: 'CLOSED Mondays; Open Wed, Dec 16', tags: ['wed'], nuance: 'Free admission. Online booking (100 slots/session) opens 14 days prior at 10:00 AM JST (9:00 AM SGT) = Wed, Dec 2 at 9:00 AM SGT (plus 50 walk-in spots 10 min before session).' },
-      { name: 'Nakanoshima Museum of Art, Osaka', hours: '10:00 AM – 5:00 PM (Fri until 8:00 PM)', cutoff: 'Last entry: 4:30 PM', status: 'CLOSED Mondays; Open Wed, Dec 16', tags: ['wed'], nuance: 'Walk-in tickets on 2F; giant Ship\'s Cat sculpture sits outside on the 2F deck.' },
-      { name: 'OSAKA Hikari-Renaissance (Nakanoshima)', hours: 'Nightly 5:00 PM – 10:00 PM (Dec 11 – Dec 25, 2026)', cutoff: 'Lights turn on at 5:00 PM', status: 'Nightly during run', tags: ['mon', 'wed', 'night'], nuance: 'Free waterfront light installations right outside Book Forest / Festival Plaza on Wed, Dec 16.' }
+      { name: 'Midosuji Boulevard Illuminations', hours: 'Nightly 5:00 PM – 1:00 AM (Nov 3 – Dec 31, 2026)', cutoff: 'Lights stay on past midnight', status: 'Open nightly', tags: ['mon', 'wed', 'night'], nuance: 'Free; 4 km of glowing ginkgo trees right beside Shinsaibashi-Suji.' },
+      { name: 'LEGOLAND Discovery Center Osaka', hours: 'Mon–Fri: 10:00 AM – 6:00 PM | Sat–Sun: 10:00 AM – 7:00 PM', cutoff: 'Last entry: 4:00 PM on weekdays (3-hour timed stay limit)', status: 'Open Mon, Dec 14', tags: ['mon', 'wed'], nuance: 'Online timed ticket required in advance. Adults can only enter with a child. Weekday entries after 2:00 PM save ~20% online.' },
+      { name: 'Universal Studios Japan (USJ)', hours: '9:00 AM – 9:00 PM (gates often open 15–30 min early)', cutoff: 'Evening Christmas show at Gramercy Park starts ~5:30 PM', status: 'Open Tue, Dec 15', tags: ['mon', 'wed'], nuance: 'BOOKED (Klook): 1-Day Studio Passes (USJ-P1X000000JNPMM / JNPMN) + 2x Express Pass 5: Race & Minion Special (USJ-P1X000000102MV / 102MW). Timed slots: 11:20–12:20 Super Nintendo World™, 11:20–11:50 Mario Kart, 15:00–15:30 Villain-Con Minion Blast + untimed Minion Mayhem & JAWS.' },
+      { name: 'Kids Plaza Osaka', hours: '9:30 AM – 5:00 PM', cutoff: 'Last entry: 4:15 PM', status: 'Open Wed, Dec 16', tags: ['wed'], nuance: '¥1,500 adult / ¥500 preschooler (ages 3–5) or ¥800 age 6+. Advance online vouchers (Klook/KKday) let you skip the 1F ticket queue; same-day re-entry allowed with stub.' },
+      { name: 'Nakanoshima Children\'s Book Forest', hours: '9:30 AM – 5:00 PM (four 90-min sessions)', cutoff: 'Sessions: 9:30–11:00, 11:30–13:00, 13:30–15:00, 15:30–17:00', status: 'Open Wed, Dec 16', tags: ['wed'], nuance: 'Free admission. Online booking (100 slots/session) opens 14 days prior at 10:00 AM JST (9:00 AM SGT) = Wed, Dec 2 at 9:00 AM SGT (plus 50 walk-in spots 10 min before session).' },
+      { name: 'Nakanoshima Museum of Art, Osaka', hours: '10:00 AM – 5:00 PM (Fri until 8:00 PM)', cutoff: 'Last entry: 4:30 PM', status: 'Open Wed, Dec 16', tags: ['wed'], nuance: 'Walk-in tickets on 2F; giant Ship\'s Cat sculpture sits outside on the 2F deck.' },
+      { name: 'OSAKA Hikari-Renaissance (Nakanoshima)', hours: 'Nightly 5:00 PM – 10:00 PM (Dec 11 – Dec 25, 2026)', cutoff: 'Lights turn on at 5:00 PM', status: 'Open nightly', tags: ['mon', 'wed', 'night'], nuance: 'Free waterfront light installations right outside Book Forest / Festival Plaza on Wed, Dec 16.' }
     ];
 
     // 5. GUIDE -> ALL 27 DOOR-TO-DOOR GOOGLE MAPS ROUTES
@@ -2109,8 +2085,10 @@
     }
 
     // ========================================================
-    // TAB 3: GUIDE (WEATHER, HOURS & ALL MAPS)
+    // TAB 3: GUIDE (AUTO-UPDATED WEATHER, OPEN HOURS & MAPS)
     // ========================================================
+    let lastWeatherFetchTs = parseInt(localStorage.getItem('osaka_weather_ts') || '0', 10);
+
     function switchGuideView(viewKey) {
       const views = ['weather', 'hours', 'maps'];
       views.forEach(v => {
@@ -2124,6 +2102,9 @@
           btn.className = 'gseg-btn py-2 px-2 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition';
         }
       });
+      if (viewKey === 'weather') {
+        fetchOsakaWeather(false);
+      }
       lucide.createIcons();
     }
 
@@ -2149,48 +2130,110 @@
       return map[code] || { label: 'Crisp & Fair', icon: '🌤️' };
     }
 
-    async function fetchOsakaWeather(notify = false) {
-      const url = 'https://api.open-meteo.com/v1/forecast?latitude=34.6937&longitude=135.5023&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&forecast_days=7';
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
+    function renderWeatherData(data) {
+      if (!data) return;
 
-        if (data && data.current) {
-          const c = data.current;
-          const w = decodeWeatherCode(c.weather_code);
-          const tempStr = `${Math.round(c.temperature_2m)}°C`;
+      if (data.current) {
+        const c = data.current;
+        const w = decodeWeatherCode(c.weather_code);
+        const tempStr = `${Math.round(c.temperature_2m)}°C`;
 
-          document.getElementById('header-weather-icon').textContent = w.icon;
-          document.getElementById('header-weather-temp').textContent = tempStr;
+        document.getElementById('header-weather-icon').textContent = w.icon;
+        document.getElementById('header-weather-temp').textContent = tempStr;
 
-          document.getElementById('weather-main-temp').textContent = tempStr;
-          document.getElementById('weather-main-cond').textContent = `${w.icon} ${w.label}`;
-          document.getElementById('weather-main-feels').textContent = `Feels like ${Math.round(c.apparent_temperature)}°C`;
-          document.getElementById('weather-main-hum').textContent = `${c.relative_humidity_2m}%`;
-          document.getElementById('weather-main-wind').textContent = `${Math.round(c.wind_speed_10m)} km/h`;
+        document.getElementById('weather-main-temp').textContent = tempStr;
+        document.getElementById('weather-main-cond').textContent = `${w.icon} ${w.label}`;
+        document.getElementById('weather-main-feels').textContent = `Feels like ${Math.round(c.apparent_temperature)}°C`;
+        document.getElementById('weather-main-hum').textContent = `${c.relative_humidity_2m}%`;
+        document.getElementById('weather-main-wind').textContent = `${Math.round(c.wind_speed_10m)} km/h`;
+      }
+
+      if (data.daily) {
+        const d = data.daily;
+        document.getElementById('weather-7day-strip').innerHTML = d.time.map((dtStr, i) => {
+          const dayName = new Date(dtStr + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short' });
+          const w = decodeWeatherCode(d.weather_code[i]);
+          return `
+            <div class="py-2 px-1 rounded-2xl bg-stone-50 dark:bg-slate-800/60 flex flex-col items-center">
+              <span class="text-[11px] font-medium text-slate-500">${dayName}</span>
+              <span class="text-base my-1">${w.icon}</span>
+              <span class="text-xs font-mono font-bold text-slate-900 dark:text-white">${Math.round(d.temperature_2m_max[i])}°</span>
+              <span class="text-[11px] font-mono text-slate-400">${Math.round(d.temperature_2m_min[i])}°</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Compute actual Daytime vs. Nighttime temperatures from today's hourly telemetry
+      const dayEl = document.getElementById('weather-day-temp');
+      const nightEl = document.getElementById('weather-night-temp');
+      if (data.hourly && Array.isArray(data.hourly.temperature_2m) && Array.isArray(data.hourly.is_day)) {
+        const todayTemps = data.hourly.temperature_2m.slice(0, 24);
+        const todayIsDay = data.hourly.is_day.slice(0, 24);
+        const dayVals = todayTemps.filter((_, idx) => todayIsDay[idx] === 1 && typeof todayTemps[idx] === 'number');
+        const nightVals = todayTemps.filter((_, idx) => todayIsDay[idx] === 0 && typeof todayTemps[idx] === 'number');
+
+        if (dayEl && dayVals.length) {
+          const dMin = Math.round(Math.min(...dayVals));
+          const dMax = Math.round(Math.max(...dayVals));
+          dayEl.textContent = dMin === dMax ? `${dMax}°C` : `${dMin}°C – ${dMax}°C`;
+        } else if (dayEl && data.daily) {
+          dayEl.textContent = `${Math.round(data.daily.temperature_2m_max[0])}°C`;
         }
 
-        if (data && data.daily) {
-          const d = data.daily;
-          document.getElementById('weather-7day-strip').innerHTML = d.time.map((dtStr, i) => {
-            const dayName = new Date(dtStr + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short' });
-            const w = decodeWeatherCode(d.weather_code[i]);
-            return `
-              <div class="py-2 px-1 rounded-2xl bg-stone-50 dark:bg-slate-800/60 flex flex-col items-center">
-                <span class="text-[11px] font-medium text-slate-500">${dayName}</span>
-                <span class="text-base my-1">${w.icon}</span>
-                <span class="text-xs font-mono font-bold text-slate-900 dark:text-white">${Math.round(d.temperature_2m_max[i])}°</span>
-                <span class="text-[11px] font-mono text-slate-400">${Math.round(d.temperature_2m_min[i])}°</span>
-              </div>
-            `;
-          }).join('');
+        if (nightEl && nightVals.length) {
+          const nMin = Math.round(Math.min(...nightVals));
+          const nMax = Math.round(Math.max(...nightVals));
+          nightEl.textContent = nMin === nMax ? `${nMin}°C` : `${nMin}°C – ${nMax}°C`;
+        } else if (nightEl && data.daily) {
+          nightEl.textContent = `${Math.round(data.daily.temperature_2m_min[0])}°C`;
         }
-
-        if (notify) showToast('Osaka weather refreshed');
-      } catch (e) {
-        document.getElementById('weather-main-cond').textContent = 'Dec Avg: 11°C High / 4°C Low';
+      } else if (data.daily) {
+        if (dayEl) dayEl.textContent = `${Math.round(data.daily.temperature_2m_max[0])}°C`;
+        if (nightEl) nightEl.textContent = `${Math.round(data.daily.temperature_2m_min[0])}°C`;
       }
     }
+
+    async function fetchOsakaWeather(force = false) {
+      const now = Date.now();
+      const cachedRaw = localStorage.getItem('osaka_weather_cache_v1');
+      if (cachedRaw) {
+        try {
+          renderWeatherData(JSON.parse(cachedRaw));
+        } catch (e) {}
+      }
+
+      if (!force && lastWeatherFetchTs && (now - lastWeatherFetchTs) < 10 * 60 * 1000 && cachedRaw) {
+        return;
+      }
+
+      const url = 'https://api.open-meteo.com/v1/forecast?latitude=34.6937&longitude=135.5023&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m&hourly=temperature_2m,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&forecast_days=7';
+      try {
+        const res = await fetch(url);
+        if (!res.ok) return;
+        const data = await res.json();
+        lastWeatherFetchTs = now;
+        localStorage.setItem('osaka_weather_cache_v1', JSON.stringify(data));
+        localStorage.setItem('osaka_weather_ts', String(lastWeatherFetchTs));
+        renderWeatherData(data);
+      } catch (e) {
+        if (!cachedRaw) {
+          document.getElementById('weather-main-cond').textContent = 'Offline';
+        }
+      }
+    }
+
+    // Auto-sync FX & Weather when app returns to foreground or comes back online
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        fetchJpyToSgdRate(false);
+        fetchOsakaWeather(false);
+      }
+    });
+    window.addEventListener('online', () => {
+      fetchJpyToSgdRate(true);
+      fetchOsakaWeather(true);
+    });
 
     function setHoursFilter(key) {
       hoursFilter = key;
@@ -2212,24 +2255,17 @@
         return matchTag && matchText;
       });
 
-      document.getElementById('hours-list-container').innerHTML = filtered.map(v => {
-        const isClosedMon = v.status.includes('CLOSED');
-        return `
-          <div class="bg-white dark:bg-slate-900 rounded-3xl p-4 shadow-editorial dark:border dark:border-slate-800/80 space-y-2">
-            <div class="flex items-start justify-between gap-2">
-              <h4 class="text-sm font-bold text-slate-900 dark:text-white">${v.name}</h4>
-              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0 ${
-                isClosedMon
-                  ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300'
-                  : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300'
-              }">${v.status}</span>
-            </div>
-            <div class="text-xs font-mono text-slate-600 dark:text-slate-300">${v.hours}</div>
-            <div class="text-xs font-semibold text-rose-600 dark:text-rose-400">${v.cutoff}</div>
-            <p class="text-[13px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-stone-100 dark:border-slate-800 leading-relaxed">${v.nuance}</p>
+      document.getElementById('hours-list-container').innerHTML = filtered.map(v => `
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-4 shadow-editorial dark:border dark:border-slate-800/80 space-y-2">
+          <div class="flex items-start justify-between gap-2">
+            <h4 class="text-sm font-bold text-slate-900 dark:text-white">${v.name}</h4>
+            <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300">${v.status}</span>
           </div>
-        `;
-      }).join('');
+          <div class="text-xs font-mono text-slate-600 dark:text-slate-300">${v.hours}</div>
+          <div class="text-xs font-semibold text-rose-600 dark:text-rose-400">${v.cutoff}</div>
+          <p class="text-[13px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-stone-100 dark:border-slate-800 leading-relaxed">${v.nuance}</p>
+        </div>
+      `).join('');
     }
 
     function setMapFilter(key) {
@@ -2318,6 +2354,9 @@
       });
       if (tabKey === 'wallet') {
         fetchJpyToSgdRate(false);
+      }
+      if (tabKey === 'guide') {
+        fetchOsakaWeather(false);
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
@@ -2418,6 +2457,7 @@
       updateJstClock();
       setInterval(updateJstClock, 15000);
       setInterval(() => fetchJpyToSgdRate(false), 30 * 60 * 1000);
+      setInterval(() => fetchOsakaWeather(false), 15 * 60 * 1000);
       updateFxBadge();
       convertJpyToSgd();
       renderDayPills();
@@ -2427,7 +2467,7 @@
       renderAllMapsList();
       loadVaultDB();
       pullFromNeon();
-      fetchOsakaWeather(false);
+      fetchOsakaWeather(true);
       fetchJpyToSgdRate(true);
       lucide.createIcons();
     };

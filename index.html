@@ -185,10 +185,10 @@
           </div>
         </div>
 
-        <!-- 2. GATE & USJ QR PASS SCANNERS (2 VJW ROW 1 + 2 USJ EXPRESS ROW 2 + 1 USJ STUDIO ROW 3) -->
+        <!-- 2. GATE, USJ & KIDS PLAZA QR PASS SCANNERS -->
         <div class="space-y-2.5">
           <div class="flex items-center justify-between px-1">
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Gate & USJ QR Scanners</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Gate & Attraction QR Scanners</span>
             <span class="text-xs text-slate-400">Tap QR to enlarge</span>
           </div>
           <div class="grid grid-cols-2 gap-3" id="wallet-qr-grid"></div>
@@ -332,6 +332,49 @@
               </div>
             </div>
           </div>
+
+          <!-- KIDS PLAZA OSAKA (BOOKED) -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Booked • Wed, Dec 16</span>
+                  <span id="badge-asset-kids_plaza" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">PDF Saved</span>
+                </div>
+                <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-1">Kids Plaza Osaka</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Wed, Dec 16 (9:30 AM – 5:00 PM) • 1 Adult + 1 Child</p>
+              </div>
+              <button onclick="openQrFullscreen('qr-kids-plaza')" class="px-2.5 py-1 rounded-xl bg-stone-100 dark:bg-slate-800 font-mono text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1 shrink-0 hover:text-rose-600">
+                QR Pass <i data-lucide="qr-code" class="w-3 h-3 text-rose-600"></i>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openPdfFile('kids_plaza')" class="flex-1 py-2.5 px-3.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold flex items-center justify-center gap-1.5">
+                <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Open Kids Plaza PDF
+              </button>
+              <button onclick="openTranslatorFromHeader('tickets')" class="py-2.5 px-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-1.5">
+                <i data-lucide="languages" class="w-3.5 h-3.5"></i> Entry JP
+              </button>
+              <label class="p-2.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Upload Kids Plaza PDF">
+                <i data-lucide="upload" class="w-4 h-4"></i>
+                <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'kids_plaza')" />
+              </label>
+            </div>
+
+            <div>
+              <button onclick="toggleDetails('wallet-kids-plaza-details', this)" class="w-full pt-2 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-left text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
+                <span>View entry rules & station exit</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 shrink-0 transition-transform duration-200"></i>
+              </button>
+              <div id="wallet-kids-plaza-details" class="hidden pt-3 space-y-2 text-[13px] text-slate-600 dark:text-slate-300">
+                <div>• <strong>Voucher Entry:</strong> Present mobile QR/PDF voucher to skip the 1F ticket counter line (last entry 4:15 PM; same-day re-entry allowed with stub).</div>
+                <div>• <strong>Subway Exit:</strong> Brown Sakaisuji Line to <strong>Ogimachi Station (K12) — Exit 2 (elevator)</strong> opens directly outside Kids Plaza Osaka.</div>
+                <div>• <strong>Highlights:</strong> Hundertwasser Kids Town (4F), pretend supermarket & post office (4F), Kantele TV Studio (3F), giant soap bubbles & water physics (5F).</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 4. ON-GROUND BUDGET & PAYMENT SPLIT -->
@@ -424,9 +467,9 @@
               <div class="flex items-start justify-between gap-2 border-b border-stone-100 dark:border-slate-800/60 pb-2">
                 <div>
                   <div class="font-bold text-slate-900 dark:text-white">Remaining Attractions</div>
-                  <div class="text-[11.5px] text-slate-500">LEGOLAND (~¥4.6k–5.6k), Kids Plaza (¥2k–2.3k), Nakanoshima Art Museum (~¥1.6k–1.8k; Ethan free)</div>
+                  <div class="text-[11.5px] text-slate-500">LEGOLAND (~¥4.6k–5.6k), Kids Plaza (Booked), Nakanoshima Art Museum (~¥1.6k–1.8k; Ethan free)</div>
                 </div>
-                <div class="font-mono font-semibold text-right shrink-0">¥8.2k–9.7k<br><span class="text-[11px] text-slate-400">~S$66–79</span></div>
+                <div class="font-mono font-semibold text-right shrink-0">¥6.2k–7.4k<br><span class="text-[11px] text-slate-400">~S$50–60</span></div>
               </div>
 
               <div class="flex items-start justify-between gap-2 border-b border-stone-100 dark:border-slate-800/60 pb-2">
@@ -439,7 +482,7 @@
 
               <div class="flex items-start justify-between gap-2 pt-1 font-semibold text-emerald-600 dark:text-emerald-400">
                 <div>Unallocated Cushion</div>
-                <div class="font-mono text-right">~S$45–S$345<br><span class="text-[11px] opacity-80">(~¥5,500–¥42,500)</span></div>
+                <div class="font-mono text-right">~S$60–S$360<br><span class="text-[11px] opacity-80">(~¥7,500–¥44,500)</span></div>
               </div>
             </div>
           </div>
@@ -1250,13 +1293,14 @@
       { id: 'u5-5', slot: 'Untimed Choice A', title: 'JAWS™ (Selected over Jurassic Park)', meta: 'Untimed Choice A • No height minimum • Stays 100% dry in Dec' }
     ];
 
-    // 3. WALLET QR PASS SCANNERS (ROW 1: 2 VJW | ROW 2: 2 USJ EXPRESS 5 | ROW 3: 1 USJ STUDIO PASS)
+    // 3. WALLET QR PASS SCANNERS (ROW 1: 2 VJW | ROW 2: 2 USJ EXPRESS 5 | ROW 3: USJ STUDIO + KIDS PLAZA)
     const QR_PASSES = [
       { id: 'qr-vjw-heping', title: 'MR Wang Heping', subtitle: 'Visit Japan Web • KIX Arrival', tag: 'CUSTOMS / IMMIG', code: 'VJW-HEPING-8823131497' },
       { id: 'qr-vjw-ethan', title: 'MSTR Wang Renyu Ethan', subtitle: 'Visit Japan Web • KIX Arrival', tag: 'CUSTOMS / IMMIG', code: 'VJW-ETHAN-8823131497' },
       { id: 'qr-usj-express-1', title: 'USJ Express Pass 5 #1', subtitle: 'USJ-P1X000000102MV • 11:20 SNW', tag: 'EXPRESS 5 #1', code: 'P:1302.0.261026.47726' },
       { id: 'qr-usj-express-2', title: 'USJ Express Pass 5 #2', subtitle: 'USJ-P1X000000102MW • 11:20 SNW', tag: 'EXPRESS 5 #2', code: 'P:1302.0.261026.47734' },
-      { id: 'qr-usj-studio', title: 'USJ 1-Day Studio Pass', subtitle: 'JNPMM / JNPMN • Tue Dec 15', tag: 'USJ STUDIO', code: 'P:1302.0.261121.21657', fullWidth: true }
+      { id: 'qr-usj-studio', title: 'USJ 1-Day Studio Pass', subtitle: 'JNPMM / JNPMN • Tue, Dec 15', tag: 'USJ STUDIO', code: 'P:1302.0.261121.21657' },
+      { id: 'qr-kids-plaza', title: 'Kids Plaza Osaka', subtitle: '1 Adult + 1 Child • Wed, Dec 16', tag: 'KIDS PLAZA', code: 'KIDSPLAZA-DEC16-VOUCHER' }
     ];
 
     // 4. GUIDE -> COMPREHENSIVE JAPANESE TRANSLATOR PHRASEBOOK (26 PHRASES)
@@ -1513,7 +1557,7 @@
       { name: 'Midosuji Boulevard Illuminations', hours: 'Nightly 5:00 PM – 1:00 AM (Nov 3 – Dec 31, 2026)', cutoff: 'Lights stay on past midnight', status: 'Open nightly', tags: ['mon', 'wed', 'night'], nuance: 'Free; 4 km of glowing ginkgo trees right beside Shinsaibashi-Suji.' },
       { name: 'LEGOLAND Discovery Center Osaka', hours: 'Mon–Fri: 10:00 AM – 6:00 PM | Sat–Sun: 10:00 AM – 7:00 PM', cutoff: 'Last entry: 4:00 PM on weekdays (3-hour timed stay limit)', status: 'Open Mon, Dec 14', tags: ['mon', 'wed'], nuance: 'Online timed ticket required in advance. Adults can only enter with a child. Weekday entries after 2:00 PM save ~20% online.' },
       { name: 'Universal Studios Japan (USJ)', hours: '9:00 AM – 9:00 PM (gates often open 15–30 min early)', cutoff: 'Evening Christmas show at Gramercy Park starts ~5:30 PM', status: 'Open Tue, Dec 15', tags: ['mon', 'wed'], nuance: 'BOOKED (Klook): 1-Day Studio Passes (USJ-P1X000000JNPMM / JNPMN) + 2x Express Pass 5: Race & Minion Special (USJ-P1X000000102MV / 102MW). Timed slots: 11:20–12:20 Super Nintendo World™, 11:20–11:50 Mario Kart, 15:00–15:30 Villain-Con Minion Blast + untimed Minion Mayhem & JAWS.' },
-      { name: 'Kids Plaza Osaka', hours: '9:30 AM – 5:00 PM', cutoff: 'Last entry: 4:15 PM', status: 'Open Wed, Dec 16', tags: ['wed'], nuance: '¥1,500 adult / ¥500 preschooler (ages 3–5) or ¥800 age 6+. Advance online vouchers (Klook/KKday) let you skip the 1F ticket queue; same-day re-entry allowed with stub.' },
+      { name: 'Kids Plaza Osaka', hours: '9:30 AM – 5:00 PM', cutoff: 'Last entry: 4:15 PM', status: 'Open Wed, Dec 16', tags: ['wed'], nuance: 'BOOKED: Advance mobile voucher skips the 1F ticket counter queue; same-day re-entry allowed with stub.' },
       { name: 'Nakanoshima Children\'s Book Forest', hours: '9:30 AM – 5:00 PM (four 90-min sessions)', cutoff: 'Sessions: 9:30–11:00, 11:30–13:00, 13:30–15:00, 15:30–17:00', status: 'Open Wed, Dec 16', tags: ['wed'], nuance: 'Free admission. Online booking (100 slots/session) opens 14 days prior at 10:00 AM JST (9:00 AM SGT) = Wed, Dec 2 at 9:00 AM SGT (plus 50 walk-in spots 10 min before session).' },
       { name: 'Nakanoshima Museum of Art, Osaka', hours: '10:00 AM – 5:00 PM (Fri until 8:00 PM)', cutoff: 'Last entry: 4:30 PM', status: 'Open Wed, Dec 16', tags: ['wed'], nuance: 'Walk-in tickets on 2F; giant Ship\'s Cat sculpture sits outside on the 2F deck.' },
       { name: 'OSAKA Hikari-Renaissance (Nakanoshima)', hours: 'Nightly 5:00 PM – 10:00 PM (Dec 11 – Dec 25, 2026)', cutoff: 'Lights turn on at 5:00 PM', status: 'Open nightly', tags: ['mon', 'wed', 'night'], nuance: 'Free waterfront light installations right outside Book Forest / Festival Plaza on Wed, Dec 16.' }
@@ -1560,7 +1604,8 @@
       hyatt: 'Caption by Hyatt Reservation (#40023B32617210)',
       scoot: 'Scoot Flights Itinerary (EYC6JZ)',
       usj_studio: 'USJ 1-Day Studio Passes (JNPMM / JNPMN)',
-      usj_express: 'USJ Express Pass 5 (102MV / 102MW)'
+      usj_express: 'USJ Express Pass 5 (102MV / 102MW)',
+      kids_plaza: 'Kids Plaza Osaka Voucher (Wed, Dec 16)'
     };
 
     // STATE
@@ -1649,6 +1694,7 @@
       show('badge-asset-hyatt', !!vaultCache['hyatt']);
       show('badge-asset-scoot', !!vaultCache['scoot']);
       show('badge-asset-usj', !!(vaultCache['usj_studio'] || vaultCache['usj_express']));
+      show('badge-asset-kids_plaza', !!vaultCache['kids_plaza']);
     }
 
     // ========================================================
@@ -1886,35 +1932,6 @@
       if (!grid) return;
       grid.innerHTML = QR_PASSES.map(q => {
         const savedImg = vaultCache[q.id];
-        if (q.fullWidth) {
-          return `
-            <div class="col-span-2 bg-white dark:bg-slate-900 rounded-3xl p-4 shadow-editorial dark:border dark:border-slate-800/80 flex items-center gap-3.5">
-              <div onclick="openQrFullscreen('${q.id}')" class="w-24 h-24 shrink-0 rounded-2xl border border-stone-200/80 dark:border-slate-800 bg-white p-2 cursor-pointer flex items-center justify-center">
-                ${savedImg ? `<img src="${savedImg}" alt="${q.title}" class="w-full h-full object-contain" />` : generateCrispQrSvg(q.code)}
-              </div>
-              <div class="flex-1 min-w-0 space-y-2">
-                <div>
-                  <div class="flex items-center justify-between">
-                    <span class="text-[11px] font-mono font-semibold text-rose-600 dark:text-rose-400">${q.tag}</span>
-                    <span class="w-2 h-2 rounded-full ${savedImg ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-700'}" title="${savedImg ? 'Saved Offline' : 'Ready for Upload'}"></span>
-                  </div>
-                  <h4 class="text-sm font-bold text-slate-900 dark:text-white mt-0.5 truncate">${q.title}</h4>
-                  <p class="text-xs text-slate-500 dark:text-slate-400 truncate">${q.subtitle}</p>
-                </div>
-                <div class="flex items-center gap-1.5">
-                  <button onclick="openQrFullscreen('${q.id}')" class="flex-1 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold">
-                    Scan QR
-                  </button>
-                  <label class="py-2 px-3 rounded-xl bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold cursor-pointer" title="Upload QR Image">
-                    <i data-lucide="upload" class="w-3.5 h-3.5"></i>
-                    <input type="file" accept="image/*" class="hidden" onchange="handleVaultUpload(event, '${q.id}')" />
-                  </label>
-                </div>
-              </div>
-            </div>
-          `;
-        }
-
         return `
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-4 shadow-editorial dark:border dark:border-slate-800/80 flex flex-col justify-between space-y-3">
             <div>
@@ -2019,7 +2036,8 @@
           hyatt: '/docs/Hyatt_View_Reservation.pdf',
           scoot: '/docs/Itinerary_EYC6JZ.pdf',
           usj_studio: '/docs/usj_studio_pass.pdf',
-          usj_express: '/docs/express_pass.pdf'
+          usj_express: '/docs/express_pass.pdf',
+          kids_plaza: '/docs/kids_plaza.pdf'
         };
         source = defaults[key];
       }
@@ -2220,11 +2238,14 @@
       if (data.daily) {
         const d = data.daily;
         document.getElementById('weather-7day-strip').innerHTML = d.time.map((dtStr, i) => {
-          const dayName = new Date(dtStr + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short' });
+          const dtObj = new Date(dtStr + 'T00:00:00');
+          const dayName = dtObj.toLocaleDateString('en-US', { weekday: 'short' });
+          const dateLabel = dtObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
           const w = decodeWeatherCode(d.weather_code[i]);
           return `
-            <div class="py-2 px-1 rounded-2xl bg-stone-50 dark:bg-slate-800/60 flex flex-col items-center">
-              <span class="text-[11px] font-medium text-slate-500">${dayName}</span>
+            <div class="py-2 px-0.5 rounded-2xl bg-stone-50 dark:bg-slate-800/60 flex flex-col items-center">
+              <span class="text-[11px] font-semibold text-slate-700 dark:text-slate-200 leading-tight">${dayName}</span>
+              <span class="text-[9.5px] font-mono text-slate-400 mt-0.5 leading-tight">${dateLabel}</span>
               <span class="text-base my-1">${w.icon}</span>
               <span class="text-xs font-mono font-bold text-slate-900 dark:text-white">${Math.round(d.temperature_2m_max[i])}°</span>
               <span class="text-[11px] font-mono text-slate-400">${Math.round(d.temperature_2m_min[i])}°</span>

@@ -11,7 +11,7 @@
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -136,35 +136,250 @@
       </section>
 
       <!-- ====================================================== -->
-      <!-- TAB 2: WALLET (QRS, PASSES, BUDGET & PDFS)             -->
+      <!-- TAB 2: WALLET (FX, QRS, PASSES, SHOW-CARDS & BUDGET)   -->
       <!-- ====================================================== -->
       <section id="tab-wallet" class="hidden space-y-5">
 
-        <!-- Section Header + Vercel Config Action -->
-        <div class="flex items-center justify-between px-1">
-          <div>
-            <h2 class="text-base font-bold tracking-tight text-slate-900 dark:text-white">Travel Wallet</h2>
-            <p class="text-xs text-slate-500 dark:text-slate-400">Cloud synced + offline IndexedDB vault</p>
+        <!-- 1. REAL-TIME JPY → SGD CURRENCY CONVERTER -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-3.5">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">JPY → SGD Converter</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span id="fx-rate-badge" class="px-2.5 py-1 rounded-full bg-stone-100 dark:bg-slate-800 font-mono text-[11px] font-semibold text-slate-700 dark:text-slate-300">
+                ¥1,000 = S$--
+              </span>
+              <button onclick="fetchJpyToSgdRate(true)" title="Refresh Daily FX Rate" class="p-1.5 rounded-full bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-rose-600 transition">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
           </div>
-          <button onclick="openVercelModal()" class="px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-1.5 hover:text-rose-600 transition">
-            <i data-lucide="cloud" class="w-3.5 h-3.5 text-rose-600"></i> Vercel Paths
-          </button>
+
+          <!-- Input Row -->
+          <div class="grid grid-cols-2 gap-2.5 items-stretch">
+            <div class="rounded-2xl bg-stone-50 dark:bg-slate-800/70 border border-stone-200/80 dark:border-slate-700 px-3.5 py-2.5 flex flex-col justify-between focus-within:border-rose-500">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-mono font-semibold text-slate-400">JPY (¥)</span>
+                <button type="button" onclick="setJpyAmount('')" class="text-[11px] text-slate-400 hover:text-rose-600 font-semibold">Clear</button>
+              </div>
+              <div class="flex items-baseline gap-1 mt-1">
+                <span class="font-mono text-base font-bold text-slate-400">¥</span>
+                <input
+                  id="fx-jpy-input"
+                  type="number"
+                  inputmode="decimal"
+                  value="1000"
+                  placeholder="0"
+                  oninput="convertJpyToSgd()"
+                  class="w-full bg-transparent font-mono text-xl font-bold text-slate-900 dark:text-white focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <div class="rounded-2xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200/70 dark:border-rose-900/50 px-3.5 py-2.5 flex flex-col justify-between">
+              <span class="text-[11px] font-mono font-semibold text-rose-600 dark:text-rose-400">SGD (S$)</span>
+              <div class="flex items-baseline gap-1 mt-1">
+                <span class="font-mono text-base font-bold text-rose-500">S$</span>
+                <span id="fx-sgd-output" class="font-mono text-xl font-extrabold text-slate-900 dark:text-white truncate">--.--</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Preset Chips -->
+          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+            <button type="button" onclick="setJpyAmount(500)" class="px-2.5 py-1 rounded-full bg-stone-100 dark:bg-slate-800 hover:bg-rose-50 dark:hover:bg-slate-700 font-mono text-xs font-semibold text-slate-700 dark:text-slate-300 shrink-0">¥500</button>
+            <button type="button" onclick="setJpyAmount(1000)" class="px-2.5 py-1 rounded-full bg-stone-100 dark:bg-slate-800 hover:bg-rose-50 dark:hover:bg-slate-700 font-mono text-xs font-semibold text-slate-700 dark:text-slate-300 shrink-0">¥1,000</button>
+            <button type="button" onclick="setJpyAmount(5500)" class="px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300 shrink-0">¥5,500 Tax-Free</button>
+            <button type="button" onclick="setJpyAmount(10000)" class="px-2.5 py-1 rounded-full bg-stone-100 dark:bg-slate-800 hover:bg-rose-50 dark:hover:bg-slate-700 font-mono text-xs font-semibold text-slate-700 dark:text-slate-300 shrink-0">¥10,000</button>
+          </div>
         </div>
 
-        <!-- On-Ground Budget & Payment Split Card (Appendix D Synced) -->
-        <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
-          <div class="flex items-start justify-between gap-2">
-            <div>
-              <span class="text-xs font-semibold uppercase tracking-wider text-rose-600">Appendix D • Budget Strategy</span>
-              <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-0.5">S$1,000 (~¥123,500) On-Ground Budget</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Excludes pre-paid flights, hotel (~S$728) & USJ passes • 1 JPY ≈ 0.0081 SGD</p>
+        <!-- 2. GATE & USJ QR PASS SCANNERS (2 VJW + 1 USJ STUDIO + 2 USJ EXPRESS 5) -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Gate & USJ QR Scanners</span>
+            <span class="text-xs text-slate-400">Tap QR to enlarge</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3" id="wallet-qr-grid"></div>
+        </div>
+
+        <!-- 3. CONFIRMED BOOKINGS & PDFS -->
+        <div class="space-y-3">
+          <div class="px-1">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Confirmed Bookings & PDFs</span>
+          </div>
+
+          <!-- CAPTION BY HYATT NAMBA OSAKA -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Paid in Full • SGD 728.03</span>
+                  <span id="badge-asset-hyatt" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">PDF Saved</span>
+                </div>
+                <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-1">Caption by Hyatt Namba Osaka</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Sun, Dec 13 (3:00 PM) – Thu, Dec 17 (8:00 AM target)</p>
+              </div>
+              <button onclick="copyText('40023B32617210', 'Hyatt Confirmation')" class="px-2.5 py-1 rounded-xl bg-stone-100 dark:bg-slate-800 font-mono text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1 shrink-0 hover:text-rose-600">
+                #40023B32617210 <i data-lucide="copy" class="w-3 h-3 text-slate-400"></i>
+              </button>
             </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openPdfFile('hyatt')" class="flex-1 py-2.5 px-3.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold flex items-center justify-center gap-1.5">
+                <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Open Hyatt PDF
+              </button>
+              <button onclick="openPhraseModal('namba_exit')" class="py-2.5 px-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-1.5">
+                <i data-lucide="languages" class="w-3.5 h-3.5"></i> Station Exit JP
+              </button>
+              <label class="p-2.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Upload PDF">
+                <i data-lucide="upload" class="w-4 h-4"></i>
+                <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'hyatt')" />
+              </label>
+            </div>
+
+            <div>
+              <button onclick="toggleDetails('wallet-hyatt-details', this)" class="w-full pt-2 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
+                <span>View room & property nuances</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i>
+              </button>
+              <div id="wallet-hyatt-details" class="hidden pt-3 space-y-2 text-[13px] text-slate-600 dark:text-slate-300">
+                <div>• <strong>Room:</strong> 1 Queen Bed, City View (20 sqm, walk-in rain shower, table & chairs; Floor 10/11 high floor & 11:00 AM arrival logged).</div>
+                <div>• <strong>Guest:</strong> MR HEPING WANG (WoH <span class="font-mono">#604601623L</span>) • 1 Adult, 1 Child (under 12 free).</div>
+                <div>• <strong>Address:</strong> 2-7-5 Nippombashi, Chuo-ku, Osaka (<span class="font-mono">+81 6-6649-4321</span>).</div>
+                <div>• <strong>House Rules:</strong> 100% cashless hotel; up to ¥500/person/night local tax at check-in; no outside konbini food in 1F lounge (eat at room table); 2F coin laundry.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCOOT FLIGHTS (EYC6JZ) -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                  <span class="text-xs font-medium text-amber-600 dark:text-amber-400">Confirmed • 2x 20kg Bags</span>
+                  <span id="badge-asset-scoot" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">PDF Saved</span>
+                </div>
+                <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-1">Scoot Flights • SIN ⇄ KIX</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">TR 880 (Dec 13, 03:05→10:15) • TR 881 (Dec 17, 11:30→17:30)</p>
+              </div>
+              <button onclick="copyText('EYC6JZ', 'Scoot Booking Ref')" class="px-2.5 py-1 rounded-xl bg-stone-100 dark:bg-slate-800 font-mono text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1 shrink-0 hover:text-rose-600">
+                EYC6JZ <i data-lucide="copy" class="w-3 h-3 text-slate-400"></i>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openPdfFile('scoot')" class="flex-1 py-2.5 px-3.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold flex items-center justify-center gap-1.5">
+                <i data-lucide="plane" class="w-3.5 h-3.5"></i> Open Scoot PDF
+              </button>
+              <label class="p-2.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Upload PDF">
+                <i data-lucide="upload" class="w-4 h-4"></i>
+                <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'scoot')" />
+              </label>
+            </div>
+
+            <div>
+              <button onclick="toggleDetails('wallet-scoot-details', this)" class="w-full pt-2 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
+                <span>View seats & bag-drop deadlines</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i>
+              </button>
+              <div id="wallet-scoot-details" class="hidden pt-3 space-y-2 text-[13px] text-slate-600 dark:text-slate-300">
+                <div>• <strong>Outbound TR 880 (Sun, Dec 13):</strong> SIN T1 03:05 → KIX T1 10:15 (B787-9, 6h 10m). Seats <strong>32C</strong> (Heping) & <strong>32B</strong> (Ethan).</div>
+                <div>• <strong>Return TR 881 (Thu, Dec 17):</strong> KIX T1 11:30 → SIN T1 17:30 (B787-8, 7h 00m). Seats <strong>11D</strong> (Heping) & <strong>11E</strong> (Ethan). Strict 10:30 AM bag-drop cutoff.</div>
+                <div>• <strong>Ticket #:</strong> <span class="font-mono">8823131497</span> • Flex included • Onboard F&B accepts Visa/Mastercard only.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- UNIVERSAL STUDIOS JAPAN (KLOOK BOOKED) -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-rose-600"></span>
+                  <span class="text-xs font-medium text-rose-600 dark:text-rose-400">Booked via Klook • Tue, Dec 15</span>
+                  <span id="badge-asset-usj" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">PDF Saved</span>
+                </div>
+                <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-1">USJ Studio + Express Pass 5</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Race & Minion Special • SNW Entry 11:20–12:20</p>
+              </div>
+              <button onclick="copyText('USJ-P1X000000102MV', 'USJ Express Inquiry #')" class="px-2.5 py-1 rounded-xl bg-stone-100 dark:bg-slate-800 font-mono text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1 shrink-0 hover:text-rose-600">
+                102MV/MW <i data-lucide="copy" class="w-3 h-3 text-slate-400"></i>
+              </button>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="openPdfFile('usj_studio')" class="py-2.5 px-3 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold flex items-center justify-center gap-1.5">
+                <i data-lucide="ticket" class="w-3.5 h-3.5"></i> Studio Pass PDF
+              </button>
+              <button onclick="openPdfFile('usj_express')" class="py-2.5 px-3 rounded-2xl bg-rose-600 text-white text-xs font-semibold flex items-center justify-center gap-1.5">
+                <i data-lucide="zap" class="w-3.5 h-3.5"></i> Express 5 PDF
+              </button>
+            </div>
+
+            <div>
+              <button onclick="toggleDetails('wallet-usj-details', this)" class="w-full pt-2 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
+                <span>View ticket codes, timed slots & attach PDFs</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i>
+              </button>
+              <div id="wallet-usj-details" class="hidden pt-3 space-y-2 text-[13px] text-slate-600 dark:text-slate-300">
+                <div>• <strong>1-Day Studio Passes:</strong> Adult <span class="font-mono">USJ-P1X000000JNPMM</span> (¥9,400) & Child <span class="font-mono">USJ-P1X000000JNPMN</span> (¥5,800).</div>
+                <div>• <strong>2x Express Pass 5 (Race & Minion Special):</strong> <span class="font-mono">USJ-P1X000000102MV</span> & <span class="font-mono">USJ-P1X000000102MW</span>.</div>
+                <div>• <strong>Timed Windows:</strong> 11:20–12:20 Super Nintendo World™; 11:20–11:50 Mario Kart; 15:00–15:30 Villain-Con Minion Blast + untimed Minion Mayhem & JAWS™.</div>
+                <div class="pt-1 flex items-center gap-2">
+                  <label class="flex-1 py-2 px-3 rounded-xl bg-stone-100 dark:bg-slate-800 text-xs font-semibold text-center cursor-pointer">
+                    Attach Studio PDF
+                    <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'usj_studio')" />
+                  </label>
+                  <label class="flex-1 py-2 px-3 rounded-xl bg-stone-100 dark:bg-slate-800 text-xs font-semibold text-center cursor-pointer">
+                    Attach Express PDF
+                    <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'usj_express')" />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. JAPANESE STATION & LANDMARK SHOW-CARDS -->
+        <div class="space-y-2.5">
+          <div class="px-1">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Japanese Station & Landmark Show-Cards</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <button onclick="openPhraseModal('namba_exit')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
+              <div class="text-sm font-bold text-slate-900 dark:text-white">🛗 Namba South Exit</div>
+              <p class="text-xs text-slate-500 dark:text-slate-400">1F Elevator to Nansan-dori & Hotel</p>
+            </button>
+            <button onclick="openPhraseModal('yoji')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
+              <div class="text-sm font-bold text-slate-900 dark:text-white">🚃 6yo Free Rule</div>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Preschooler (Yōji) train gate pass</p>
+            </button>
+            <button onclick="openPhraseModal('usj_nishikujo')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
+              <div class="text-sm font-bold text-slate-900 dark:text-white">🎢 USJ Nishikujo</div>
+              <p class="text-xs text-slate-500 dark:text-slate-400">JR Yumesaki Platform 3 transfer</p>
+            </button>
+            <button onclick="openPhraseModal('nakanoshima_landmarks')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
+              <div class="text-sm font-bold text-slate-900 dark:text-white">🏛️ Day 4 Landmarks</div>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Kids Plaza, Book Forest & Museum</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. ON-GROUND BUDGET & PAYMENT SPLIT (MOVED TO BOTTOM AFTER PASSES) -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-[15px] font-bold text-slate-900 dark:text-white">On-Ground Budget</h3>
             <span class="px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 font-mono text-xs font-bold shrink-0">
               S$1,000 Cap
             </span>
           </div>
 
-          <!-- 3-Channel Payment Split Up Front -->
+          <!-- 3-Channel Payment Split -->
           <div class="space-y-2">
             <div class="p-3 rounded-2xl bg-stone-50 dark:bg-slate-800/60 border border-stone-200/60 dark:border-slate-800 space-y-1">
               <div class="flex items-center justify-between text-xs">
@@ -266,214 +481,17 @@
           </div>
         </div>
 
-        <!-- 2x2 Gate & Customs QR Pass Grid -->
-        <div class="space-y-2.5">
-          <div class="flex items-center justify-between px-1">
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Gate & Customs QR Passes</span>
-            <span class="text-xs text-slate-400">Tap QR to enlarge</span>
-          </div>
-          <div class="grid grid-cols-2 gap-3" id="wallet-qr-grid"></div>
-        </div>
-
-        <!-- Confirmed Bookings (Apple Wallet Style Clean Cards) -->
-        <div class="space-y-3">
-          <div class="px-1">
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Confirmed Bookings & PDFs</span>
-          </div>
-
-          <!-- 1. CAPTION BY HYATT NAMBA OSAKA -->
-          <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                  <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Paid in Full • SGD 728.03</span>
-                  <span id="badge-asset-hyatt" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">PDF Saved</span>
-                </div>
-                <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-1">Caption by Hyatt Namba Osaka</h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Sun, Dec 13 (3:00 PM) – Thu, Dec 17 (8:00 AM target)</p>
-              </div>
-              <button onclick="copyText('40023B32617210', 'Hyatt Confirmation')" class="px-2.5 py-1 rounded-xl bg-stone-100 dark:bg-slate-800 font-mono text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1 shrink-0 hover:text-rose-600">
-                #40023B32617210 <i data-lucide="copy" class="w-3 h-3 text-slate-400"></i>
-              </button>
-            </div>
-
-            <div class="flex items-center gap-2">
-              <button onclick="openPdfFile('hyatt')" class="flex-1 py-2.5 px-3.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold flex items-center justify-center gap-1.5">
-                <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Open Hyatt PDF
-              </button>
-              <button onclick="openPhraseModal('namba_exit')" class="py-2.5 px-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-1.5">
-                <i data-lucide="languages" class="w-3.5 h-3.5"></i> Station Exit JP
-              </button>
-              <label class="p-2.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Upload PDF">
-                <i data-lucide="upload" class="w-4 h-4"></i>
-                <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'hyatt')" />
-              </label>
-            </div>
-
-            <div>
-              <button onclick="toggleDetails('wallet-hyatt-details', this)" class="w-full pt-2 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
-                <span>View room & property nuances</span>
-                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i>
-              </button>
-              <div id="wallet-hyatt-details" class="hidden pt-3 space-y-2 text-[13px] text-slate-600 dark:text-slate-300">
-                <div>• <strong>Room:</strong> 1 Queen Bed, City View (20 sqm, walk-in rain shower, table & chairs; Floor 10/11 high floor & 11:00 AM arrival logged).</div>
-                <div>• <strong>Guest:</strong> MR HEPING WANG (WoH <span class="font-mono">#604601623L</span>) • 1 Adult, 1 Child (under 12 free).</div>
-                <div>• <strong>Address:</strong> 2-7-5 Nippombashi, Chuo-ku, Osaka (<span class="font-mono">+81 6-6649-4321</span>).</div>
-                <div>• <strong>House Rules:</strong> 100% cashless hotel; up to ¥500/person/night local tax at check-in; no outside konbini food in 1F lounge (eat at room table); 2F coin laundry.</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 2. SCOOT FLIGHTS (EYC6JZ) -->
-          <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                  <span class="text-xs font-medium text-amber-600 dark:text-amber-400">Confirmed • 2x 20kg Bags</span>
-                  <span id="badge-asset-scoot" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">PDF Saved</span>
-                </div>
-                <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-1">Scoot Flights • SIN ⇄ KIX</h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">TR 880 (Dec 13, 03:05→10:15) • TR 881 (Dec 17, 11:30→17:30)</p>
-              </div>
-              <button onclick="copyText('EYC6JZ', 'Scoot Booking Ref')" class="px-2.5 py-1 rounded-xl bg-stone-100 dark:bg-slate-800 font-mono text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1 shrink-0 hover:text-rose-600">
-                EYC6JZ <i data-lucide="copy" class="w-3 h-3 text-slate-400"></i>
-              </button>
-            </div>
-
-            <div class="flex items-center gap-2">
-              <button onclick="openPdfFile('scoot')" class="flex-1 py-2.5 px-3.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold flex items-center justify-center gap-1.5">
-                <i data-lucide="plane" class="w-3.5 h-3.5"></i> Open Scoot PDF
-              </button>
-              <label class="p-2.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Upload PDF">
-                <i data-lucide="upload" class="w-4 h-4"></i>
-                <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'scoot')" />
-              </label>
-            </div>
-
-            <div>
-              <button onclick="toggleDetails('wallet-scoot-details', this)" class="w-full pt-2 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
-                <span>View seats & bag-drop deadlines</span>
-                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i>
-              </button>
-              <div id="wallet-scoot-details" class="hidden pt-3 space-y-2 text-[13px] text-slate-600 dark:text-slate-300">
-                <div>• <strong>Outbound TR 880 (Sun, Dec 13):</strong> SIN T1 03:05 → KIX T1 10:15 (B787-9, 6h 10m). Seats <strong>32C</strong> (Heping) & <strong>32B</strong> (Ethan).</div>
-                <div>• <strong>Return TR 881 (Thu, Dec 17):</strong> KIX T1 11:30 → SIN T1 17:30 (B787-8, 7h 00m). Seats <strong>11D</strong> (Heping) & <strong>11E</strong> (Ethan). Strict 10:30 AM bag-drop cutoff.</div>
-                <div>• <strong>Ticket #:</strong> <span class="font-mono">8823131497</span> • Flex included • Onboard F&B accepts Visa/Mastercard only.</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3. UNIVERSAL STUDIOS JAPAN (KLOOK BOOKED) -->
-          <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-rose-600"></span>
-                  <span class="text-xs font-medium text-rose-600 dark:text-rose-400">Booked via Klook • Tue, Dec 15</span>
-                  <span id="badge-asset-usj" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">PDF Saved</span>
-                </div>
-                <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-1">USJ Studio + Express Pass 5</h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Race & Minion Special • SNW Entry 11:20–12:20</p>
-              </div>
-              <button onclick="copyText('USJ-P1X000000102MV', 'USJ Express Inquiry #')" class="px-2.5 py-1 rounded-xl bg-stone-100 dark:bg-slate-800 font-mono text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1 shrink-0 hover:text-rose-600">
-                102MV/MW <i data-lucide="copy" class="w-3 h-3 text-slate-400"></i>
-              </button>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2">
-              <button onclick="openPdfFile('usj_studio')" class="py-2.5 px-3 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold flex items-center justify-center gap-1.5">
-                <i data-lucide="ticket" class="w-3.5 h-3.5"></i> Studio Pass PDF
-              </button>
-              <button onclick="openPdfFile('usj_express')" class="py-2.5 px-3 rounded-2xl bg-rose-600 text-white text-xs font-semibold flex items-center justify-center gap-1.5">
-                <i data-lucide="zap" class="w-3.5 h-3.5"></i> Express 5 PDF
-              </button>
-            </div>
-
-            <div>
-              <button onclick="toggleDetails('wallet-usj-details', this)" class="w-full pt-2 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
-                <span>View ticket codes, timed slots & attach PDFs</span>
-                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i>
-              </button>
-              <div id="wallet-usj-details" class="hidden pt-3 space-y-2 text-[13px] text-slate-600 dark:text-slate-300">
-                <div>• <strong>1-Day Studio Passes:</strong> Adult <span class="font-mono">USJ-P1X000000JNPMM</span> (¥9,400) & Child <span class="font-mono">USJ-P1X000000JNPMN</span> (¥5,800).</div>
-                <div>• <strong>2x Express Pass 5 (Race & Minion Special):</strong> <span class="font-mono">USJ-P1X000000102MV</span> & <span class="font-mono">USJ-P1X000000102MW</span>.</div>
-                <div>• <strong>Timed Windows:</strong> 11:20–12:20 Super Nintendo World™; 11:20–11:50 Mario Kart; 15:00–15:30 Villain-Con Minion Blast + untimed Minion Mayhem & JAWS™.</div>
-                <div class="pt-1 flex items-center gap-2">
-                  <label class="flex-1 py-2 px-3 rounded-xl bg-stone-100 dark:bg-slate-800 text-xs font-semibold text-center cursor-pointer">
-                    Attach Studio PDF
-                    <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'usj_studio')" />
-                  </label>
-                  <label class="flex-1 py-2 px-3 rounded-xl bg-stone-100 dark:bg-slate-800 text-xs font-semibold text-center cursor-pointer">
-                    Attach Express PDF
-                    <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'usj_express')" />
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 4. MASTER OSAKA.PDF -->
-          <div class="bg-white dark:bg-slate-900 rounded-3xl p-4 shadow-editorial dark:border dark:border-slate-800/80 flex items-center justify-between gap-3">
-            <div>
-              <div class="flex items-center gap-2">
-                <h4 class="text-sm font-bold text-slate-900 dark:text-white">Master Osaka.pdf</h4>
-                <span id="badge-asset-osaka" class="hidden px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">Saved</span>
-              </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Reference plan</p>
-            </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <button onclick="openPdfFile('osaka')" class="py-2 px-3.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-semibold">
-                Open PDF
-              </button>
-              <label class="p-2 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Attach Osaka.pdf">
-                <i data-lucide="upload" class="w-4 h-4"></i>
-                <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleVaultUpload(event, 'osaka')" />
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <!-- Japanese Station & Landmark Show-Cards -->
-        <div class="space-y-2.5">
-          <div class="px-1">
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Japanese Station & Landmark Show-Cards</span>
-          </div>
-          <div class="grid grid-cols-2 gap-3">
-            <button onclick="openPhraseModal('namba_exit')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
-              <div class="text-sm font-bold text-slate-900 dark:text-white">🛗 Namba South Exit</div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">1F Elevator to Nansan-dori & Hotel</p>
-            </button>
-            <button onclick="openPhraseModal('yoji')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
-              <div class="text-sm font-bold text-slate-900 dark:text-white">🚃 6yo Free Rule</div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Preschooler (Yōji) train gate pass</p>
-            </button>
-            <button onclick="openPhraseModal('usj_nishikujo')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
-              <div class="text-sm font-bold text-slate-900 dark:text-white">🎢 USJ Nishikujo</div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">JR Yumesaki Platform 3 transfer</p>
-            </button>
-            <button onclick="openPhraseModal('nakanoshima_landmarks')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
-              <div class="text-sm font-bold text-slate-900 dark:text-white">🏛️ Day 4 Landmarks</div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Kids Plaza, Book Forest & Museum</p>
-            </button>
-          </div>
-        </div>
-
       </section>
 
       <!-- ====================================================== -->
-      <!-- TAB 3: GUIDE (SEGMENTED SUB-VIEWS FOR ZERO CLUTTER)    -->
+      <!-- TAB 3: GUIDE (WEATHER, HOURS & ALL MAPS)               -->
       <!-- ====================================================== -->
       <section id="tab-guide" class="hidden space-y-4">
 
-        <!-- 4-Pill Segmented Sub-View Switcher -->
-        <div class="p-1.5 rounded-2xl bg-stone-200/70 dark:bg-slate-900 grid grid-cols-4 gap-1">
+        <!-- 3-Pill Segmented Sub-View Switcher -->
+        <div class="p-1.5 rounded-2xl bg-stone-200/70 dark:bg-slate-900 grid grid-cols-3 gap-1">
           <button onclick="switchGuideView('weather')" id="gseg-weather" class="gseg-btn py-2 px-2 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm text-xs font-semibold transition">
             Weather
-          </button>
-          <button onclick="switchGuideView('tasks')" id="gseg-tasks" class="gseg-btn py-2 px-2 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition">
-            Tasks (<span id="pending-badge-count">3</span>)
           </button>
           <button onclick="switchGuideView('hours')" id="gseg-hours" class="gseg-btn py-2 px-2 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition">
             Hours
@@ -546,32 +564,7 @@
           </div>
         </div>
 
-        <!-- GUIDE SUB-VIEW 2: PENDING TASKS -->
-        <div id="guide-view-tasks" class="hidden space-y-4">
-          <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
-            <div class="flex items-center justify-between">
-              <div>
-                <h2 class="text-[15px] font-bold text-slate-900 dark:text-white">Pre-Trip Action Checklist</h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Priority action items in execution order</p>
-              </div>
-              <span id="tasks-status-pill" class="px-2.5 py-1 rounded-full bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 font-mono text-xs font-semibold">
-                3 Pending
-              </span>
-            </div>
-
-            <div id="pending-tasks-list" class="space-y-2.5"></div>
-
-            <div class="pt-2 border-t border-stone-100 dark:border-slate-800">
-              <button onclick="toggleCompletedTasks()" id="toggle-completed-btn" class="w-full py-2 flex items-center justify-between text-xs font-semibold text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
-                <span>Show completed bookings (3)</span>
-                <i data-lucide="chevron-down" id="completed-chevron" class="w-4 h-4 transition-transform duration-200"></i>
-              </button>
-              <div id="completed-tasks-list" class="hidden pt-2.5 space-y-2"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- GUIDE SUB-VIEW 3: VENUE HOURS & CLOSURES (DEC 13-17) -->
+        <!-- GUIDE SUB-VIEW 2: VENUE HOURS & CLOSURES (DEC 13-17) -->
         <div id="guide-view-hours" class="hidden space-y-3">
           <div class="space-y-2.5">
             <div class="relative">
@@ -590,7 +583,7 @@
           <div id="hours-list-container" class="space-y-3"></div>
         </div>
 
-        <!-- GUIDE SUB-VIEW 4: ALL DOOR-TO-DOOR GOOGLE MAPS -->
+        <!-- GUIDE SUB-VIEW 3: ALL DOOR-TO-DOOR GOOGLE MAPS -->
         <div id="guide-view-maps" class="hidden space-y-3.5">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-4 shadow-editorial dark:border dark:border-slate-800/80 space-y-2">
             <div class="flex items-center justify-between gap-2">
@@ -703,51 +696,6 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- MODAL 3: VERCEL STATIC DEPLOYMENT & INDEXED-DB PATHS     -->
-  <!-- ======================================================== -->
-  <div id="vercel-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="w-full max-w-[460px] bg-white dark:bg-slate-900 rounded-3xl border border-stone-200 dark:border-slate-800 p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between">
-        <div>
-          <span class="text-xs font-mono font-semibold uppercase text-rose-600">Offline & Cloud Vault</span>
-          <h3 class="text-base font-bold text-slate-900 dark:text-white">PDF & QR Storage Paths</h3>
-        </div>
-        <button onclick="closeVercelModal()" class="p-2 rounded-full bg-stone-100 dark:bg-slate-800 text-slate-500">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-
-      <p class="text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed">
-        Files uploaded in the <strong>Wallet</strong> tab sync to your Neon database and cache offline inside your browser's <code>IndexedDB</code>. Fallback static paths:
-      </p>
-
-      <pre class="text-xs font-mono bg-slate-950 text-emerald-400 p-3.5 rounded-2xl overflow-x-auto leading-relaxed">/docs/Hyatt_View_Reservation.pdf
-/docs/Itinerary_EYC6JZ.pdf
-/docs/usj_studio_pass.pdf
-/docs/express_pass.pdf
-/docs/Osaka.pdf</pre>
-
-      <div class="space-y-2 text-xs">
-        <div class="font-semibold text-slate-900 dark:text-white">Custom Fallback URLs:</div>
-        <input id="vpath-hyatt" type="text" placeholder="/docs/Hyatt_View_Reservation.pdf" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 font-mono text-xs" />
-        <input id="vpath-scoot" type="text" placeholder="/docs/Itinerary_EYC6JZ.pdf" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 font-mono text-xs" />
-        <input id="vpath-usj_studio" type="text" placeholder="/docs/usj_studio_pass.pdf" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 font-mono text-xs" />
-        <input id="vpath-usj_express" type="text" placeholder="/docs/express_pass.pdf" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 font-mono text-xs" />
-        <input id="vpath-osaka" type="text" placeholder="/docs/Osaka.pdf" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 font-mono text-xs" />
-      </div>
-
-      <div class="flex items-center gap-2 pt-1">
-        <button onclick="saveVercelPaths()" class="flex-1 py-3 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs">
-          Save Paths
-        </button>
-        <button onclick="closeVercelModal()" class="py-3 px-4 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold text-xs">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ======================================================== -->
   <!-- MODAL 4: MULTI-PAGE PDF.JS READER (iOS PWA FRIENDLY)     -->
   <!-- ======================================================== -->
   <div id="pdf-reader-modal" class="fixed inset-0 z-50 hidden bg-slate-950 flex flex-col">
@@ -800,6 +748,74 @@
     }
 
     // ========================================================
+    // REAL-TIME DAILY JPY → SGD FX CONVERTER
+    // ========================================================
+    let jpyToSgdRate = parseFloat(localStorage.getItem('osaka_jpy_sgd_rate')) || 0.00865;
+
+    function updateFxBadge() {
+      const badge = document.getElementById('fx-rate-badge');
+      if (badge) {
+        badge.textContent = `¥1,000 = S$${(1000 * jpyToSgdRate).toFixed(2)}`;
+      }
+    }
+
+    function convertJpyToSgd() {
+      const inputEl = document.getElementById('fx-jpy-input');
+      const outputEl = document.getElementById('fx-sgd-output');
+      if (!inputEl || !outputEl) return;
+      const val = parseFloat(inputEl.value);
+      if (isNaN(val) || val <= 0) {
+        outputEl.textContent = '0.00';
+        return;
+      }
+      outputEl.textContent = (val * jpyToSgdRate).toFixed(2);
+    }
+
+    function setJpyAmount(amount) {
+      const inputEl = document.getElementById('fx-jpy-input');
+      if (!inputEl) return;
+      inputEl.value = amount;
+      convertJpyToSgd();
+      if (amount === '') inputEl.focus();
+    }
+
+    async function fetchJpyToSgdRate(notify = false) {
+      try {
+        const res = await fetch('https://open.er-api.com/v6/latest/JPY');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.rates && data.rates.SGD) {
+            jpyToSgdRate = Number(data.rates.SGD);
+            localStorage.setItem('osaka_jpy_sgd_rate', String(jpyToSgdRate));
+            updateFxBadge();
+            convertJpyToSgd();
+            if (notify) showToast(`FX updated: ¥1,000 = S$${(1000 * jpyToSgdRate).toFixed(2)}`);
+            return;
+          }
+        }
+      } catch (e) {
+        // Fallback to Frankfurter ECB daily rate
+      }
+
+      try {
+        const res2 = await fetch('https://api.frankfurter.app/latest?from=JPY&to=SGD');
+        if (res2.ok) {
+          const data2 = await res2.json();
+          if (data2 && data2.rates && data2.rates.SGD) {
+            jpyToSgdRate = Number(data2.rates.SGD);
+            localStorage.setItem('osaka_jpy_sgd_rate', String(jpyToSgdRate));
+            updateFxBadge();
+            convertJpyToSgd();
+            if (notify) showToast(`FX updated: ¥1,000 = S$${(1000 * jpyToSgdRate).toFixed(2)}`);
+            return;
+          }
+        }
+      } catch (e2) {
+        if (notify) showToast('Offline — using cached FX rate');
+      }
+    }
+
+    // ========================================================
     // 1. COMPLETE 5-DAY ITINERARY DATA (ADHD-PACED & DETAILED)
     // ========================================================
     // === ITINERARY_DAYS_START ===
@@ -810,12 +826,6 @@
         pillSub: 'Arrival',
         fullTitle: 'Day 1 — Sunday, December 13: Arrival, Kuromon Lunch, Shopping & Neon Walk',
         area: 'Minami / Namba • Shinsaibashi',
-        mustBring: [
-          'Physical passports (immigration + 10% tax-free shopping on ¥5,500+)',
-          'Visit Japan Web QR codes & Scoot TR 880 booking',
-          'Phone with Digital ICOCA + portable charger',
-          'Warm outer jacket/layers & Ethan\'s water bottle'
-        ],
         directionsJp: [
           {
             badge: 'NANKAI NAMBA STATION',
@@ -946,12 +956,6 @@
         pillSub: 'LEGO Bay',
         fullTitle: 'Day 2 — Monday, December 14: Talk Shop Breakfast & Waterfront LEGO Day',
         area: 'Osaka Bay (Brown Sakaisuji → Green Chuo Line)',
-        mustBring: [
-          'Physical passport (10% tax-free shopping & ID)',
-          'Phone with Digital ICOCA + portable charger',
-          'LEGOLAND Discovery Center online timed e-ticket QR',
-          'Mandatory socks for Ethan (required for LEGO City Play Zone)'
-        ],
         directionsJp: [
           {
             badge: 'SAKAISUJI-HOMMACHI TRANSFER',
@@ -1056,13 +1060,6 @@
         pillSub: 'USJ Day',
         fullTitle: 'Day 3 — Tuesday, December 15: Yayoi-ken Breakfast & USJ Express Pass 5',
         area: 'Sakurajima / Bay (Hanshin Blue → JR Navy Blue)',
-        mustBring: [
-          'Physical passports (USJ ID check & 10% tax-free shopping)',
-          'Uncropped original USJ Studio Pass & Express Pass 5 QR codes',
-          'Phone with Digital ICOCA + portable charger',
-          'Beanie, scarf, gloves & pocket warmers (kairo)',
-          'NO outside food/drinks past security • NO park re-entry'
-        ],
         directionsJp: [
           {
             badge: 'KINTETSU-NIPPOMBASHI PLATFORM',
@@ -1132,7 +1129,7 @@
             title: 'Calm Security Entry & Super Nintendo World™ Buffer',
             summary: 'Clear X-ray security after the morning rush, get Ethan\'s 107 cm+ height wristband & stroll to Nintendo World.',
             details: [
-              'Keep physical passports and uncropped Klook QR codes ready at the gate.',
+              'Keep physical passports and uncropped Klook QR codes ready at the gate (NO outside food/drinks past security; NO park re-entry).',
               'Ask any crew member for Ethan\'s 107 cm+ height-confirmation wristband before heading to Super Nintendo World™.'
             ]
           },
@@ -1183,13 +1180,6 @@
         pillSub: 'Play & Art',
         fullTitle: 'Day 4 — Wednesday, December 16: Caffè Veloce, Kids Plaza, Book Forest & Art',
         area: 'Kita / Nakanoshima (Brown Sakaisuji & Teal Keihan)',
-        mustBring: [
-          'Physical passport (10% tax-free shopping & ID)',
-          'Phone with Digital ICOCA + portable charger',
-          'Kids Plaza Osaka pre-booked Klook/KKday mobile voucher',
-          'Nakanoshima Children\'s Book Forest reservation QR/number (Session C 13:30–15:00)',
-          'Lidded water bottle (NO food & NO coin lockers inside Book Forest)'
-        ],
         directionsJp: [
           {
             badge: 'OGIMACHI STATION EXIT 2',
@@ -1315,12 +1305,6 @@
         pillSub: 'Fly Home',
         fullTitle: 'Day 5 — Thursday, December 17: 8:00 AM Checkout & 11:30 AM Flight Home (TR 881)',
         area: 'Namba → KIX T1 → SIN',
-        mustBring: [
-          'Physical passports (immigration & tax-free receipts)',
-          'Scoot TR 881 booking confirmation (EYC6JZ)',
-          'Phone with Digital ICOCA + portable charger',
-          'Two 20 kg checked suitcases (strict bag drop cutoff 10:30 AM)'
-        ],
         directionsJp: [
           {
             badge: 'NANKAI NAMBA STATION',
@@ -1390,25 +1374,16 @@
       { id: 'u5-5', slot: 'Untimed Choice A', title: 'JAWS™ (Selected over Jurassic Park)', meta: 'Untimed Choice A • No height minimum • Stays 100% dry in Dec' }
     ];
 
-    // 3. WALLET QR PASSES
+    // 3. WALLET QR PASS SCANNERS (2 VJW + 1 USJ STUDIO PASS + 2 USJ EXPRESS PASS 5)
     const QR_PASSES = [
       { id: 'qr-vjw-heping', title: 'MR Wang Heping', subtitle: 'Visit Japan Web • KIX Arrival', tag: 'CUSTOMS / IMMIG', code: 'VJW-HEPING-8823131497' },
       { id: 'qr-vjw-ethan', title: 'MSTR Wang Renyu Ethan', subtitle: 'Visit Japan Web • KIX Arrival', tag: 'CUSTOMS / IMMIG', code: 'VJW-ETHAN-8823131497' },
-      { id: 'qr-usj', title: 'USJ Studio + Express 5', subtitle: 'USJ-P1X000000102MV / 102MW', tag: 'TUE DEC 15', code: 'P:1302.0.261026.47726' },
-      { id: 'qr-bookforest', title: 'Book Forest Session C', subtitle: 'Wed Dec 16 • 13:30–15:00', tag: 'WED DEC 16', code: 'BOOKFOREST-DEC16-1330' }
+      { id: 'qr-usj-studio', title: 'USJ 1-Day Studio Pass', subtitle: 'JNPMM / JNPMN • Tue Dec 15', tag: 'USJ STUDIO', code: 'P:1302.0.261121.21657' },
+      { id: 'qr-usj-express-1', title: 'USJ Express Pass 5 #1', subtitle: 'USJ-P1X000000102MV • 11:20 SNW', tag: 'EXPRESS 5 #1', code: 'P:1302.0.261026.47726' },
+      { id: 'qr-usj-express-2', title: 'USJ Express Pass 5 #2', subtitle: 'USJ-P1X000000102MW • 11:20 SNW', tag: 'EXPRESS 5 #2', code: 'P:1302.0.261026.47734' }
     ];
 
-    // 4. GUIDE -> PRE-TRIP ACTION CHECKLIST (IN PRIORITY ORDER)
-    const INITIAL_TASKS = [
-      { id: 't-bookforest', title: 'Set Calendar Alert for Wed, Dec 2 at 9:00 AM SGT (10:00 AM JST)', desc: 'Reserve your free Wed, Dec 16 (13:30–15:00) session at Nakanoshima Children\'s Book Forest (kodomohonnomori-osaka.resv.jp).', done: false },
-      { id: 't-legoland', title: 'Book LEGOLAND Discovery Center Osaka Online (1–2 weeks prior)', desc: 'Reserve timed entry for Mon, Dec 14 at 1:30 PM or 2:00 PM (after 2:00 PM gets the weekday afternoon discount).', done: false },
-      { id: 't-kidsplaza', title: 'Buy Kids Plaza Osaka Tickets in Advance (Online via Klook or KKday)', desc: 'Purchase 1 Adult + 1 Child mobile voucher before Wed, Dec 16 so you skip the 1F ticket counter queue on arrival.', done: false },
-      { id: 't-flights', title: 'Scoot Flights Booked (EYC6JZ • TR 880 & TR 881)', desc: 'Confirmed: Seats 32B/32C outbound, 11D/11E return, 2x 20kg checked bags.', done: true },
-      { id: 't-hyatt', title: 'Caption by Hyatt Namba Osaka Booked (#40023B32617210)', desc: 'Paid SGD 728.03: 1 Queen Bed City View, High Floor 10/11 & 11:00 AM arrival logged.', done: true },
-      { id: 't-usj', title: 'USJ Tickets Booked via Klook (Tue, Dec 15)', desc: '1-Day Studio Passes (JNPMM/JNPMN) + 2x Express Pass 5: Race & Minion Special (102MV/102MW).', done: true }
-    ];
-
-    // 5. GUIDE -> VENUE HOURS & CLOSURES (NATIONAL MUSEUM REMOVED)
+    // 4. GUIDE -> VENUE HOURS & CLOSURES
     const VENUE_HOURS = [
       { name: 'Kuromon Market', hours: 'Daily 9:00 AM – 6:00 PM (individual stalls vary; most close 5:00–5:30 PM)', cutoff: 'Best window: 9:00 AM – 2:00 PM', status: 'Open daily (a few fish stalls close Sundays)', tags: ['mon', 'wed'], nuance: 'Free entry; arrive at 1:00 PM Sunday for midday seafood grazing.' },
       { name: 'Shinsaibashi PARCO (6F) & Daimaru (9F)', hours: 'Retail: 10:00 AM – 8:00 PM | Dining floors: 11:00 AM – 10:00/11:00 PM', cutoff: 'Retail doors shut promptly at 8:00 PM', status: 'Open daily', tags: ['mon', 'wed'], nuance: 'Indoor & heated; 6F PARCO houses LEGO, SEGA, Godzilla, CAPCOM, Ghibli & Shin-chan; 9F Daimaru has Pokémon Center DX.' },
@@ -1421,7 +1396,7 @@
       { name: 'OSAKA Hikari-Renaissance (Nakanoshima)', hours: 'Nightly 5:00 PM – 10:00 PM (Dec 11 – Dec 25, 2026)', cutoff: 'Lights turn on at 5:00 PM', status: 'Nightly during run', tags: ['mon', 'wed', 'night'], nuance: 'Free waterfront light installations right outside Book Forest / Festival Plaza on Wed, Dec 16.' }
     ];
 
-    // 6. GUIDE -> ALL 27 DOOR-TO-DOOR GOOGLE MAPS ROUTES
+    // 5. GUIDE -> ALL 27 DOOR-TO-DOOR GOOGLE MAPS ROUTES
     const ALL_ROUTES = [
       { day: 'hub', dayLabel: 'Hotel Hub', mode: 'walking', time: '6–8m (400m)', title: 'Nankai Namba South Exit ⇄ Caption by Hyatt', origin: 'Nankai Namba Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'South Exit (南口) 1F street-level elevator onto Nansan-dori; flat walk east across Sakaisuji Ave.' },
       { day: 'hub', dayLabel: 'Hotel Hub', mode: 'walking', time: '3–4m (260m)', title: 'Caption by Hyatt → 7-Eleven Nipponbashi 3-chome', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: '7-Eleven Osaka Nipponbashi 3-chome, Osaka', notes: '24-hour konbini straight south on Sakaisuji Ave.' },
@@ -1458,7 +1433,7 @@
       { day: 'day5', dayLabel: 'Day 5 KIX', mode: 'transit', time: '39m', title: 'Nankai Namba → KIX T1 (8:30 AM Rapi:t β)', origin: 'Nankai Namba Station, Osaka', destination: 'Kansai International Airport Terminal 1, Osaka', notes: 'Arrives KIX T1 at 9:09 AM for 11:30 AM Scoot TR 881.' }
     ];
 
-    // 7. JAPANESE STATION & LANDMARK SHOW-CARDS (WALLET TAB)
+    // 6. JAPANESE STATION & LANDMARK SHOW-CARDS (WALLET TAB)
     const JP_PHRASES = {
       namba_exit: {
         badge: 'NANKAI NAMBA STATION',
@@ -1494,8 +1469,7 @@
       hyatt: 'Caption by Hyatt Reservation (#40023B32617210)',
       scoot: 'Scoot Flights Itinerary (EYC6JZ)',
       usj_studio: 'USJ 1-Day Studio Passes (JNPMM / JNPMN)',
-      usj_express: 'USJ Express Pass 5 (102MV / 102MW)',
-      osaka: 'Master Osaka.pdf (Reference Plan)'
+      usj_express: 'USJ Express Pass 5 (102MV / 102MW)'
     };
 
     // STATE
@@ -1583,11 +1557,10 @@
       show('badge-asset-hyatt', !!vaultCache['hyatt']);
       show('badge-asset-scoot', !!vaultCache['scoot']);
       show('badge-asset-usj', !!(vaultCache['usj_studio'] || vaultCache['usj_express']));
-      show('badge-asset-osaka', !!vaultCache['osaka']);
     }
 
     // ========================================================
-    // TAB 1: PLAN (RED PASSPORT CARD + CLEAN DETAILS + JP CARDS)
+    // TAB 1: PLAN (SINGLE-LINE CALLOUT + CLEAN DETAILS + JP CARDS)
     // ========================================================
     function renderDayPills() {
       const container = document.getElementById('day-pills-container');
@@ -1689,30 +1662,18 @@
         `;
       }
 
-      const mustBringList = day.mustBring || [
-        'Physical passport (10% tax-free shopping & ID)',
-        'Phone with Digital ICOCA + portable charger'
-      ];
-
       const container = document.getElementById('plan-day-container');
       container.innerHTML = `
-        <!-- RED BACKGROUND DAILY PASSPORT & MUST-BRING CARD -->
-        <div class="rounded-3xl bg-red-600 text-white p-4 shadow-float border border-red-500 space-y-2">
-          <div class="flex items-center gap-2 font-extrabold text-xs uppercase tracking-wider">
-            <span>🛂</span>
-            <span>Daily Must-Bring: Physical Passport + Essentials</span>
+        <!-- SINGLE-LINE WHITE CALLOUT REMINDER (3 ITEMS ONLY) -->
+        <div class="rounded-2xl bg-white dark:bg-slate-900 px-4 py-3 shadow-editorial border-2 border-rose-500/80 border-l-[6px] border-l-rose-600 flex items-center">
+          <div class="flex items-center gap-2.5 text-[13.5px] font-extrabold tracking-tight text-slate-900 dark:text-white whitespace-nowrap">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-600 shrink-0 animate-pulse"></span>
+            <span>Passport</span>
+            <span class="text-rose-500">•</span>
+            <span>Powerbank</span>
+            <span class="text-rose-500">•</span>
+            <span>Water bottle</span>
           </div>
-          <p class="text-xs text-red-100 leading-snug">
-            Carry your physical passport every day for 10% tax-free shopping (¥5,500+) and ID checks.
-          </p>
-          <ul class="space-y-1 text-xs font-medium text-white pt-1 border-t border-red-500/70">
-            ${mustBringList.map(item => `
-              <li class="flex items-start gap-2">
-                <span class="text-red-200 font-bold">✓</span>
-                <span>${item}</span>
-              </li>
-            `).join('')}
-          </ul>
         </div>
 
         <div class="px-1 space-y-1">
@@ -1964,17 +1925,15 @@
         }
       }
 
-      // 3. Fallback to configured static path
+      // 3. Fallback to static path
       if (!source) {
-        const savedPaths = JSON.parse(localStorage.getItem('osaka_vercel_paths_v2') || '{}');
         const defaults = {
           hyatt: '/docs/Hyatt_View_Reservation.pdf',
           scoot: '/docs/Itinerary_EYC6JZ.pdf',
           usj_studio: '/docs/usj_studio_pass.pdf',
-          usj_express: '/docs/express_pass.pdf',
-          osaka: '/docs/Osaka.pdf'
+          usj_express: '/docs/express_pass.pdf'
         };
-        source = savedPaths[key] || defaults[key];
+        source = defaults[key];
       }
 
       // If the user uploaded an image screenshot instead of a PDF
@@ -2086,10 +2045,10 @@
     }
 
     // ========================================================
-    // TAB 3: GUIDE (SEGMENTED SUB-VIEWS)
+    // TAB 3: GUIDE (WEATHER, HOURS & ALL MAPS)
     // ========================================================
     function switchGuideView(viewKey) {
-      const views = ['weather', 'tasks', 'hours', 'maps'];
+      const views = ['weather', 'hours', 'maps'];
       views.forEach(v => {
         const el = document.getElementById('guide-view-' + v);
         const btn = document.getElementById('gseg-' + v);
@@ -2167,59 +2126,6 @@
       } catch (e) {
         document.getElementById('weather-main-cond').textContent = 'Dec Avg: 11°C High / 4°C Low';
       }
-    }
-
-    function renderTasks() {
-      const saved = JSON.parse(localStorage.getItem('osaka_tasks_v2') || '{}');
-      const tasks = INITIAL_TASKS.map(t => ({
-        ...t,
-        done: saved[t.id] !== undefined ? saved[t.id] : t.done
-      }));
-
-      const pending = tasks.filter(t => !t.done);
-      const completed = tasks.filter(t => t.done);
-
-      document.getElementById('pending-badge-count').textContent = pending.length;
-      document.getElementById('tasks-status-pill').textContent = `${pending.length} Pending`;
-      document.getElementById('toggle-completed-btn').querySelector('span').textContent = `Show completed bookings (${completed.length})`;
-
-      document.getElementById('pending-tasks-list').innerHTML = pending.length
-        ? pending.map(t => `
-            <label onclick="toggleTask('${t.id}')" class="flex items-start gap-3 p-3.5 rounded-2xl bg-stone-50 dark:bg-slate-800/60 hover:bg-stone-100 dark:hover:bg-slate-800 cursor-pointer transition">
-              <input type="checkbox" class="mt-1 rounded text-rose-600 pointer-events-none" />
-              <div class="flex-1">
-                <div class="text-[13.5px] font-semibold text-slate-900 dark:text-white">${t.title}</div>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">${t.desc}</p>
-              </div>
-            </label>
-          `).join('')
-        : `<div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 text-xs font-semibold text-center">All pre-trip tasks completed!</div>`;
-
-      document.getElementById('completed-tasks-list').innerHTML = completed.map(t => `
-        <label onclick="toggleTask('${t.id}')" class="flex items-start gap-3 p-3 rounded-2xl bg-stone-50/70 dark:bg-slate-800/30 opacity-75 cursor-pointer transition">
-          <input type="checkbox" checked class="mt-1 rounded text-emerald-600 pointer-events-none" />
-          <div class="flex-1">
-            <div class="text-xs font-semibold line-through text-slate-600 dark:text-slate-400">${t.title}</div>
-            <p class="text-xs text-slate-500 mt-0.5">${t.desc}</p>
-          </div>
-        </label>
-      `).join('');
-    }
-
-    function toggleTask(id) {
-      const saved = JSON.parse(localStorage.getItem('osaka_tasks_v2') || '{}');
-      const base = INITIAL_TASKS.find(t => t.id === id);
-      const curr = saved[id] !== undefined ? saved[id] : base.done;
-      saved[id] = !curr;
-      localStorage.setItem('osaka_tasks_v2', JSON.stringify(saved));
-      renderTasks();
-    }
-
-    function toggleCompletedTasks() {
-      const list = document.getElementById('completed-tasks-list');
-      const icon = document.getElementById('completed-chevron');
-      const hidden = list.classList.toggle('hidden');
-      icon.style.transform = hidden ? 'rotate(0deg)' : 'rotate(180deg)';
     }
 
     function setHoursFilter(key) {
@@ -2334,33 +2240,6 @@
       document.getElementById('fullscreen-modal').classList.add('hidden');
     }
 
-    function openVercelModal() {
-      const saved = JSON.parse(localStorage.getItem('osaka_vercel_paths_v2') || '{}');
-      document.getElementById('vpath-hyatt').value = saved.hyatt || '/docs/Hyatt_View_Reservation.pdf';
-      document.getElementById('vpath-scoot').value = saved.scoot || '/docs/Itinerary_EYC6JZ.pdf';
-      document.getElementById('vpath-usj_studio').value = saved.usj_studio || '/docs/usj_studio_pass.pdf';
-      document.getElementById('vpath-usj_express').value = saved.usj_express || '/docs/express_pass.pdf';
-      document.getElementById('vpath-osaka').value = saved.osaka || '/docs/Osaka.pdf';
-      document.getElementById('vercel-modal').classList.remove('hidden');
-    }
-
-    function closeVercelModal() {
-      document.getElementById('vercel-modal').classList.add('hidden');
-    }
-
-    function saveVercelPaths() {
-      const paths = {
-        hyatt: document.getElementById('vpath-hyatt').value.trim() || '/docs/Hyatt_View_Reservation.pdf',
-        scoot: document.getElementById('vpath-scoot').value.trim() || '/docs/Itinerary_EYC6JZ.pdf',
-        usj_studio: document.getElementById('vpath-usj_studio').value.trim() || '/docs/usj_studio_pass.pdf',
-        usj_express: document.getElementById('vpath-usj_express').value.trim() || '/docs/express_pass.pdf',
-        osaka: document.getElementById('vpath-osaka').value.trim() || '/docs/Osaka.pdf'
-      };
-      localStorage.setItem('osaka_vercel_paths_v2', JSON.stringify(paths));
-      closeVercelModal();
-      showToast('Vercel static paths saved');
-    }
-
     function switchMainTab(tabKey) {
       ['plan', 'wallet', 'guide'].forEach(t => {
         const sec = document.getElementById('tab-' + t);
@@ -2430,9 +2309,7 @@
         if (!res.ok) return;
         const cloud = await res.json();
 
-        if (cloud.tasks) localStorage.setItem('osaka_tasks_v2', JSON.stringify(cloud.tasks));
         if (cloud.usj_pass5) localStorage.setItem('osaka_usj_pass5_done', JSON.stringify(cloud.usj_pass5));
-        if (cloud.vercel_paths) localStorage.setItem('osaka_vercel_paths_v2', JSON.stringify(cloud.vercel_paths));
 
         for (const [k, v] of Object.entries(cloud)) {
           if (k.startsWith('asset_') && v) {
@@ -2444,7 +2321,6 @@
         }
 
         renderPlanDay();
-        renderTasks();
         renderWalletQrGrid();
         updateAssetBadges();
         lucide.createIcons();
@@ -2459,22 +2335,10 @@
       await pushToNeon('asset_' + key, dataUrl);
     };
 
-    const _origToggleTask = toggleTask;
-    toggleTask = function(id) {
-      _origToggleTask(id);
-      pushToNeon('tasks', JSON.parse(localStorage.getItem('osaka_tasks_v2') || '{}'));
-    };
-
     const _origToggleUsj = toggleUsjPass5;
     toggleUsjPass5 = function(rideId) {
       _origToggleUsj(rideId);
       pushToNeon('usj_pass5', JSON.parse(localStorage.getItem('osaka_usj_pass5_done') || '{}'));
-    };
-
-    const _origSavePaths = saveVercelPaths;
-    saveVercelPaths = function() {
-      _origSavePaths();
-      pushToNeon('vercel_paths', JSON.parse(localStorage.getItem('osaka_vercel_paths_v2') || '{}'));
     };
 
     // INITIALIZE ON LOAD
@@ -2486,15 +2350,17 @@
       }
       updateJstClock();
       setInterval(updateJstClock, 15000);
+      updateFxBadge();
+      convertJpyToSgd();
       renderDayPills();
       renderPlanDay();
       renderWalletQrGrid();
-      renderTasks();
       renderHoursList();
       renderAllMapsList();
       loadVaultDB();
       pullFromNeon();
       fetchOsakaWeather(false);
+      fetchJpyToSgdRate(false);
       lucide.createIcons();
     };
   </script>

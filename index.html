@@ -99,7 +99,7 @@
         <!-- Compact Live Utility Pills -->
         <div class="flex items-center gap-1.5 shrink-0">
           <!-- Live Osaka Weather Pill -->
-          <button onclick="openWeatherFromHeader()" title="Live Osaka Weather" class="px-2.5 py-1.5 rounded-full bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800 flex items-center gap-1 text-xs font-mono font-semibold text-slate-700 dark:text-slate-200 hover:text-rose-600 transition">
+          <button onclick="openWeatherFromHeader()" title="Osaka Weather" class="px-2.5 py-1.5 rounded-full bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800 flex items-center gap-1 text-xs font-mono font-semibold text-slate-700 dark:text-slate-200 hover:text-rose-600 transition">
             <span id="header-weather-icon">🌤️</span>
             <span id="header-weather-temp">--°C</span>
           </button>
@@ -109,8 +109,8 @@
             <span class="text-[10px] text-slate-400 mr-0.5">JST</span><span id="jst-clock">--:--</span>
           </div>
 
-          <!-- Quick Station & Landmark JP Directions -->
-          <button onclick="scrollToDayDirections()" title="Ask for Station & Landmark Directions in Japanese" class="p-2 rounded-full bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800 text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800 transition">
+          <!-- Quick Japanese Translator Shortcut -->
+          <button onclick="openTranslatorFromHeader()" title="Japanese Translator Guide" class="p-2 rounded-full bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800 text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800 transition">
             <i data-lucide="languages" class="w-4 h-4"></i>
           </button>
 
@@ -136,7 +136,7 @@
       </section>
 
       <!-- ====================================================== -->
-      <!-- TAB 2: WALLET (FX, QRS, PASSES, SHOW-CARDS & BUDGET)   -->
+      <!-- TAB 2: WALLET (FX, QRS, PASSES & BUDGET)               -->
       <!-- ====================================================== -->
       <section id="tab-wallet" class="hidden space-y-5">
 
@@ -227,8 +227,8 @@
               <button onclick="openPdfFile('hyatt')" class="flex-1 py-2.5 px-3.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold flex items-center justify-center gap-1.5">
                 <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Open Hyatt PDF
               </button>
-              <button onclick="openPhraseModal('namba_exit')" class="py-2.5 px-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-1.5">
-                <i data-lucide="languages" class="w-3.5 h-3.5"></i> Station Exit JP
+              <button onclick="openTranslatorFromHeader('trains')" class="py-2.5 px-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-1.5">
+                <i data-lucide="languages" class="w-3.5 h-3.5"></i> Station JP
               </button>
               <label class="p-2.5 rounded-2xl bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer" title="Upload PDF">
                 <i data-lucide="upload" class="w-4 h-4"></i>
@@ -340,32 +340,7 @@
           </div>
         </div>
 
-        <!-- 4. JAPANESE STATION & LANDMARK SHOW-CARDS -->
-        <div class="space-y-2.5">
-          <div class="px-1">
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Japanese Station & Landmark Show-Cards</span>
-          </div>
-          <div class="grid grid-cols-2 gap-3">
-            <button onclick="openPhraseModal('namba_exit')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
-              <div class="text-sm font-bold text-slate-900 dark:text-white">🛗 Namba South Exit</div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">1F Elevator to Nansan-dori & Hotel</p>
-            </button>
-            <button onclick="openPhraseModal('yoji')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
-              <div class="text-sm font-bold text-slate-900 dark:text-white">🚃 6yo Free Rule</div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Preschooler (Yōji) train gate pass</p>
-            </button>
-            <button onclick="openPhraseModal('usj_nishikujo')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
-              <div class="text-sm font-bold text-slate-900 dark:text-white">🎢 USJ Nishikujo</div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">JR Yumesaki Platform 3 transfer</p>
-            </button>
-            <button onclick="openPhraseModal('nakanoshima_landmarks')" class="p-4 rounded-3xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800/80 text-left hover:border-rose-500 transition space-y-1">
-              <div class="text-sm font-bold text-slate-900 dark:text-white">🏛️ Day 4 Landmarks</div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Kids Plaza, Book Forest & Museum</p>
-            </button>
-          </div>
-        </div>
-
-        <!-- 5. ON-GROUND BUDGET & PAYMENT SPLIT -->
+        <!-- 4. ON-GROUND BUDGET & PAYMENT SPLIT -->
         <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
           <div class="flex items-center justify-between gap-2">
             <h3 class="text-[15px] font-bold text-slate-900 dark:text-white">On-Ground Budget</h3>
@@ -479,19 +454,22 @@
       </section>
 
       <!-- ====================================================== -->
-      <!-- TAB 3: GUIDE (WEATHER, HOURS & ALL MAPS)               -->
+      <!-- TAB 3: GUIDE (WEATHER, TRANSLATOR, HOURS & ALL MAPS)   -->
       <!-- ====================================================== -->
       <section id="tab-guide" class="hidden space-y-4">
 
-        <!-- 3-Pill Segmented Sub-View Switcher -->
-        <div class="p-1.5 rounded-2xl bg-stone-200/70 dark:bg-slate-900 grid grid-cols-3 gap-1">
-          <button onclick="switchGuideView('weather')" id="gseg-weather" class="gseg-btn py-2 px-2 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm text-xs font-semibold transition">
+        <!-- 4-Pill Segmented Sub-View Switcher -->
+        <div class="p-1.5 rounded-2xl bg-stone-200/70 dark:bg-slate-900 grid grid-cols-4 gap-1">
+          <button onclick="switchGuideView('weather')" id="gseg-weather" class="gseg-btn py-2 px-1.5 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm text-xs font-semibold transition">
             Weather
           </button>
-          <button onclick="switchGuideView('hours')" id="gseg-hours" class="gseg-btn py-2 px-2 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition">
+          <button onclick="switchGuideView('translator')" id="gseg-translator" class="gseg-btn py-2 px-1.5 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition">
+            Translator
+          </button>
+          <button onclick="switchGuideView('hours')" id="gseg-hours" class="gseg-btn py-2 px-1.5 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition">
             Hours
           </button>
-          <button onclick="switchGuideView('maps')" id="gseg-maps" class="gseg-btn py-2 px-2 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition">
+          <button onclick="switchGuideView('maps')" id="gseg-maps" class="gseg-btn py-2 px-1.5 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition">
             All Maps
           </button>
         </div>
@@ -499,14 +477,8 @@
         <!-- GUIDE SUB-VIEW 1: AUTO-UPDATED LIVE OSAKA WEATHER -->
         <div id="guide-view-weather" class="space-y-4">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-4">
-            <div class="flex items-start justify-between">
-              <div>
-                <div class="flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                  <span class="text-xs font-medium text-slate-500 dark:text-slate-400">Auto-Updated Osaka Weather</span>
-                </div>
-                <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-0.5">Osaka-shi, Japan</h2>
-              </div>
+            <div>
+              <h2 class="text-lg font-bold text-slate-900 dark:text-white">Osaka-shi, Japan</h2>
             </div>
 
             <div class="flex items-baseline justify-between">
@@ -545,7 +517,28 @@
           </div>
         </div>
 
-        <!-- GUIDE SUB-VIEW 2: VENUE HOURS (OPEN HOURS ONLY) -->
+        <!-- GUIDE SUB-VIEW 2: COMPREHENSIVE JAPANESE TRANSLATOR GUIDE -->
+        <div id="guide-view-translator" class="hidden space-y-3">
+          <div class="space-y-2.5">
+            <div class="relative">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+              <input id="translator-search-input" oninput="renderTranslatorList()" type="text" placeholder="Search phrase (e.g. elevator, Nishikujo, tax-free, ramen, 6yo)..." class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white dark:bg-slate-900 shadow-editorial dark:border dark:border-slate-800 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/30" />
+            </div>
+
+            <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+              <button onclick="setTranslatorFilter('all')" data-tfilter="all" class="trans-pill px-3 py-1.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold shrink-0">All (26)</button>
+              <button onclick="setTranslatorFilter('trains')" data-tfilter="trains" class="trans-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Trains & Exits</button>
+              <button onclick="setTranslatorFilter('tickets')" data-tfilter="tickets" class="trans-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Tickets & 6yo</button>
+              <button onclick="setTranslatorFilter('dining')" data-tfilter="dining" class="trans-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Hotel & Dining</button>
+              <button onclick="setTranslatorFilter('shopping')" data-tfilter="shopping" class="trans-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Shopping & Tax-Free</button>
+              <button onclick="setTranslatorFilter('help')" data-tfilter="help" class="trans-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0">Taxi & Help</button>
+            </div>
+          </div>
+
+          <div id="translator-list-container" class="space-y-3"></div>
+        </div>
+
+        <!-- GUIDE SUB-VIEW 3: VENUE OPEN HOURS -->
         <div id="guide-view-hours" class="hidden space-y-3">
           <div class="space-y-2.5">
             <div class="relative">
@@ -564,7 +557,7 @@
           <div id="hours-list-container" class="space-y-3"></div>
         </div>
 
-        <!-- GUIDE SUB-VIEW 3: ALL DOOR-TO-DOOR GOOGLE MAPS -->
+        <!-- GUIDE SUB-VIEW 4: ALL DOOR-TO-DOOR GOOGLE MAPS -->
         <div id="guide-view-maps" class="hidden space-y-3.5">
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-4 shadow-editorial dark:border dark:border-slate-800/80 space-y-2">
             <div class="flex items-center justify-between gap-2">
@@ -572,7 +565,7 @@
                 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                 <h3 class="text-sm font-bold text-slate-900 dark:text-white">Preschooler Rule (幼児 / Yōji): Ethan Rides Free</h3>
               </div>
-              <button onclick="openPhraseModal('yoji')" class="px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-xs font-semibold shrink-0">
+              <button onclick="openTranslatorPhrase('tr-yoji')" class="px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-xs font-semibold shrink-0">
                 Show JP
               </button>
             </div>
@@ -799,44 +792,22 @@
           }
         }
       } catch (e2) {
-        // Silently retain cached FX rate when offline
+        // Retain cached rate when offline
       }
     }
 
     // ========================================================
-    // 1. COMPLETE 5-DAY ITINERARY DATA (ADHD-PACED & DETAILED)
+    // 1. COMPLETE 5-DAY ITINERARY DATA (DATES ON EVERY CARD)
     // ========================================================
     // === ITINERARY_DAYS_START ===
     const ITINERARY_DAYS = [
       {
         id: 'day1',
-        pillDay: 'Sun 13',
-        pillSub: 'Arrival',
-        fullTitle: 'Day 1 — Sunday, December 13: Arrival, Kuromon Lunch, Shopping & Neon Walk',
+        pillDate: 'Dec 13',
+        pillDay: 'Sun • Arrival',
+        shortDate: 'Sun, Dec 13',
+        fullTitle: 'Sun, Dec 13 — Arrival, Kuromon Lunch, Shopping & Neon Walk',
         area: 'Minami / Namba • Shinsaibashi',
-        directionsJp: [
-          {
-            badge: 'NANKAI NAMBA STATION',
-            label: 'South Exit (南口) 1F Elevator → Nansan-dori / Hotel',
-            jp: 'すみません、南海なんば駅の「南口（なんさん通り方面）」の1階エレベーターはどこですか？',
-            romaji: 'Sumimasen, Nankai Namba-eki no "Minami-guchi (Nansan-dōri hōmen)" no ikkai erebētā wa doko desu ka?',
-            en: 'Excuse me, where is the 1F street-level elevator for Nankai Namba Station\'s South Exit toward Nansan-dori?'
-          },
-          {
-            badge: 'HOTEL LANDMARK',
-            label: 'Caption by Hyatt Namba Osaka (Nippombashi 2-7-5)',
-            jp: 'すみません、「キャプション by Hyatt なんば 大阪」（日本橋2-7-5）はどちらですか？',
-            romaji: 'Sumimasen, "Caption by Hyatt Namba Osaka" (Nippombashi 2-7-5) wa dochira desu ka?',
-            en: 'Excuse me, which way is Caption by Hyatt Namba Osaka (2-7-5 Nippombashi)?'
-          },
-          {
-            badge: 'NIPPOMBASHI → SHINSAIBASHI PARCO',
-            label: 'Nippombashi Exit 5 Elevator / Brown Sakaisuji Line → PARCO',
-            jp: 'すみません、日本橋駅の「5番出口（エレベーター）」／「心斎橋パルコ」へはどう行けばいいですか？',
-            romaji: 'Sumimasen, Nippombashi-eki no "Goban-deguchi (erebētā)" / "Shinsaibashi PARCO" e wa dō ikeba ii desu ka?',
-            en: 'Excuse me, how do I get to Nippombashi Station Exit 5 elevator / Shinsaibashi PARCO?'
-          }
-        ],
         events: [
           {
             time: '10:15 AM – 11:35 AM',
@@ -940,33 +911,11 @@
       },
       {
         id: 'day2',
-        pillDay: 'Mon 14',
-        pillSub: 'LEGO Bay',
-        fullTitle: 'Day 2 — Monday, December 14: Talk Shop Breakfast & Waterfront LEGO Day',
+        pillDate: 'Dec 14',
+        pillDay: 'Mon • LEGO Bay',
+        shortDate: 'Mon, Dec 14',
+        fullTitle: 'Mon, Dec 14 — Talk Shop Breakfast & Waterfront LEGO Day',
         area: 'Osaka Bay (Brown Sakaisuji → Green Chuo Line)',
-        directionsJp: [
-          {
-            badge: 'SAKAISUJI-HOMMACHI TRANSFER',
-            label: 'Transfer to Green Chuo Line (toward Cosmosquare)',
-            jp: 'すみません、堺筋本町駅で「中央線（緑色・コスモスクエア方面）」への乗り換えはどちらですか？',
-            romaji: 'Sumimasen, Sakaisuji-Hommachi-eki de "Chūō-sen (midori-iro / Kosumosukuea hōmen)" e no norikae wa dochira desu ka?',
-            en: 'Excuse me, which way is the transfer at Sakaisuji-Hommachi to the Green Chuo Line toward Cosmosquare?'
-          },
-          {
-            badge: 'OSAKAKO STATION → LEGOLAND',
-            label: 'Osakako Exit 1 Elevator → Tempozan Marketplace / LEGOLAND',
-            jp: 'すみません、大阪港駅の「1番出口（エレベーター）」／「天保山マーケットプレース（レゴランド）」はどちらですか？',
-            romaji: 'Sumimasen, Ōsakakō-eki no "Ichiban-deguchi (erebētā)" / "Tenpōzan Mākettopurēsu (Regorando)" wa dochira desu ka?',
-            en: 'Excuse me, which way is Osakako Station Exit 1 elevator / Tempozan Marketplace & LEGOLAND?'
-          },
-          {
-            badge: 'RETURN TO NAMBA / NIPPOMBASHI',
-            label: 'Sakaisuji-Hommachi Transfer to Brown Sakaisuji Line (toward Tengachaya)',
-            jp: 'すみません、堺筋本町駅で「堺筋線（茶色・天下茶屋・日本橋方面）」への乗り換えはどちらですか？',
-            romaji: 'Sumimasen, Sakaisuji-Hommachi-eki de "Sakaisuji-sen (chairo / Tengachaya / Nippombashi hōmen)" e no norikae wa dochira desu ka?',
-            en: 'Excuse me, which way is the transfer at Sakaisuji-Hommachi to the Brown Sakaisuji Line toward Tengachaya / Nippombashi?'
-          }
-        ],
         events: [
           {
             time: '8:30 AM – 10:30 AM',
@@ -1013,7 +962,7 @@
             title: 'LEGOLAND Discovery Center Osaka (Tempozan 3F)',
             summary: '100% indoor LEGO rides, 4D Cinema, soft-play climbing zone & Miniland Osaka (open 10:00 AM – 6:00 PM).',
             details: [
-              'Open 10:00 AM – 6:00 PM (last admission 4:00 PM; 3-hour timed stay limit). Online timed ticket required (no walk-up counter).',
+              'Open 10:00 AM – 6:00 PM (last admission 4:00 PM; 3-hour timed stay limit). Online timed ticket required.',
               'Rides & Zones for Ethan (~1.15 m): Kingdom Quest, Merlin\'s Apprentice, 4D LEGO Cinema, Miniland Osaka, and LEGO City Play Zone (socks mandatory).'
             ],
             route: {
@@ -1044,33 +993,11 @@
       },
       {
         id: 'day3',
-        pillDay: 'Tue 15',
-        pillSub: 'USJ Day',
-        fullTitle: 'Day 3 — Tuesday, December 15: Yayoi-ken Breakfast & USJ Express Pass 5',
+        pillDate: 'Dec 15',
+        pillDay: 'Tue • USJ Day',
+        shortDate: 'Tue, Dec 15',
+        fullTitle: 'Tue, Dec 15 — Yayoi-ken Breakfast & USJ Express Pass 5',
         area: 'Sakurajima / Bay (Hanshin Blue → JR Navy Blue)',
-        directionsJp: [
-          {
-            badge: 'KINTETSU-NIPPOMBASHI PLATFORM',
-            label: 'Confirm Westbound Train Stops at Nishikujo',
-            jp: 'すみません、この電車は「西九条（尼崎・神戸三宮方面）」に停まりますか？',
-            romaji: 'Sumimasen, kono densha wa "Nishikujō (Amagasaki / Kōbe-Sannomiya hōmen)" ni tomarimasu ka?',
-            en: 'Excuse me, does this train stop at Nishikujo toward Amagasaki / Kobe-Sannomiya?'
-          },
-          {
-            badge: 'NISHIKUJO TRANSFER TO USJ',
-            label: 'JR Nishikujo Gate & Platform 3 (JR Yumesaki Line to Universal City)',
-            jp: 'すみません、西九条駅で「JRゆめ咲線（3番のりば・ユニバーサルシティ方面）」の改札はどこですか？',
-            romaji: 'Sumimasen, Nishikujō-eki de "JR Yumesaki-sen (Sanban-noriba / Yunibāsaru Shiti hōmen)" no kaisatsu wa doko desu ka?',
-            en: 'Excuse me, where is the ticket gate at Nishikujo for JR Yumesaki Line Platform 3 toward Universal City?'
-          },
-          {
-            badge: 'NISHIKUJO RETURN TO NAMBA',
-            label: 'Hanshin Line to Kintetsu-Nippombashi (toward Nara)',
-            jp: 'すみません、この電車は「近鉄日本橋（奈良・東花園方面）」に行きますか？',
-            romaji: 'Sumimasen, kono densha wa "Kintetsu-Nippombashi (Nara / Higashi-Hanazono hōmen)" ni ikimasu ka?',
-            en: 'Excuse me, does this train go to Kintetsu-Nippombashi toward Nara / Higashi-Hanazono?'
-          }
-        ],
         isUsjDay: true,
         events: [
           {
@@ -1164,33 +1091,11 @@
       },
       {
         id: 'day4',
-        pillDay: 'Wed 16',
-        pillSub: 'Play & Art',
-        fullTitle: 'Day 4 — Wednesday, December 16: Caffè Veloce, Kids Plaza, Book Forest & Art',
+        pillDate: 'Dec 16',
+        pillDay: 'Wed • Play & Art',
+        shortDate: 'Wed, Dec 16',
+        fullTitle: 'Wed, Dec 16 — Caffè Veloce, Kids Plaza, Book Forest & Art',
         area: 'Kita / Nakanoshima (Brown Sakaisuji & Teal Keihan)',
-        directionsJp: [
-          {
-            badge: 'OGIMACHI STATION EXIT 2',
-            label: 'Ogimachi Exit 2 Elevator → Kids Plaza Osaka',
-            jp: 'すみません、扇町駅の「2番出口（エレベーター）」／「キッズプラザ大阪」はどちらですか？',
-            romaji: 'Sumimasen, Ōgimachi-eki no "Niban-deguchi (erebētā)" / "Kizzu Puraza Ōsaka" wa dochira desu ka?',
-            en: 'Excuse me, which way is Ogimachi Station Exit 2 elevator / Kids Plaza Osaka?'
-          },
-          {
-            badge: 'KITAHAMA / NANIWABASHI → BOOK FOREST',
-            label: 'Naniwabashi Exits 2/3 Elevator → Nakanoshima Children\'s Book Forest',
-            jp: 'すみません、「こども本の森 中之島」（なにわ橋駅 2番・3番出口方面）はどちらですか？',
-            romaji: 'Sumimasen, "Kodomo Hon no Mori Nakanoshima" (Naniwabashi-eki Niban / Sanban-deguchi hōmen) wa dochira desu ka?',
-            en: 'Excuse me, which way is Nakanoshima Children\'s Book Forest toward Naniwabashi Station Exits 2 & 3?'
-          },
-          {
-            badge: 'WATANABEBASHI EXIT 2 → ART MUSEUM & DINNER',
-            label: 'Nakanoshima Museum of Art & Festival Plaza B1F (Ramen Jikon)',
-            jp: 'すみません、「大阪中之島美術館」／「中之島フェスティバルプラザ（地下1階）」はどちらですか？',
-            romaji: 'Sumimasen, "Ōsaka Nakanoshima Bijutsukan" / "Nakanoshima Fesutibaru Puraza (Chika ikkai)" wa dochira desu ka?',
-            en: 'Excuse me, which way is Nakanoshima Museum of Art / Nakanoshima Festival Plaza B1F?'
-          }
-        ],
         events: [
           {
             time: '8:15 AM – 9:15 AM',
@@ -1289,19 +1194,11 @@
       },
       {
         id: 'day5',
-        pillDay: 'Thu 17',
-        pillSub: 'Fly Home',
-        fullTitle: 'Day 5 — Thursday, December 17: 8:00 AM Checkout & 11:30 AM Flight Home (TR 881)',
+        pillDate: 'Dec 17',
+        pillDay: 'Thu • Fly Home',
+        shortDate: 'Thu, Dec 17',
+        fullTitle: 'Thu, Dec 17 — 8:00 AM Checkout & 11:30 AM Flight Home (TR 881)',
         area: 'Namba → KIX T1 → SIN',
-        directionsJp: [
-          {
-            badge: 'NANKAI NAMBA STATION',
-            label: 'South Exit 1F Elevator up to 3F North Ticket Gate (Rapi:t to KIX)',
-            jp: 'すみません、南海なんば駅の「3階北改札口（関西空港行きラピート乗り場）」へのエレベーターはどこですか？',
-            romaji: 'Sumimasen, Nankai Namba-eki no "Sangai Kita-kaisatsuguchi (Kansai-Kūkō-yuki Rapīto noriba)" e no erebētā wa doko desu ka?',
-            en: 'Excuse me, where is the elevator to Nankai Namba Station 3F North Ticket Gate for the Rapi:t to Kansai Airport?'
-          }
-        ],
         events: [
           {
             time: '7:25 AM – 7:55 AM',
@@ -1371,7 +1268,254 @@
       { id: 'qr-usj-studio', title: 'USJ 1-Day Studio Pass', subtitle: 'JNPMM / JNPMN • Tue Dec 15', tag: 'USJ STUDIO', code: 'P:1302.0.261121.21657', fullWidth: true }
     ];
 
-    // 4. GUIDE -> VENUE OPEN HOURS ONLY (NO CLOSED HOURS LABELS)
+    // 4. GUIDE -> COMPREHENSIVE JAPANESE TRANSLATOR PHRASEBOOK (26 PHRASES)
+    const TRANSLATOR_PHRASES = [
+      // TRAINS & STATION EXITS (12)
+      {
+        id: 'tr-namba-south',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Nankai Namba South Exit (南口) 1F Elevator → Hotel',
+        jp: 'すみません、南海なんば駅の「南口（なんさん通り方面）」の1階エレベーターはどこですか？',
+        romaji: 'Sumimasen, Nankai Namba-eki no "Minami-guchi (Nansan-dōri hōmen)" no ikkai erebētā wa doko desu ka?',
+        en: 'Excuse me, where is the 1F street-level elevator for Nankai Namba Station\'s South Exit toward Nansan-dori?'
+      },
+      {
+        id: 'tr-namba-3f-rapit',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Nankai Namba 3F North Gate Elevator → Rapi:t to KIX Airport',
+        jp: 'すみません、南海なんば駅の「3階北改札口（関西空港行きラピート乗り場）」へのエレベーターはどこですか？',
+        romaji: 'Sumimasen, Nankai Namba-eki no "Sangai Kita-kaisatsuguchi (Kansai-Kūkō-yuki Rapīto noriba)" e no erebētā wa doko desu ka?',
+        en: 'Excuse me, where is the elevator to Nankai Namba Station 3F North Ticket Gate for the Rapi:t to Kansai Airport?'
+      },
+      {
+        id: 'tr-nippombashi-exit5',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Nippombashi Station Exit 5 Elevator / Brown Sakaisuji Line',
+        jp: 'すみません、日本橋駅の「5番出口（エレベーター）」／「堺筋線（茶色）」の改札はどこですか？',
+        romaji: 'Sumimasen, Nippombashi-eki no "Goban-deguchi (erebētā)" / "Sakaisuji-sen (chairo)" no kaisatsu wa doko desu ka?',
+        en: 'Excuse me, where is Nippombashi Station Exit 5 elevator / the Brown Sakaisuji Line ticket gate?'
+      },
+      {
+        id: 'tr-parco-crysta',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Nagahoribashi → Shinsaibashi PARCO (via Crysta Nagahori)',
+        jp: 'すみません、地下街（クリスタ長堀）を通って「心斎橋パルコ」へはどう行けばいいですか？',
+        romaji: 'Sumimasen, chikagai (Kurisuta Nagahori) o tōtte "Shinsaibashi PARCO" e wa dō ikeba ii desu ka?',
+        en: 'Excuse me, how do I get to Shinsaibashi PARCO through the Crysta Nagahori underground mall?'
+      },
+      {
+        id: 'tr-chuo-transfer',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Sakaisuji-Hommachi → Green Chuo Line (toward Osakako)',
+        jp: 'すみません、堺筋本町駅で「中央線（緑色・コスモスクエア・大阪港方面）」への乗り換えはどちらですか？',
+        romaji: 'Sumimasen, Sakaisuji-Hommachi-eki de "Chūō-sen (midori-iro / Kosumosukuea / Ōsakakō hōmen)" e no norikae wa dochira desu ka?',
+        en: 'Excuse me, which way is the transfer at Sakaisuji-Hommachi to the Green Chuo Line toward Cosmosquare / Osakako?'
+      },
+      {
+        id: 'tr-sakaisuji-return',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Sakaisuji-Hommachi → Brown Sakaisuji Line (toward Nippombashi)',
+        jp: 'すみません、堺筋本町駅で「堺筋線（茶色・天下茶屋・日本橋方面）」への乗り換えはどちらですか？',
+        romaji: 'Sumimasen, Sakaisuji-Hommachi-eki de "Sakaisuji-sen (chairo / Tengachaya / Nippombashi hōmen)" e no norikae wa dochira desu ka?',
+        en: 'Excuse me, which way is the transfer at Sakaisuji-Hommachi to the Brown Sakaisuji Line toward Tengachaya / Nippombashi?'
+      },
+      {
+        id: 'tr-osakako-exit1',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Osakako Station Exit 1 Elevator → Tempozan / LEGOLAND',
+        jp: 'すみません、大阪港駅の「1番出口（エレベーター）」／「天保山マーケットプレース（レゴランド）」はどちらですか？',
+        romaji: 'Sumimasen, Ōsakakō-eki no "Ichiban-deguchi (erebētā)" / "Tenpōzan Mākettopurēsu (Regorando)" wa dochira desu ka?',
+        en: 'Excuse me, which way is Osakako Station Exit 1 elevator / Tempozan Marketplace & LEGOLAND?'
+      },
+      {
+        id: 'tr-usj-nishikujo-check',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Kintetsu-Nippombashi: Does This Train Stop at Nishikujo?',
+        jp: 'すみません、この電車は「西九条（尼崎・神戸三宮方面）」に停まりますか？',
+        romaji: 'Sumimasen, kono densha wa "Nishikujō (Amagasaki / Kōbe-Sannomiya hōmen)" ni tomarimasu ka?',
+        en: 'Excuse me, does this train stop at Nishikujo toward Amagasaki / Kobe-Sannomiya?'
+      },
+      {
+        id: 'tr-nishikujo-jr3',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Nishikujo Transfer → JR Yumesaki Line Platform 3 (to USJ)',
+        jp: 'すみません、西九条駅で「JRゆめ咲線（3番のりば・ユニバーサルシティ方面）」の改札はどこですか？',
+        romaji: 'Sumimasen, Nishikujō-eki de "JR Yumesaki-sen (Sanban-noriba / Yunibāsaru Shiti hōmen)" no kaisatsu wa doko desu ka?',
+        en: 'Excuse me, where is the ticket gate at Nishikujo for JR Yumesaki Line Platform 3 toward Universal City?'
+      },
+      {
+        id: 'tr-nishikujo-hanshin-back',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Nishikujo Return → Hanshin/Kintetsu Line to Kintetsu-Nippombashi',
+        jp: 'すみません、この電車は「近鉄日本橋（奈良・東花園方面）」に行きますか？',
+        romaji: 'Sumimasen, kono densha wa "Kintetsu-Nippombashi (Nara / Higashi-Hanazono hōmen)" ni ikimasu ka?',
+        en: 'Excuse me, does this train go to Kintetsu-Nippombashi toward Nara / Higashi-Hanazono?'
+      },
+      {
+        id: 'tr-ogimachi-exit2',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Ogimachi Station Exit 2 Elevator → Kids Plaza Osaka',
+        jp: 'すみません、扇町駅の「2番出口（エレベーター）」／「キッズプラザ大阪」はどちらですか？',
+        romaji: 'Sumimasen, Ōgimachi-eki no "Niban-deguchi (erebētā)" / "Kizzu Puraza Ōsaka" wa dochira desu ka?',
+        en: 'Excuse me, which way is Ogimachi Station Exit 2 elevator / Kids Plaza Osaka?'
+      },
+      {
+        id: 'tr-nakanoshima-exits',
+        cat: 'trains',
+        catLabel: 'Trains & Exits',
+        title: 'Book Forest (Naniwabashi Exit 2/3) & Art Museum (Watanabebashi Exit 2)',
+        jp: 'すみません、「こども本の森 中之島」（なにわ橋駅 2番・3番出口）／「大阪中之島美術館」（渡辺橋駅 2番出口）はどちらですか？',
+        romaji: 'Sumimasen, "Kodomo Hon no Mori Nakanoshima" (Naniwabashi-eki Niban / Sanban-deguchi) / "Ōsaka Nakanoshima Bijutsukan" (Watanabebashi-eki Niban-deguchi) wa dochira desu ka?',
+        en: 'Excuse me, which way is Nakanoshima Children\'s Book Forest (Naniwabashi Exits 2/3) / Nakanoshima Museum of Art (Watanabebashi Exit 2)?'
+      },
+
+      // TICKETS & 6YO PRESCHOOLER RULES (4)
+      {
+        id: 'tr-yoji',
+        cat: 'tickets',
+        catLabel: 'Tickets & 6yo',
+        title: '6-Year-Old Preschooler (幼児 / Yōji) Free Train Gate Rule',
+        jp: 'この子は6歳ですが、まだ小学校入学前（未就学児／幼児）です。\n大人1名と一緒に乗車します。',
+        romaji: 'Kono ko wa roku-sai desu ga, mada shōgakkō nyūgaku mae (mishūgakuji / yōji) desu. Otona ichi-mei to issho ni jōsha shimasu.',
+        en: 'This child is 6 years old, but has not yet entered elementary school (preschooler / Yōji class), riding together with 1 paying adult.'
+      },
+      {
+        id: 'tr-rapit-counter',
+        cat: 'tickets',
+        catLabel: 'Tickets & 6yo',
+        title: 'Nankai Rapi:t Counter: 1 Adult Seat + 6yo on Lap (Free)',
+        jp: '次のラピート（なんば ⇄ 関西空港）の特急券を大人1枚お願いします。\n（※6歳の未就学児1名は膝の上に乗せます）',
+        romaji: 'Tsugi no Rapīto no tokkyūken o otona ichi-mai onegaishimasu. (Roku-sai no mishūgakuji ichi-mei wa hiza no ue ni nosemasu.)',
+        en: 'One adult ticket for the next Nankai Rapi:t Limited Express, please. (My 6-year-old preschooler will sit on my lap.)'
+      },
+      {
+        id: 'tr-usj-wristband',
+        cat: 'tickets',
+        catLabel: 'Tickets & 6yo',
+        title: 'USJ 107cm+ Height Wristband & Express Pass Check',
+        jp: 'すみません、子供の身長（107cm以上）の確認リストバンドをお願いできますか？また、エクスプレス・パスの入場時間を確認したいです。',
+        romaji: 'Sumimasen, kodomo no shinchō (hyaku-nana senchi ijō) no kakunin risutobando o onegai dekimasu ka? Mata, Ekusupuresu Pasu no nyūjō jikan o kakunin shitai desu.',
+        en: 'Excuse me, could we get a 107cm+ height-confirmation wristband for my child? Also, we\'d like to confirm our Express Pass entry time.'
+      },
+      {
+        id: 'tr-qr-voucher',
+        cat: 'tickets',
+        catLabel: 'Tickets & 6yo',
+        title: 'Pre-Booked Mobile QR Voucher Entry (Kids Plaza / Book Forest / LEGOLAND)',
+        jp: '事前予約済みのQRコードチケットを持っています。こちらから入場できますか？',
+        romaji: 'Jizen yoyaku-zumi no QR kōdo chiketto o motte imasu. Kochira kara nyūjō dekimasu ka?',
+        en: 'We have pre-booked QR code tickets. Can we enter here?'
+      },
+
+      // HOTEL & DINING (5)
+      {
+        id: 'tr-hotel-checkin',
+        cat: 'dining',
+        catLabel: 'Hotel & Dining',
+        title: 'Caption by Hyatt: Bag Drop / Check-In (#40023B32617210)',
+        jp: '予約番号 #40023B32617210（WANG HEPING）です。\nチェックイン前ですが、荷物を預かっていただけますか？ありがとうございます。',
+        romaji: 'Yoyaku bangō #40023B32617210 (Wang Heping) desu. Chekku-in mae desu ga, nimotsu o azukatte itadakemasu ka? Arigatō gozaimasu.',
+        en: 'Reservation #40023B32617210 (WANG HEPING). Could you hold our luggage before check-in? Thank you.'
+      },
+      {
+        id: 'tr-dining-table',
+        cat: 'dining',
+        catLabel: 'Hotel & Dining',
+        title: 'Restaurant Table for 1 Adult + 1 Child (6yo) & English Menu',
+        jp: '大人1名と子供1名（6歳）です。英語または写真付きのメニューはありますか？',
+        romaji: 'Otona ichi-mei to kodomo ichi-mei (roku-sai) desu. Eigo matawa shashin-tsuki no menyū wa arimasu ka?',
+        en: 'Table for 1 adult and 1 child (6 years old). Do you have an English menu or a menu with photos?'
+      },
+      {
+        id: 'tr-dining-kidfriendly',
+        cat: 'dining',
+        catLabel: 'Hotel & Dining',
+        title: 'Not Spicy / Kid-Friendly Meal & Kids\' Bowl/Fork',
+        jp: '子供用に取り分けたいので、辛くないものはどれですか？子供用のお椀とフォークをいただけますか？',
+        romaji: 'Kodomo-yō ni toriwaketai node, karakunai mono wa dore desu ka? Kodomo-yō no owan to fōku o itadakemasu ka?',
+        en: 'We\'re sharing with a child—which dishes are not spicy? Could we have a small kids\' bowl and fork?'
+      },
+      {
+        id: 'tr-dining-pay',
+        cat: 'dining',
+        catLabel: 'Hotel & Dining',
+        title: 'Check Please • Paying by Visa Tap / ICOCA',
+        jp: 'お会計をお願いします。クレジットカードのタッチ決済（またはICOCA）は使えますか？',
+        romaji: 'Okaikei o onegaishimasu. Kurejitto kādo no tacchi kessai (matawa ICOCA) wa tsukaemasu ka?',
+        en: 'Check please. Can we pay by credit card contactless tap (or ICOCA)?'
+      },
+      {
+        id: 'tr-restroom',
+        cat: 'dining',
+        catLabel: 'Hotel & Dining',
+        title: 'Nearest Restroom / Family Multi-Purpose Restroom',
+        jp: 'すみません、一番近いトイレ（または多目的トイレ）はどこですか？',
+        romaji: 'Sumimasen, ichiban chikai toire (matawa tamokuteki toire) wa doko desu ka?',
+        en: 'Excuse me, where is the nearest restroom (or family multi-purpose restroom)?'
+      },
+
+      // SHOPPING & TAX-FREE (3)
+      {
+        id: 'tr-taxfree',
+        cat: 'shopping',
+        catLabel: 'Shopping & Tax-Free',
+        title: '10% Tax-Free Shopping Checkout (¥5,500+ with Passport)',
+        jp: '免税（タックスフリー）の手続きをお願いできますか？パスポートを持っています。',
+        romaji: 'Menzei (takkusu furī) no tetsuzuki o onegai dekimasu ka? Pasupōto o motte imasu.',
+        en: 'Could we process tax-free shopping? I have my physical passport with me.'
+      },
+      {
+        id: 'tr-ogon-sample',
+        cat: 'shopping',
+        catLabel: 'Shopping & Tax-Free',
+        title: 'Hands (PARCO 9F–11F): Test OGON Slider Card Case Sample',
+        jp: 'すみません、OGON（オゴン）のスライダーカードケース（ナチュラル／シルバー）のサンプルを試してもいいですか？',
+        romaji: 'Sumimasen, OGON no suraidā kādo kēsu (nachuraru / shirubā) no sanpuru o tameshite mo ii desu ka?',
+        en: 'Excuse me, may I try a sample of the OGON Slider card case (Natural / Silver)?'
+      },
+      {
+        id: 'tr-kids-shoes',
+        cat: 'shopping',
+        catLabel: 'Shopping & Tax-Free',
+        title: 'Daimaru / ABC-Mart: Measure 6yo Foot & White School Shoes',
+        jp: '6歳の子供の足のサイズを測ってもらえますか？通学用の白いスニーカー（またはローファー）を探しています。',
+        romaji: 'Roku-sai no kodomo no ashi no saizu o hakatte moraemasu ka? Tsūgaku-yō no shiroi sunīkā (matawa rōfā) o sagashite imasu.',
+        en: 'Could you measure my 6-year-old child\'s foot size? We\'re looking for white school sneakers (or loafers).'
+      },
+
+      // TAXI & HELP (2)
+      {
+        id: 'tr-taxi-hotel',
+        cat: 'help',
+        catLabel: 'Taxi & Help',
+        title: 'Taxi to Caption by Hyatt Namba Osaka (Nippombashi 2-7-5)',
+        jp: '「キャプション by Hyatt なんば 大阪」（中央区日本橋2-7-5、なんさん通り沿い）までお願いします。',
+        romaji: '"Caption by Hyatt Namba Osaka" (Chūō-ku Nippombashi 2-7-5, Nansan-dōri zoi) made onegaishimasu.',
+        en: 'Please take us to Caption by Hyatt Namba Osaka (2-7-5 Nippombashi, Chuo-ku, along Nansan-dori).'
+      },
+      {
+        id: 'tr-pharmacy-help',
+        cat: 'help',
+        catLabel: 'Taxi & Help',
+        title: 'Drugstore / Pharmacy: 6yo Child Medicine or Pocket Warmers (Kairo)',
+        jp: 'すみません、6歳の子供用の風邪薬（または解熱剤／使い捨てカイロ）はどこにありますか？',
+        romaji: 'Sumimasen, roku-sai no kodomo-yō no kazegusuri (matawa genetsuzai / tsukaisute kairo) wa doko ni arimasu ka?',
+        en: 'Excuse me, where can I find cold/fever medicine for a 6-year-old child (or disposable pocket hand warmers)?'
+      }
+    ];
+
+    // 5. GUIDE -> VENUE OPEN HOURS ONLY (NO CLOSED LABELS)
     const VENUE_HOURS = [
       { name: 'Kuromon Market', hours: 'Daily 9:00 AM – 6:00 PM (individual stalls vary; most close 5:00–5:30 PM)', cutoff: 'Best window: 9:00 AM – 2:00 PM', status: 'Open daily', tags: ['mon', 'wed'], nuance: 'Free entry; arrive at 1:00 PM Sunday for midday seafood grazing.' },
       { name: 'Shinsaibashi PARCO (6F) & Daimaru (9F)', hours: 'Retail: 10:00 AM – 8:00 PM | Dining floors: 11:00 AM – 10:00/11:00 PM', cutoff: 'Retail doors shut promptly at 8:00 PM', status: 'Open daily', tags: ['mon', 'wed'], nuance: 'Indoor & heated; 6F PARCO houses LEGO, SEGA, Godzilla, CAPCOM, Ghibli & Shin-chan; 9F Daimaru has Pokémon Center DX.' },
@@ -1384,74 +1528,42 @@
       { name: 'OSAKA Hikari-Renaissance (Nakanoshima)', hours: 'Nightly 5:00 PM – 10:00 PM (Dec 11 – Dec 25, 2026)', cutoff: 'Lights turn on at 5:00 PM', status: 'Open nightly', tags: ['mon', 'wed', 'night'], nuance: 'Free waterfront light installations right outside Book Forest / Festival Plaza on Wed, Dec 16.' }
     ];
 
-    // 5. GUIDE -> ALL 27 DOOR-TO-DOOR GOOGLE MAPS ROUTES
+    // 6. GUIDE -> ALL 27 DOOR-TO-DOOR GOOGLE MAPS ROUTES
     const ALL_ROUTES = [
       { day: 'hub', dayLabel: 'Hotel Hub', mode: 'walking', time: '6–8m (400m)', title: 'Nankai Namba South Exit ⇄ Caption by Hyatt', origin: 'Nankai Namba Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'South Exit (南口) 1F street-level elevator onto Nansan-dori; flat walk east across Sakaisuji Ave.' },
       { day: 'hub', dayLabel: 'Hotel Hub', mode: 'walking', time: '3–4m (260m)', title: 'Caption by Hyatt → 7-Eleven Nipponbashi 3-chome', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: '7-Eleven Osaka Nipponbashi 3-chome, Osaka', notes: '24-hour konbini straight south on Sakaisuji Ave.' },
       { day: 'hub', dayLabel: 'Hotel Hub', mode: 'walking', time: '4m (290m)', title: 'Caption by Hyatt → FamilyMart Nihonbashi 2-chome', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'FamilyMart Nihonbashi 2-chome, Osaka', notes: '24-hour konbini one block east behind the hotel.' },
 
-      { day: 'day1', dayLabel: 'Day 1', mode: 'transit', time: '39m', title: 'KIX Terminal 1 → Nankai Namba Station', origin: 'Kansai International Airport Terminal 1, Osaka', destination: 'Nankai Namba Station, Osaka', notes: 'Sunday/Holiday Nankai Rapi:t β at 11:35 AM or 12:05 PM Rapi:t α (¥1,490 adult; Ethan free on lap).' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '6–8m (400m)', title: 'Nankai Namba South Exit → Caption by Hyatt', origin: 'Nankai Namba Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'South Exit (南口) 1F elevator onto Nansan-dori; flat walk east to hotel.' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '2m (190m)', title: 'Caption by Hyatt → Kuromon Market', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Kuromon Market, Osaka', notes: 'Cross Sakaisuji Ave straight into the covered seafood arcade.' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'transit', time: '10m', title: 'Nippombashi Exit 5 → Shinsaibashi PARCO', origin: 'Nippombashi Station, Osaka', destination: 'Shinsaibashi PARCO, Osaka', notes: 'Brown Sakaisuji Line 1 stop north to Nagahoribashi (K16) → Crysta Nagahori indoor walk into PARCO.' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '10m', title: 'Shinsaibashi PARCO → Caption Hotel (Pit Stop)', origin: 'Shinsaibashi PARCO, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Optional 3:30 PM stop for room key & coats.' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '7–8m', title: 'Caption by Hyatt → Dotonbori Glico Sign', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Dotonbori Glico Sign, Ebisu Bridge, Osaka', notes: '5:00 PM sunset neon canal walk.' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '3m', title: 'Dotonbori Canal → Midosuji Illuminations', origin: 'Dotonbori Glico Sign, Osaka', destination: 'Midosuji Boulevard, Shinsaibashi, Osaka', notes: '4 km of glowing ginkgo trees lit 5:00 PM – 1:00 AM.' },
-      { day: 'day1', dayLabel: 'Day 1', mode: 'walking', time: '8–10m', title: 'Dotonbori / Midosuji → Caption by Hyatt', origin: 'Dotonbori, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Walk back to Caption by 7:30–8:00 PM.' },
+      { day: 'day1', dayLabel: 'Sun, Dec 13', mode: 'transit', time: '39m', title: 'KIX Terminal 1 → Nankai Namba Station', origin: 'Kansai International Airport Terminal 1, Osaka', destination: 'Nankai Namba Station, Osaka', notes: 'Sunday/Holiday Nankai Rapi:t β at 11:35 AM or 12:05 PM Rapi:t α (¥1,490 adult; Ethan free on lap).' },
+      { day: 'day1', dayLabel: 'Sun, Dec 13', mode: 'walking', time: '6–8m (400m)', title: 'Nankai Namba South Exit → Caption by Hyatt', origin: 'Nankai Namba Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'South Exit (南口) 1F elevator onto Nansan-dori; flat walk east to hotel.' },
+      { day: 'day1', dayLabel: 'Sun, Dec 13', mode: 'walking', time: '2m (190m)', title: 'Caption by Hyatt → Kuromon Market', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Kuromon Market, Osaka', notes: 'Cross Sakaisuji Ave straight into the covered seafood arcade.' },
+      { day: 'day1', dayLabel: 'Sun, Dec 13', mode: 'transit', time: '10m', title: 'Nippombashi Exit 5 → Shinsaibashi PARCO', origin: 'Nippombashi Station, Osaka', destination: 'Shinsaibashi PARCO, Osaka', notes: 'Brown Sakaisuji Line 1 stop north to Nagahoribashi (K16) → Crysta Nagahori indoor walk into PARCO.' },
+      { day: 'day1', dayLabel: 'Sun, Dec 13', mode: 'walking', time: '10m', title: 'Shinsaibashi PARCO → Caption Hotel (Pit Stop)', origin: 'Shinsaibashi PARCO, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Optional 3:30 PM stop for room key & coats.' },
+      { day: 'day1', dayLabel: 'Sun, Dec 13', mode: 'walking', time: '7–8m', title: 'Caption by Hyatt → Dotonbori Glico Sign', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Dotonbori Glico Sign, Ebisu Bridge, Osaka', notes: '5:00 PM sunset neon canal walk.' },
+      { day: 'day1', dayLabel: 'Sun, Dec 13', mode: 'walking', time: '3m', title: 'Dotonbori Canal → Midosuji Illuminations', origin: 'Dotonbori Glico Sign, Osaka', destination: 'Midosuji Boulevard, Shinsaibashi, Osaka', notes: '4 km of glowing ginkgo trees lit 5:00 PM – 1:00 AM.' },
+      { day: 'day1', dayLabel: 'Sun, Dec 13', mode: 'walking', time: '8–10m', title: 'Dotonbori / Midosuji → Caption by Hyatt', origin: 'Dotonbori, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Walk back to Caption by 7:30–8:00 PM.' },
 
-      { day: 'day2', dayLabel: 'Day 2', mode: 'walking', time: '5m (300m)', title: 'Caption by Hyatt → Nippombashi Exit 5', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Nippombashi Station, Osaka', notes: 'Exit 5 (or Higashi / East Gate elevator) for Brown Sakaisuji Line.' },
-      { day: 'day2', dayLabel: 'Day 2', mode: 'transit', time: '18m', title: 'Nippombashi → Osakako Station (Bay)', origin: 'Nippombashi Station, Osaka', destination: 'Osakako Station, Osaka', notes: 'Brown Sakaisuji Line 1 stop north (K15) → Green Chuo Line 7 stops west to Osakako (C11) Exit 1 elevator.' },
-      { day: 'day2', dayLabel: 'Day 2', mode: 'walking', time: '5–8m', title: 'Osakako Exit 1 → LEGOLAND / Tempozan', origin: 'Osakako Station, Osaka', destination: 'LEGOLAND Discovery Center Osaka, Tempozan Marketplace', notes: 'Elevator at Exit 1; walk north into Tempozan Marketplace 2F/3F.' },
-      { day: 'day2', dayLabel: 'Day 2', mode: 'transit', time: '25m', title: 'Osakako Exit 1 → Nippombashi Exit 5', origin: 'Osakako Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Green Chuo Line eastbound (7 stops to C17) → Brown Sakaisuji Line southbound (1 stop to K17 Exit 5).' },
+      { day: 'day2', dayLabel: 'Mon, Dec 14', mode: 'walking', time: '5m (300m)', title: 'Caption by Hyatt → Nippombashi Exit 5', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Nippombashi Station, Osaka', notes: 'Exit 5 (or Higashi / East Gate elevator) for Brown Sakaisuji Line.' },
+      { day: 'day2', dayLabel: 'Mon, Dec 14', mode: 'transit', time: '18m', title: 'Nippombashi → Osakako Station (Bay)', origin: 'Nippombashi Station, Osaka', destination: 'Osakako Station, Osaka', notes: 'Brown Sakaisuji Line 1 stop north (K15) → Green Chuo Line 7 stops west to Osakako (C11) Exit 1 elevator.' },
+      { day: 'day2', dayLabel: 'Mon, Dec 14', mode: 'walking', time: '5–8m', title: 'Osakako Exit 1 → LEGOLAND / Tempozan', origin: 'Osakako Station, Osaka', destination: 'LEGOLAND Discovery Center Osaka, Tempozan Marketplace', notes: 'Elevator at Exit 1; walk north into Tempozan Marketplace 2F/3F.' },
+      { day: 'day2', dayLabel: 'Mon, Dec 14', mode: 'transit', time: '25m', title: 'Osakako Exit 1 → Nippombashi Exit 5', origin: 'Osakako Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Green Chuo Line eastbound (7 stops to C17) → Brown Sakaisuji Line southbound (1 stop to K17 Exit 5).' },
 
-      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'walking', time: '3m', title: 'Caption → Yayoi-ken Nipponbashi (Breakfast)', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Yayoi-ken Nipponbashi, 1-21-23 Nipponbashi, Chuo-ku, Osaka', notes: '8:15 AM warm Japanese breakfast sets before 9:30 AM USJ train.' },
-      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'transit', time: '20m', title: 'Kintetsu-Nippombashi → Universal City Station', origin: 'Kintetsu-Nippombashi Station, Osaka', destination: 'Universal City Station, Osaka', notes: 'Hanshin Blue Line westbound (5 stops to Nishikujo) → Tap out/in JR Platform 3 Navy Blue Line (2 stops).' },
-      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'walking', time: '5–10m', title: 'Universal City Station → USJ Gates', origin: 'Universal City Station, Osaka', destination: 'Universal Studios Japan, Osaka', notes: 'Exit main gate, turn left, walk through Universal CityWalk.' },
-      { day: 'day3', dayLabel: 'Day 3 USJ', mode: 'transit', time: '25m', title: 'Universal City → Kintetsu-Nippombashi Exit 5', origin: 'Universal City Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'JR Navy Blue Line (2 stops to Nishikujo) → Tap out/in Hanshin Blue/Red Line toward Nara (5 stops).' },
+      { day: 'day3', dayLabel: 'Tue, Dec 15', mode: 'walking', time: '3m', title: 'Caption → Yayoi-ken Nipponbashi (Breakfast)', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Yayoi-ken Nipponbashi, 1-21-23 Nipponbashi, Chuo-ku, Osaka', notes: '8:15 AM warm Japanese breakfast sets before 9:30 AM USJ train.' },
+      { day: 'day3', dayLabel: 'Tue, Dec 15', mode: 'transit', time: '20m', title: 'Kintetsu-Nippombashi → Universal City Station', origin: 'Kintetsu-Nippombashi Station, Osaka', destination: 'Universal City Station, Osaka', notes: 'Hanshin Blue Line westbound (5 stops to Nishikujo) → Tap out/in JR Platform 3 Navy Blue Line (2 stops).' },
+      { day: 'day3', dayLabel: 'Tue, Dec 15', mode: 'walking', time: '5–10m', title: 'Universal City Station → USJ Gates', origin: 'Universal City Station, Osaka', destination: 'Universal Studios Japan, Osaka', notes: 'Exit main gate, turn left, walk through Universal CityWalk.' },
+      { day: 'day3', dayLabel: 'Tue, Dec 15', mode: 'transit', time: '25m', title: 'Universal City → Kintetsu-Nippombashi Exit 5', origin: 'Universal City Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'JR Navy Blue Line (2 stops to Nishikujo) → Tap out/in Hanshin Blue/Red Line toward Nara (5 stops).' },
 
-      { day: 'day4', dayLabel: 'Day 4', mode: 'walking', time: '5m', title: 'Caption → Caffè Veloce Nansan-dori (Breakfast)', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Caffe Veloce Namba Nansan-dori, 2-1-18 Nambanaka, Naniwa-ku, Osaka', notes: 'Flat walk west on Nansan-dori; opens 7:00 AM.' },
-      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '15m', title: 'Nippombashi Exit 5 → Kids Plaza (Ogimachi Exit 2)', origin: 'Nippombashi Station, Osaka', destination: 'Kids Plaza Osaka, Ogimachi, Osaka', notes: 'Brown Sakaisuji Line 5 stops north to Ogimachi (K12) Exit 2 elevator.' },
-      { day: 'day4', dayLabel: 'Day 4', mode: 'walking', time: '1m', title: 'Kids Plaza → Tenjinbashisuji Covered Arcade', origin: 'Kids Plaza Osaka, Ogimachi, Osaka', destination: 'Tenjinbashisuji Shopping Street, Osaka', notes: 'Step immediately next door for warm lunch.' },
-      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '12m', title: 'Ogimachi Exit 2 → Nakanoshima Book Forest', origin: 'Ogimachi Station, Osaka', destination: 'Nakanoshima Children\'s Book Forest, Osaka', notes: 'Brown Sakaisuji Line 2 stops south to Kitahama (K14) Exit 26 or Naniwabashi Exit 2/3 elevator.' },
-      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '8m', title: 'Book Forest → Nakanoshima Museum of Art', origin: 'Nakanoshima Children\'s Book Forest, Osaka', destination: 'Nakanoshima Museum of Art, Osaka', notes: 'Teal Keihan Nakanoshima Line 1 stop west to Watanabebashi Exit 2 elevator (or ~¥800 taxi).' },
-      { day: 'day4', dayLabel: 'Day 4', mode: 'walking', time: '5m', title: 'Art Museum → Ramen Jikon (Festival Plaza B1F)', origin: 'Nakanoshima Museum of Art, Osaka', destination: 'Nakanoshima Festival Plaza, Osaka', notes: 'Walk east along OSAKA Hikari-Renaissance waterfront lights to Festival Plaza B1F.' },
-      { day: 'day4', dayLabel: 'Day 4', mode: 'transit', time: '15m', title: 'Kitahama (Brown Line) → Nippombashi Exit 5', origin: 'Kitahama Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Brown Sakaisuji Line 3 stops south directly to Nippombashi Exit 5 (or Red Midosuji Line from Yodoyabashi).' },
+      { day: 'day4', dayLabel: 'Wed, Dec 16', mode: 'walking', time: '5m', title: 'Caption → Caffè Veloce Nansan-dori (Breakfast)', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Caffe Veloce Namba Nansan-dori, 2-1-18 Nambanaka, Naniwa-ku, Osaka', notes: 'Flat walk west on Nansan-dori; opens 7:00 AM.' },
+      { day: 'day4', dayLabel: 'Wed, Dec 16', mode: 'transit', time: '15m', title: 'Nippombashi Exit 5 → Kids Plaza (Ogimachi Exit 2)', origin: 'Nippombashi Station, Osaka', destination: 'Kids Plaza Osaka, Ogimachi, Osaka', notes: 'Brown Sakaisuji Line 5 stops north to Ogimachi (K12) Exit 2 elevator.' },
+      { day: 'day4', dayLabel: 'Wed, Dec 16', mode: 'walking', time: '1m', title: 'Kids Plaza → Tenjinbashisuji Covered Arcade', origin: 'Kids Plaza Osaka, Ogimachi, Osaka', destination: 'Tenjinbashisuji Shopping Street, Osaka', notes: 'Step immediately next door for warm lunch.' },
+      { day: 'day4', dayLabel: 'Wed, Dec 16', mode: 'transit', time: '12m', title: 'Ogimachi Exit 2 → Nakanoshima Book Forest', origin: 'Ogimachi Station, Osaka', destination: 'Nakanoshima Children\'s Book Forest, Osaka', notes: 'Brown Sakaisuji Line 2 stops south to Kitahama (K14) Exit 26 or Naniwabashi Exit 2/3 elevator.' },
+      { day: 'day4', dayLabel: 'Wed, Dec 16', mode: 'transit', time: '8m', title: 'Book Forest → Nakanoshima Museum of Art', origin: 'Nakanoshima Children\'s Book Forest, Osaka', destination: 'Nakanoshima Museum of Art, Osaka', notes: 'Teal Keihan Nakanoshima Line 1 stop west to Watanabebashi Exit 2 elevator (or ~¥800 taxi).' },
+      { day: 'day4', dayLabel: 'Wed, Dec 16', mode: 'walking', time: '5m', title: 'Art Museum → Ramen Jikon (Festival Plaza B1F)', origin: 'Nakanoshima Museum of Art, Osaka', destination: 'Nakanoshima Festival Plaza, Osaka', notes: 'Walk east along OSAKA Hikari-Renaissance waterfront lights to Festival Plaza B1F.' },
+      { day: 'day4', dayLabel: 'Wed, Dec 16', mode: 'transit', time: '15m', title: 'Kitahama (Brown Line) → Nippombashi Exit 5', origin: 'Kitahama Station, Osaka', destination: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', notes: 'Brown Sakaisuji Line 3 stops south directly to Nippombashi Exit 5 (or Red Midosuji Line from Yodoyabashi).' },
 
-      { day: 'day5', dayLabel: 'Day 5 KIX', mode: 'walking', time: '6–7m (400m)', title: '8:00 AM Checkout: Caption → Nankai Namba South Exit', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Nankai Namba Station, Osaka', notes: 'Flat walk west on Nansan-dori → South Exit 1F elevator up to 3F North Ticket Gate.' },
-      { day: 'day5', dayLabel: 'Day 5 KIX', mode: 'transit', time: '39m', title: 'Nankai Namba → KIX T1 (8:30 AM Rapi:t β)', origin: 'Nankai Namba Station, Osaka', destination: 'Kansai International Airport Terminal 1, Osaka', notes: 'Arrives KIX T1 at 9:09 AM for 11:30 AM Scoot TR 881.' }
+      { day: 'day5', dayLabel: 'Thu, Dec 17', mode: 'walking', time: '6–7m (400m)', title: '8:00 AM Checkout: Caption → Nankai Namba South Exit', origin: 'Caption by Hyatt Namba Osaka, 2-7-5 Nippombashi, Chuo-ku, Osaka', destination: 'Nankai Namba Station, Osaka', notes: 'Flat walk west on Nansan-dori → South Exit 1F elevator up to 3F North Ticket Gate.' },
+      { day: 'day5', dayLabel: 'Thu, Dec 17', mode: 'transit', time: '39m', title: 'Nankai Namba → KIX T1 (8:30 AM Rapi:t β)', origin: 'Nankai Namba Station, Osaka', destination: 'Kansai International Airport Terminal 1, Osaka', notes: 'Arrives KIX T1 at 9:09 AM for 11:30 AM Scoot TR 881.' }
     ];
-
-    // 6. JAPANESE STATION & LANDMARK SHOW-CARDS (WALLET TAB)
-    const JP_PHRASES = {
-      namba_exit: {
-        badge: 'NANKAI NAMBA STATION',
-        title: 'South Exit (南口) 1F Elevator → Nansan-dori / Hotel',
-        jp: 'すみません、南海なんば駅の「南口（なんさん通り方面）」の1階エレベーターはどこですか？\n（「キャプション by Hyatt なんば 大阪」へ行きたいです）',
-        romaji: 'Sumimasen, Nankai Namba-eki no "Minami-guchi (Nansan-dōri hōmen)" no ikkai erebētā wa doko desu ka? ("Caption by Hyatt Namba Osaka" e ikitai desu.)',
-        en: 'Excuse me, where is the 1F street-level elevator for Nankai Namba Station\'s South Exit toward Nansan-dori? (We are going to Caption by Hyatt Namba Osaka.)'
-      },
-      yoji: {
-        badge: 'TRAIN & SUBWAY STATION GATE',
-        title: '6-Year-Old Preschooler (幼児 / Yōji) Free Rule',
-        jp: 'この子は6歳ですが、まだ小学校入学前（未就学児／幼児）です。\n大人1名と一緒に乗車します。',
-        romaji: 'Kono ko wa roku-sai desu ga, mada shōgakkō nyūgaku mae (mishūgakuji / yōji) desu. Otona ichi-mei to issho ni jōsha shimasu.',
-        en: 'This child is 6 years old, but has not yet entered elementary school (preschooler / Yōji class), riding together with 1 paying adult.'
-      },
-      usj_nishikujo: {
-        badge: 'NISHIKUJO TRANSFER (DAY 3 USJ)',
-        title: 'JR Nishikujo Gate & Platform 3 (JR Yumesaki Line)',
-        jp: 'すみません、西九条駅で「JRゆめ咲線（3番のりば・ユニバーサルシティ方面）」の改札はどこですか？',
-        romaji: 'Sumimasen, Nishikujō-eki de "JR Yumesaki-sen (Sanban-noriba / Yunibāsaru Shiti hōmen)" no kaisatsu wa doko desu ka?',
-        en: 'Excuse me, where is the ticket gate at Nishikujo for JR Yumesaki Line Platform 3 toward Universal City?'
-      },
-      nakanoshima_landmarks: {
-        badge: 'DAY 4 KITA & NAKANOSHIMA',
-        title: 'Kids Plaza, Book Forest & Nakanoshima Museum of Art',
-        jp: 'すみません、「キッズプラザ大阪」（扇町駅 2番出口）／「こども本の森 中之島」／「大阪中之島美術館」はどちらですか？',
-        romaji: 'Sumimasen, "Kizzu Puraza Ōsaka" (Ōgimachi-eki Niban-deguchi) / "Kodomo Hon no Mori Nakanoshima" / "Ōsaka Nakanoshima Bijutsukan" wa dochira desu ka?',
-        en: 'Excuse me, which way is Kids Plaza Osaka (Ogimachi Exit 2) / Nakanoshima Children\'s Book Forest / Nakanoshima Museum of Art?'
-      }
-    };
 
     const PDF_TITLES = {
       hyatt: 'Caption by Hyatt Reservation (#40023B32617210)',
@@ -1462,6 +1574,7 @@
 
     // STATE
     let activeDayId = 'day1';
+    let translatorFilter = 'all';
     let hoursFilter = 'all';
     let mapFilter = 'all';
     let vaultCache = {};
@@ -1548,7 +1661,7 @@
     }
 
     // ========================================================
-    // TAB 1: PLAN (MINIMALIST CHECKLIST + CLEAN DETAILS + JP CARDS)
+    // TAB 1: PLAN (DATES ON EVERY CARD + MINIMALIST CARRY BAR)
     // ========================================================
     function renderDayPills() {
       const container = document.getElementById('day-pills-container');
@@ -1560,8 +1673,8 @@
               ? 'bg-rose-600 text-white shadow-float'
               : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 shadow-editorial dark:border dark:border-slate-800 hover:border-rose-400'
           }">
-            <div class="text-xs font-bold leading-tight">${d.pillDay}</div>
-            <div class="text-[11px] mt-0.5 ${active ? 'text-rose-100' : 'text-slate-400'}">${d.pillSub}</div>
+            <div class="text-xs font-bold leading-tight">${d.pillDate}</div>
+            <div class="text-[11px] mt-0.5 ${active ? 'text-rose-100' : 'text-slate-400'}">${d.pillDay}</div>
           </button>
         `;
       }).join('');
@@ -1572,36 +1685,6 @@
       renderDayPills();
       renderPlanDay();
       lucide.createIcons();
-    }
-
-    function scrollToDayDirections() {
-      switchMainTab('plan');
-      setTimeout(() => {
-        const el = document.getElementById('day-directions-section');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 60);
-    }
-
-    function openDayDirection(idx) {
-      const day = ITINERARY_DAYS.find(d => d.id === activeDayId);
-      if (!day || !day.directionsJp || !day.directionsJp[idx]) return;
-      const d = day.directionsJp[idx];
-      document.getElementById('fs-modal-badge').textContent = d.badge || 'SHOW TO STATION STAFF / LOCAL';
-      document.getElementById('fs-modal-title').textContent = d.label;
-      document.getElementById('fs-modal-body').innerHTML = `
-        <div class="p-4 rounded-2xl bg-stone-100 space-y-3">
-          <div class="text-xl font-bold leading-relaxed text-slate-950 whitespace-pre-line">${d.jp}</div>
-          <div class="text-xs italic text-slate-600 border-t border-stone-200 pt-2.5">${d.romaji}</div>
-          <div class="text-xs text-slate-700 border-t border-stone-200 pt-2.5 leading-relaxed">${d.en}</div>
-        </div>
-      `;
-      document.getElementById('fullscreen-modal').classList.remove('hidden');
-    }
-
-    function copyDayDirection(idx) {
-      const day = ITINERARY_DAYS.find(d => d.id === activeDayId);
-      if (!day || !day.directionsJp || !day.directionsJp[idx]) return;
-      copyText(day.directionsJp[idx].jp, 'Japanese phrase');
     }
 
     function toggleDailyItem(dayId, itemName) {
@@ -1627,7 +1710,7 @@
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-3">
             <div class="flex items-center justify-between">
               <div>
-                <span class="text-xs font-semibold uppercase tracking-wider text-rose-600">Express Pass 5 • Zero Coasters</span>
+                <span class="text-xs font-semibold uppercase tracking-wider text-rose-600">${day.shortDate} • Express Pass 5</span>
                 <h3 class="text-[15px] font-bold text-slate-900 dark:text-white mt-0.5">Booked USJ Non-Coaster Tracker</h3>
               </div>
               <span class="px-2.5 py-1 rounded-full bg-stone-100 dark:bg-slate-800 font-mono text-xs font-semibold text-slate-700 dark:text-slate-200">${doneUsjCount}/5</span>
@@ -1702,8 +1785,9 @@
 
             return `
               <article class="bg-white dark:bg-slate-900 rounded-3xl p-5 shadow-editorial dark:border dark:border-slate-800/80 space-y-3">
-                <div class="font-mono text-xs font-semibold text-rose-600 dark:text-rose-400">
-                  ${ev.time}
+                <div class="flex items-center justify-between gap-2 font-mono text-xs font-semibold">
+                  <span class="text-rose-600 dark:text-rose-400">${ev.time}</span>
+                  <span class="px-2 py-0.5 rounded-md bg-stone-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[11px]">${day.shortDate}</span>
                 </div>
 
                 <div class="space-y-1">
@@ -1755,33 +1839,6 @@
             `;
           }).join('')}
         </div>
-
-        <!-- JAPANESE STATION & LANDMARK DIRECTION SHOW-CARDS FOR THIS DAY -->
-        ${day.directionsJp && day.directionsJp.length ? `
-          <div id="day-directions-section" class="bg-amber-50/90 dark:bg-slate-900 rounded-3xl p-4 border border-amber-200/90 dark:border-slate-800 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-extrabold uppercase tracking-wider text-amber-800 dark:text-amber-400">
-                🗣️ Ask for Directions (Tap Card to Zoom for Staff)
-              </span>
-            </div>
-            <div class="space-y-2.5">
-              ${day.directionsJp.map((d, dIdx) => `
-                <div onclick="openDayDirection(${dIdx})" class="cursor-pointer rounded-2xl bg-white dark:bg-slate-800/90 p-3.5 border border-amber-200/80 dark:border-slate-700 hover:border-amber-400 transition">
-                  <div class="flex items-center justify-between gap-2 mb-1">
-                    <span class="text-[11px] font-bold text-amber-700 dark:text-amber-300">${d.label}</span>
-                    <button
-                      type="button"
-                      onclick="event.stopPropagation(); copyDayDirection(${dIdx});"
-                      class="px-2 py-0.5 rounded bg-stone-100 dark:bg-slate-700 text-[11px] font-semibold text-slate-700 dark:text-slate-200 shrink-0"
-                    >Copy JP</button>
-                  </div>
-                  <p class="text-sm font-bold text-slate-900 dark:text-white leading-snug">${d.jp}</p>
-                  <p class="text-[11.5px] text-slate-500 dark:text-slate-400 mt-1">${d.en}</p>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        ` : ''}
       `;
     }
 
@@ -2085,25 +2142,23 @@
     }
 
     // ========================================================
-    // TAB 3: GUIDE (AUTO-UPDATED WEATHER, OPEN HOURS & MAPS)
+    // TAB 3: GUIDE (WEATHER, TRANSLATOR, OPEN HOURS & MAPS)
     // ========================================================
-    let lastWeatherFetchTs = parseInt(localStorage.getItem('osaka_weather_ts') || '0', 10);
-
     function switchGuideView(viewKey) {
-      const views = ['weather', 'hours', 'maps'];
+      const views = ['weather', 'translator', 'hours', 'maps'];
       views.forEach(v => {
         const el = document.getElementById('guide-view-' + v);
         const btn = document.getElementById('gseg-' + v);
         if (v === viewKey) {
           el.classList.remove('hidden');
-          btn.className = 'gseg-btn py-2 px-2 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm text-xs font-semibold transition';
+          btn.className = 'gseg-btn py-2 px-1.5 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm text-xs font-semibold transition';
         } else {
           el.classList.add('hidden');
-          btn.className = 'gseg-btn py-2 px-2 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition';
+          btn.className = 'gseg-btn py-2 px-1.5 rounded-xl text-slate-600 dark:text-slate-400 text-xs font-medium transition';
         }
       });
       if (viewKey === 'weather') {
-        fetchOsakaWeather(false);
+        fetchOsakaWeather();
       }
       lucide.createIcons();
     }
@@ -2113,6 +2168,12 @@
       switchGuideView('weather');
     }
 
+    function openTranslatorFromHeader(cat = 'all') {
+      switchMainTab('guide');
+      switchGuideView('translator');
+      if (cat) setTranslatorFilter(cat);
+    }
+
     function decodeWeatherCode(code) {
       const map = {
         0: { label: 'Clear Sky', icon: '☀️' },
@@ -2120,14 +2181,31 @@
         2: { label: 'Partly Cloudy', icon: '⛅' },
         3: { label: 'Overcast', icon: '☁️' },
         45: { label: 'Foggy', icon: '🌫️' },
+        48: { label: 'Rime Fog', icon: '🌫️' },
         51: { label: 'Light Drizzle', icon: '🌦️' },
+        53: { label: 'Drizzle', icon: '🌦️' },
+        55: { label: 'Dense Drizzle', icon: '🌧️' },
+        56: { label: 'Freezing Drizzle', icon: '🌧️' },
+        57: { label: 'Freezing Drizzle', icon: '🌧️' },
         61: { label: 'Light Rain', icon: '🌧️' },
         63: { label: 'Moderate Rain', icon: '🌧️' },
+        65: { label: 'Heavy Rain', icon: '🌧️' },
+        66: { label: 'Freezing Rain', icon: '🌧️' },
+        67: { label: 'Heavy Freezing Rain', icon: '🌧️' },
         71: { label: 'Light Snow', icon: '🌨️' },
+        73: { label: 'Snow', icon: '❄️' },
+        75: { label: 'Heavy Snow', icon: '❄️' },
+        77: { label: 'Snow Grains', icon: '🌨️' },
         80: { label: 'Rain Showers', icon: '🌦️' },
-        95: { label: 'Thunderstorm', icon: '⛈️' }
+        81: { label: 'Rain Showers', icon: '🌧️' },
+        82: { label: 'Heavy Showers', icon: '⛈️' },
+        85: { label: 'Snow Showers', icon: '🌨️' },
+        86: { label: 'Heavy Snow Showers', icon: '❄️' },
+        95: { label: 'Thunderstorm', icon: '⛈️' },
+        96: { label: 'Thunderstorm', icon: '⛈️' },
+        99: { label: 'Thunderstorm', icon: '⛈️' }
       };
-      return map[code] || { label: 'Crisp & Fair', icon: '🌤️' };
+      return map[code] || { label: 'Partly Cloudy', icon: '⛅' };
     }
 
     function renderWeatherData(data) {
@@ -2194,8 +2272,7 @@
       }
     }
 
-    async function fetchOsakaWeather(force = false) {
-      const now = Date.now();
+    async function fetchOsakaWeather() {
       const cachedRaw = localStorage.getItem('osaka_weather_cache_v1');
       if (cachedRaw) {
         try {
@@ -2203,18 +2280,12 @@
         } catch (e) {}
       }
 
-      if (!force && lastWeatherFetchTs && (now - lastWeatherFetchTs) < 10 * 60 * 1000 && cachedRaw) {
-        return;
-      }
-
-      const url = 'https://api.open-meteo.com/v1/forecast?latitude=34.6937&longitude=135.5023&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m&hourly=temperature_2m,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&forecast_days=7';
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=34.6937&longitude=135.5023&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m&hourly=temperature_2m,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&forecast_days=7&_t=${Date.now()}`;
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, { cache: 'no-store' });
         if (!res.ok) return;
         const data = await res.json();
-        lastWeatherFetchTs = now;
         localStorage.setItem('osaka_weather_cache_v1', JSON.stringify(data));
-        localStorage.setItem('osaka_weather_ts', String(lastWeatherFetchTs));
         renderWeatherData(data);
       } catch (e) {
         if (!cachedRaw) {
@@ -2227,14 +2298,84 @@
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
         fetchJpyToSgdRate(false);
-        fetchOsakaWeather(false);
+        fetchOsakaWeather();
       }
     });
     window.addEventListener('online', () => {
       fetchJpyToSgdRate(true);
-      fetchOsakaWeather(true);
+      fetchOsakaWeather();
     });
 
+    // TRANSLATOR RENDERER
+    function setTranslatorFilter(key) {
+      translatorFilter = key;
+      document.querySelectorAll('.trans-pill').forEach(btn => {
+        if (btn.dataset.tfilter === key) {
+          btn.className = 'trans-pill px-3 py-1.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold shrink-0';
+        } else {
+          btn.className = 'trans-pill px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-editorial text-xs font-medium shrink-0';
+        }
+      });
+      renderTranslatorList();
+    }
+
+    function openTranslatorPhrase(id) {
+      const p = TRANSLATOR_PHRASES.find(item => item.id === id);
+      if (!p) return;
+      document.getElementById('fs-modal-badge').textContent = p.catLabel.toUpperCase();
+      document.getElementById('fs-modal-title').textContent = p.title;
+      document.getElementById('fs-modal-body').innerHTML = `
+        <div class="p-4 rounded-2xl bg-stone-100 space-y-3">
+          <div class="text-xl font-bold leading-relaxed text-slate-950 whitespace-pre-line">${p.jp}</div>
+          <div class="text-xs italic text-slate-600 border-t border-stone-200 pt-2.5">${p.romaji}</div>
+          <div class="text-xs text-slate-700 border-t border-stone-200 pt-2.5 leading-relaxed">${p.en}</div>
+        </div>
+      `;
+      document.getElementById('fullscreen-modal').classList.remove('hidden');
+    }
+
+    function copyTranslatorPhrase(id) {
+      const p = TRANSLATOR_PHRASES.find(item => item.id === id);
+      if (!p) return;
+      copyText(p.jp, 'Japanese phrase');
+    }
+
+    function renderTranslatorList() {
+      const q = (document.getElementById('translator-search-input')?.value || '').toLowerCase().trim();
+      const filtered = TRANSLATOR_PHRASES.filter(p => {
+        const matchCat = translatorFilter === 'all' || p.cat === translatorFilter;
+        const matchText = !q ||
+          p.title.toLowerCase().includes(q) ||
+          p.en.toLowerCase().includes(q) ||
+          p.romaji.toLowerCase().includes(q) ||
+          p.jp.includes(q);
+        return matchCat && matchText;
+      });
+
+      const container = document.getElementById('translator-list-container');
+      if (!container) return;
+
+      container.innerHTML = filtered.map(p => `
+        <div onclick="openTranslatorPhrase('${p.id}')" class="cursor-pointer bg-white dark:bg-slate-900 rounded-3xl p-4 shadow-editorial dark:border dark:border-slate-800/80 hover:border-rose-400 transition space-y-2">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="text-[10.5px] font-mono font-semibold uppercase tracking-wider text-rose-600 dark:text-rose-400">${p.catLabel}</span>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white mt-0.5 leading-snug">${p.title}</h4>
+            </div>
+            <button
+              type="button"
+              onclick="event.stopPropagation(); copyTranslatorPhrase('${p.id}');"
+              class="px-2.5 py-1 rounded-xl bg-stone-100 dark:bg-slate-800 text-[11px] font-semibold text-slate-700 dark:text-slate-200 shrink-0 hover:text-rose-600"
+            >Copy JP</button>
+          </div>
+          <p class="text-[15px] font-bold text-slate-900 dark:text-white leading-snug whitespace-pre-line">${p.jp}</p>
+          <p class="text-[11.5px] italic text-slate-500 dark:text-slate-400">${p.romaji}</p>
+          <p class="text-xs text-slate-600 dark:text-slate-300 pt-1.5 border-t border-stone-100 dark:border-slate-800">${p.en}</p>
+        </div>
+      `).join('');
+    }
+
+    // HOURS RENDERER
     function setHoursFilter(key) {
       hoursFilter = key;
       document.querySelectorAll('.hours-pill').forEach(btn => {
@@ -2268,6 +2409,7 @@
       `).join('');
     }
 
+    // MAPS RENDERER
     function setMapFilter(key) {
       mapFilter = key;
       document.querySelectorAll('.map-pill').forEach(btn => {
@@ -2321,21 +2463,6 @@
       document.getElementById('route-modal').classList.add('hidden');
     }
 
-    function openPhraseModal(key) {
-      const p = JP_PHRASES[key];
-      if (!p) return;
-      document.getElementById('fs-modal-badge').textContent = p.badge;
-      document.getElementById('fs-modal-title').textContent = p.title;
-      document.getElementById('fs-modal-body').innerHTML = `
-        <div class="p-4 rounded-2xl bg-stone-100 space-y-3">
-          <div class="text-xl font-bold leading-relaxed text-slate-950 whitespace-pre-line">${p.jp}</div>
-          <div class="text-xs italic text-slate-600 border-t border-stone-200 pt-2.5">${p.romaji}</div>
-          <div class="text-xs text-slate-700 border-t border-stone-200 pt-2.5 leading-relaxed">${p.en}</div>
-        </div>
-      `;
-      document.getElementById('fullscreen-modal').classList.remove('hidden');
-    }
-
     function closeFullscreenModal() {
       document.getElementById('fullscreen-modal').classList.add('hidden');
     }
@@ -2356,7 +2483,7 @@
         fetchJpyToSgdRate(false);
       }
       if (tabKey === 'guide') {
-        fetchOsakaWeather(false);
+        fetchOsakaWeather();
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
@@ -2457,17 +2584,18 @@
       updateJstClock();
       setInterval(updateJstClock, 15000);
       setInterval(() => fetchJpyToSgdRate(false), 30 * 60 * 1000);
-      setInterval(() => fetchOsakaWeather(false), 15 * 60 * 1000);
+      setInterval(() => fetchOsakaWeather(), 5 * 60 * 1000);
       updateFxBadge();
       convertJpyToSgd();
       renderDayPills();
       renderPlanDay();
       renderWalletQrGrid();
+      renderTranslatorList();
       renderHoursList();
       renderAllMapsList();
       loadVaultDB();
       pullFromNeon();
-      fetchOsakaWeather(true);
+      fetchOsakaWeather();
       fetchJpyToSgdRate(true);
       lucide.createIcons();
     };
